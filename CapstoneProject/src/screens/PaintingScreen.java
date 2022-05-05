@@ -1,5 +1,5 @@
 package screens;
 
-public class PaintingScreen {
-
+public class PaintingScreen extends Screen{
+	Painting art; 
 }
