@@ -1,3 +1,4 @@
+import java.time.Duration;
 
 public class TypingGame {
 	String text; 
