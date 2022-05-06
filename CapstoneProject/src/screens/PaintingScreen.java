@@ -17,5 +17,11 @@ public class PaintingScreen extends Screen{
 	public PaintingScreen (int width, int height) {
 		super(width, height);
 	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

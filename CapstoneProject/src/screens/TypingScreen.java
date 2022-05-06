@@ -17,4 +17,10 @@ public class TypingScreen extends Screen{
 	public TypingScreen (int width, int height) {
 		super(width, height);
 	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }

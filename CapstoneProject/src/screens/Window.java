@@ -30,6 +30,12 @@ public class Window extends Screen {
 		super(width, height);
 		
 	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/**
 	 * adds the button to the window

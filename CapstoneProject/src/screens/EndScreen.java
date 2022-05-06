@@ -19,4 +19,10 @@ public class EndScreen extends Screen{
 		super(width, height);
 		
 	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }

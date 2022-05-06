@@ -5,4 +5,10 @@ public class IntroScreen extends Screen {
 		super(width, height);
 
 	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }

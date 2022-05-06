@@ -18,4 +18,10 @@ public class InstructionsScreen extends Screen {
 		super(width, height);
 
 	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }
