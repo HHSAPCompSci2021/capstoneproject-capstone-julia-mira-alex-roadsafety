@@ -2,13 +2,21 @@ package screens;
 //figure out how to import things from a defautl package 
 //a thing that PaintButtons have that displays relevant info and buttons 
 public class Window extends Screen {
-	Buttons[] buttons; 
+	
+//	Buttons[] buttons; 
+	
 	public Window() {
+		super();
 		//figure out a set size 
 	}
-	public addButton(Button b) {
-		buttons.add(b); 
-		//drawing buttons yee 
+	
+	public Window (int width, int height) {
+		super(width, height);
+		
 	}
+//	public addButton(Button b) {
+//		buttons.add(b); 
+//		//drawing buttons yee 
+//	}
 	
 }
