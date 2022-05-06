@@ -1,5 +1,5 @@
 package screens;
-//figure out how to import things from a defautl package 
+//figure out how to import things from a default package 
 //a thing that PaintButtons have that displays relevant info and buttons 
 public class Window extends Screen {
 	
