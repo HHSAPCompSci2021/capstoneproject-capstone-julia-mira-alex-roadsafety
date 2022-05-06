@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import screens.*;
 /**
- * draws things onto PApplet screen 
+ * draws things onto PApplet 
  * @author mhaldar640
  *
  */

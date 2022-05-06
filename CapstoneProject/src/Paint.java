@@ -22,7 +22,7 @@ public class Paint {
 	 * makes available with given amount 
 	 * @param amount
 	 */
-	public makeAvailable(double amount) {
+	public void makeAvailable(double amount) {
 		
 	}
 }

@@ -33,16 +33,7 @@ public abstract class Screen {
 		
 	}
 	
-<<<<<<< Updated upstream
-	/**
-	 * draws the various aspects of the screen and displays it to the user
-	 */
-	public void draw() {
-		
-	}
-=======
 	public abstract void draw(); 
->>>>>>> Stashed changes
 	
 	/**
 	 * depending on where (or what) the mouse presses on, the program will do something

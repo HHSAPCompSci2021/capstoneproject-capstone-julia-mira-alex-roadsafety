@@ -13,7 +13,7 @@ public class Palette {
 	public Palette() {
 		// create set up all the colors over here 
 	}
-	private void sort() {
+	protected void sort() {
 		
 	}
 	/**
@@ -24,16 +24,19 @@ public class Palette {
 		
 	}
 	/**
-	 * makes Paint p available 
+	 * changes Paint p to given boolean for availble 
 	 * @param p
+	 * @param available
 	 */
-	public void addPaint(Paint p) {
+	public void changePaintAvailability(Paint p, boolean available) {
 		
 	}
 	/**
-	 * makes Paint p unavailable 
+	 *@param p 
+	 * @return paint that Point p is on 
 	 */
-	public void removePaint(Paint p) {
-		
+	public Paint selectPaint(Point p) {
+		return null; 
 	}
+	//other methods: usePaint? 
 }

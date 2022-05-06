@@ -1,4 +1,5 @@
 package screens;
+import javax.swing.*; 
 //figure out how to import things from a default package 
 //a thing that PaintButtons have that displays relevant info and buttons 
 
@@ -11,7 +12,7 @@ package screens;
 public class Window extends Screen {
 	
 //	Buttons[] buttons; 
-	
+	private JPanel display; 
 	/**
 	 * creates a window object with no set size
 	 */
