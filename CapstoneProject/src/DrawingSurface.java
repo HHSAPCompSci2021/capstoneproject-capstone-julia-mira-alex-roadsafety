@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import screens.*;
+/**
+ * draws things onto PApplet screen 
+ * @author mhaldar640
+ *
+ */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	private ArrayList<Integer> keys; 
