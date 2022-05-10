@@ -45,12 +45,13 @@ public abstract class Screen {
 	/**
 	 * depending on where (or what) the mouse presses on, the program will do something
 	 */
-	public Button mousePressed(double x, double y) {
-		for(Button b : buttons) {
-			if(b.isClicked(x, y))
-				return b; 
-		}
-		return null; 
+	public void mousePressed(double x, double y) {
+//		for(Button b : buttons) {
+//			if(b.isClicked(x, y))
+//				return b; 
+//		}
+//		return null; 
+		
 	}
 	
 	/**

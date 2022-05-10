@@ -7,6 +7,7 @@ import mhaldar.shapes.Rectangle;
 
 public class IntroScreen extends Screen {
 	
+	//add a DrawingSurface variable?
 	
 	private Button startButton;
 	private Button instructionsButton;
@@ -17,7 +18,6 @@ public class IntroScreen extends Screen {
 		startButton = new Button(new Rectangle(0, 0, 50, 50), "start!", new int[] {0,0,0});
 		instructionsButton = new Button(new Rectangle(200, 200, 50, 50), "instructions", new int[] {0,0,0});
 		
-
 	}
 	
 	
@@ -28,9 +28,11 @@ public class IntroScreen extends Screen {
 	
 	
 	
-	public Button mousePressed(double x, double y) {
-		
-		return null;
+	public void mousePressed(double x, double y) {
+		if (startButton.isClicked(x, y)) {
+			
+//			surface.switchScreen(ScreenSwitcher.)
+		}
 	}
 
 	
