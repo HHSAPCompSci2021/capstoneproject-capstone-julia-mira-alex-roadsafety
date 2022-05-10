@@ -19,7 +19,7 @@ public class PaintButton extends Button {
 	 */
 	public void draw(PApplet surface, int x, int y) {
 		//draw button at specified coord 
-		super.draw(surface, x, y);
+		super.draw(surface);
 		if(!paint.isAvailable()) {
 			
 		}
