@@ -9,6 +9,9 @@ import java.awt.Point;
  *
  */
 public class Button {
+	private Shape shape; 
+	private String text; 
+	private int[] color; 
 	/**
 	 * Constructs a button with a given shape and text and color 
 	 * @param shape
@@ -16,7 +19,9 @@ public class Button {
 	 * @param color
 	 */
 	public Button(Shape shape, String text, int[] color) {
-		
+		this.shape = shape; 
+		this.text = text; 
+		this.color = color; 
 	}
 	/**
 	 * 
@@ -25,7 +30,7 @@ public class Button {
 	 * @return whether the point with coords x and y is in the button 
 	 */
 	public boolean isClicked(double x, double y ) {
-		return false; 
+		return shape.isPointInside(x, y); 
 	}
 	/**
 	 * draws the button at specified coord 
@@ -33,8 +38,8 @@ public class Button {
 	 * @param x xcoord
 	 * @param y ycoord 
 	 */
-	public void draw(PApplet p, int x, int y) {
-		//draw circle at specified coord 
-		
+	public void draw(PApplet p) {
+		 shape.draw(p);
+		 
 	}
 }

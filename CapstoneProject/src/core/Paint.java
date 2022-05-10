@@ -4,7 +4,7 @@ import processing.core.*;
 
 public class Paint {
 	private int[] color; 
-	private double amount; 
+	private int amount; 
 	private boolean available; 
 	private MixedPalette mixed; 
 	/**
@@ -35,7 +35,7 @@ public class Paint {
 	}
 	/**
 	 * 
-	 * @return the amount of paint left 
+	 * @return the amount of paint left, or the number or uses it has 
 	 */
 	public int getAmount() {
 		return amount;  
