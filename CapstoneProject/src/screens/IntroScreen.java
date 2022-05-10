@@ -1,14 +1,37 @@
 package screens;
 
+import core.Button;
+import core.DrawingSurface;
+import mhaldar.shapes.Rectangle;
+
+
 public class IntroScreen extends Screen {
+	
+	
+	private Button startButton;
+	private Button instructionsButton;
+	
 	public IntroScreen(int width, int height) {
 		super(width, height);
+		
+		startButton = new Button(new Rectangle(0, 0, 50, 50), "start!", new int[] {0,0,0});
+		instructionsButton = new Button(new Rectangle(200, 200, 50, 50), "instructions", new int[] {0,0,0});
+		
 
 	}
-
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
+	
+	
+	public void draw(DrawingSurface surface) {
+		surface.rect(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT); //make it so that it accesses the startButton's properties
 		
 	}
+	
+	
+	
+	public Button mousePressed(double x, double y) {
+		
+		return null;
+	}
+
+	
 }

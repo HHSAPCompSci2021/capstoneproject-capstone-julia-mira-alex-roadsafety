@@ -34,7 +34,13 @@ public abstract class Screen {
 		
 	}
 	
-	public abstract void draw(); 
+	/**
+	 * displays the screen
+	 */
+	public void draw() {
+		
+		
+	}
 	
 	/**
 	 * depending on where (or what) the mouse presses on, the program will do something
