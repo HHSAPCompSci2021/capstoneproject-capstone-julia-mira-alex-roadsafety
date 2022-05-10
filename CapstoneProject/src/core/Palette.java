@@ -3,10 +3,11 @@ import processing.awt.*;
 import processing.core.*;
 import java.awt.Point; 
 import mhaldar.shapes.*;
+import java.util.*; 
 
 public class Palette {
 // just arrange paints in a nice visual array and have a sort method so you can separate available from unavailable
-	private Paint[] collection; // it'll end up looking like a nice 4 by six array maybe??? 
+	private ArrayList<PaintButton> collection; // it'll end up looking like a nice 4 by six array maybe??? 
 	int divide; 
 	private Rectangle bg; 
 	/**
@@ -14,13 +15,19 @@ public class Palette {
 	 */
 	public Palette() {
 		divide = 0; 
-		collection = new Paint[24]; 
+		collection = new ArrayList<PaintButton>(); 
 		// create set up all the colors over here 
 	}
 	protected void sort() {
-		for(int i = 0; i< collection.length; i++) {
-			if(!collection[i].isAvailable()) {
-				
+		for(int i = 0; i< collection.size(); i++) {
+			Paint p = collection.get(i).getPaint(); 
+			if(!p.isAvailable() && i< divide) {
+				collection.add(collection.remove(i)); 
+				divide --; 
+			}
+			else if(p.isAvailable() && i> divide) {
+				collection.add(0, collection.remove(i)); 
+				divide ++; 
 			}
 		}
 	}
@@ -29,7 +36,8 @@ public class Palette {
 	 * @param surface
 	 */
 	public void draw(PApplet surface, Point p) {
-		
+		//draw a rectangle 
+		//draw 24 evenly paced paints on rectangle 
 	}
 	/**
 	 * changes Paint p to given boolean for available 
@@ -46,10 +54,14 @@ public class Palette {
 	 * @return the paint that the coordinate lands on
 	 */
 	public Paint selectPaint( int x, int y) {
+		//make amount decrease
+		//and check if it's available first
+		//if it isn't return null 
 		return null; 
 	}
 	public void draw(PApplet surface, int x, int y) {
 		
 	}
-	//other methods: usePaint? parameter is how much used and it becomes zero then it can't be used n e more? 
+
+
 }

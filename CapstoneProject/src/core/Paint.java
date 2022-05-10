@@ -33,5 +33,12 @@ public class Paint {
 	public void makeAvailable(double amount) {
 		
 	}
+	/**
+	 * 
+	 * @return the amount of paint left 
+	 */
+	public int getAmount() {
+		
+	}
 
 }

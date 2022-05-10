@@ -19,8 +19,8 @@ public class Painting {
 	 * @param width
 	 * @param height
 	 */
-	public Painting(int width, int height) {
-		piece = new PImage(width, height);
+	public Painting(int width, int height, PApplet surface) {
+		piece = surface.createImage(width, height, surface.ARGB);
 		outline = new boolean[width][height]; 
 		//g = piece.createGraphics();
 	}

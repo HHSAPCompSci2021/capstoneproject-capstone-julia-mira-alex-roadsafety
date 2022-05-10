@@ -35,8 +35,6 @@ public class Button {
 	 */
 	public void draw(PApplet p, int x, int y) {
 		//draw circle at specified coord 
-		if(!available) {
-			
-		}
+		
 	}
 }
