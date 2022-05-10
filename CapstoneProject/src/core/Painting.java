@@ -32,7 +32,8 @@ public class Painting {
 	 */
 	public void fill(int[] color, int x, int y) {
 		piece.loadPixels();
-		color c = color(color[0], color[1], color[2]); 
+		int c = 0; 
+	//	color c = color(color[0], color[1], color[2]); 
 		if(y< 0 || y>= outline.length || x < 0 || x>= outline[y].length) {
 			return; 
 		}
@@ -40,6 +41,7 @@ public class Painting {
 			return; 
 		}
 		else {	
+			
 			piece.set(x, y, c); 
 			piece.updatePixels();
 			fill(color, x+1, y); 
@@ -68,7 +70,8 @@ public class Painting {
 	 * @param y y coord
 	 */
 	public void outline(int[] color, int x, int y ) {
-		color c = color(color[0], color[1], color[2]); 
+		int c = 0; 
+	//	color c = color(color[0], color[1], color[2]); 
 		piece.set(x, y, c); 
 		outline[x][y] = true; 
 		piece.set(x-1, y, c);
