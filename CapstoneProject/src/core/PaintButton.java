@@ -17,14 +17,22 @@ public class PaintButton extends Button {
 	 * @param x xcoord
 	 * @param y ycoord 
 	 */
-	public void draw(PApplet surface, int x, int y) {
+	public void draw(PApplet surface, float x, float y) {
 		//draw button at specified coord 
-		super.draw(surface);
+		
 		if(!paint.isAvailable()) {
-			
+			super.setText("NA");
 		}
+		else {
+			super.setText(""); 
+		}
+		super.draw(surface,  x, y);
 	}
 	public Paint getPaint() {
 		return paint; 
 	}
+	public void createWindow() {
+		
+	}
 }
+

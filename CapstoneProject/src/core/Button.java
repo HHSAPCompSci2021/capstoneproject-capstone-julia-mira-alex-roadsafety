@@ -38,10 +38,16 @@ public class Button {
 	 * @param x xcoord
 	 * @param y ycoord 
 	 */
-	public void draw(PApplet p) {
+	public void draw(PApplet p, double x, double y) {
 		 shape.draw(p);
+		 p.text(text, (float)x, (float)y);
 		 
 	}
-	
-	
+	/**
+	 * change what the button says 
+	 * @param n the new text for the button
+	 */
+	public void setText(String n) {
+		text = n; 
+	}
 }

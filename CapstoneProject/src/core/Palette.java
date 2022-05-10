@@ -16,6 +16,7 @@ public class Palette {
 	public Palette() {
 		divide = 0; 
 		collection = new ArrayList<PaintButton>(); 
+		bg = new Rectangle(); 
 		// create set up all the colors over here 
 	}
 	protected void sort() {
@@ -40,20 +41,29 @@ public class Palette {
 		//draw 24 evenly paced paints on rectangle 
 	}
 	/**
-	 * changes Paint p to given boolean for available 
-	 * @param p
-	 * @param available
+	 * changes Paint p to have the given amount 
+	 * @param p the paint 
+	 * @param available whether its available or not 
 	 */
-	public void changePaintAvailability(Paint p, boolean available) {
-		
+	public void changePaintAvailability(PaintButton p, int amount) {
+		p.getPaint().makeAvailable(amount);
 	}
 	/**
 	 * 
 	 * @param x xcoord
 	 * @param y ycoord
-	 * @return the paint that the coordinate lands on
+	 * @return the paint button that the coordinate lands on. null if the point isn't on a paintbutton
 	 */
-	public Paint selectPaint( int x, int y) {
+	public PaintButton selectPaint( int x, int y) {
+		if(!bg.isPointInside(x, y)) {
+			return null; 
+		}
+		for(PaintButton i: collection) {
+			if(i.isClicked(x, y)) {
+				i.createWindow();
+				return i; 
+			}
+		}
 		//make amount decrease
 		//and check if it's available first
 		//if it isn't return null 
