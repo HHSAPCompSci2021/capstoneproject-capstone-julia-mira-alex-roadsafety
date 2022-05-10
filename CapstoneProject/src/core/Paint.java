@@ -38,7 +38,7 @@ public class Paint {
 	 * @return the amount of paint left 
 	 */
 	public int getAmount() {
-		return 0; 
+		return amount;  
 	}
 
 }
