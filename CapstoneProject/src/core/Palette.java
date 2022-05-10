@@ -11,7 +11,7 @@ public class Palette {
 	int divide; 
 	private Rectangle bg; 
 	/**
-	 * set up a Palette of 24 Paints 
+	 * set up a Palette of 14 Paints 
 	 */
 	public Palette() {
 		divide = 0; 
@@ -38,7 +38,7 @@ public class Palette {
 	 */
 	public void draw(PApplet surface, Point p) {
 		//draw a rectangle 
-		//draw 24 evenly paced paints on rectangle 
+		//draw 14 evenly paced paints on rectangle 
 	}
 	/**
 	 * changes Paint p to have the given amount 
