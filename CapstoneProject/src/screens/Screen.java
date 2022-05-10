@@ -1,7 +1,8 @@
 package screens;
+import core.*; 
 
 public abstract class Screen {
-
+	Button[] buttons ; 
 	/**
 	 * the dimensions of the screen
 	 */
@@ -38,8 +39,12 @@ public abstract class Screen {
 	/**
 	 * depending on where (or what) the mouse presses on, the program will do something
 	 */
-	public void mousePressed() {
-		
+	public Button mousePressed(double x, double y) {
+		for(Button b : buttons) {
+			if(b.isClicked(x, y))
+				return b; 
+		}
+		return null; 
 	}
 	
 	/**
