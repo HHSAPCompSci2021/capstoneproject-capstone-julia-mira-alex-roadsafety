@@ -27,11 +27,17 @@ public class Paint {
 		return available; 
 	}
 	/**
-	 * makes available with given amount 
+	 * makes available with given amount. if amount is zero, then availability is false 
 	 * @param amount
 	 */
-	public void makeAvailable(double amount) {
-		
+	public void makeAvailable(int amount) {
+		if(amount == 0) {
+			available = false; 
+		}
+		else {
+			available = true; 
+			this.amount = amount; 
+		}
 	}
 	/**
 	 * 
