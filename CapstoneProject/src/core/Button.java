@@ -1,6 +1,7 @@
 package core;
 import mhaldar.shapes.*;
 import processing.core.PApplet;
+import java.awt.Color; 
 
 import java.awt.Point;
 /**
@@ -39,7 +40,11 @@ public class Button {
 	 * @param y ycoord 
 	 */
 	public void draw(PApplet p, double x, double y) {
+		shape.setFillColor(Color.BLUE, true);
 		 shape.draw(p);
+		 p.fill(255, 128,0 );
+		 p.textSize(25);
+		// make sure the text color is black ughhh p.text
 		 p.text(text, (float)x, (float)y);
 		 
 	}
@@ -49,5 +54,19 @@ public class Button {
 	 */
 	public void setText(String n) {
 		text = n; 
+	}
+	/**
+	 * change hideous color of button 
+	 * @param color
+	 */
+	public void setColor(int[] color) {
+		
+	}
+	/**
+	 * 
+	 * @return color of shape 
+	 */
+	public Color getColor() {
+		return shape.getFillColor();
 	}
 }

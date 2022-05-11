@@ -18,6 +18,8 @@ public class Palette {
 		collection = new ArrayList<PaintButton>(); 
 		bg = new Rectangle(); 
 		// create set up all the colors over here 
+		//for(int i = 0; i< 4; )
+		
 	}
 	protected void sort() {
 		for(int i = 0; i< collection.size(); i++) {

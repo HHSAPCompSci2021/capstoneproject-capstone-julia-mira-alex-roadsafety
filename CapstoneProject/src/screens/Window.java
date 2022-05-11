@@ -1,5 +1,7 @@
 package screens;
 import javax.swing.*; 
+import core.*;
+import java.util.*; 
 //figure out how to import things from a default package 
 //a thing that PaintButtons have that displays relevant info and buttons 
 
@@ -10,8 +12,8 @@ import javax.swing.*;
  *
  */
 public class Window extends Screen {
-	
-//	Buttons[] buttons; 
+	private Paint[] p ; 
+	//ArrayList<Button> buttons; 
 	private JPanel display; 
 	/**
 	 * creates a window object with no set size
@@ -41,9 +43,19 @@ public class Window extends Screen {
 	 * adds the button to the window
 	 * @param b the button that will be added
 	 */
-//	public addButton(Button b) {
-//		buttons.add(b); 
-//		//drawing buttons yee 
-//	}
+	public void addButton(Button b) {
+	//	buttons.add(b); 
+		//drawing buttons yee 
+	}
+	/**
+	 * yeet the button into the chosen screen depending on the button chosen 
+	 * its either TypingScreen or MixingScreen 
+	 * if not either then it just doesn't do anything
+	 * @param x the xcoord 
+	 * @param y the ycoord 
+	 */
+	public void selectButton(int x, int y) {
+		
+	}
 	
 }

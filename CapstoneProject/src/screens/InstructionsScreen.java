@@ -1,4 +1,6 @@
 package screens;
+import core.*; 
+import processing.core.*; 
 
 /**
  * screen that is displayed to user whenever they want to view the instructions
@@ -8,15 +10,15 @@ package screens;
  *
  */
 public class InstructionsScreen extends Screen {
-
+	DrawingSurface surface; 
 	/**
 	 * creates the instructionScreen with set width and height
 	 * @param width the width of the screen
 	 * @param height the height of the screen
 	 */
-	public InstructionsScreen(int width, int height) {
-		super(width, height);
-
+	public InstructionsScreen(DrawingSurface surface) {
+		super(1600, 800);
+		this.surface = surface; 
 	}
 
 	@Override

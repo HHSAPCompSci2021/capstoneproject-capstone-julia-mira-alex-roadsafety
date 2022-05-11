@@ -6,7 +6,9 @@ import java.awt.Color;
  *
  */
 public class MixedPalette extends Palette{
-	Paint[] shades;
+	PaintButton[] shades;
+	//these have text as outlined in readme 
+	//there's like five of them 
 	/**
 	 * creates a palette with paints based off of root color c 
 	 * @param c
