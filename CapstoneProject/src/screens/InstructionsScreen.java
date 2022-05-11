@@ -10,7 +10,8 @@ import processing.core.*;
  *
  */
 public class InstructionsScreen extends Screen {
-	DrawingSurface surface; 
+	
+	
 	/**
 	 * creates the instructionScreen with set width and height
 	 * @param width the width of the screen
@@ -23,7 +24,9 @@ public class InstructionsScreen extends Screen {
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
+		surface.rect(0, 0, 100, 100);
+		
+		
 		
 	}
 }

@@ -34,6 +34,7 @@ public class Button {
 	public boolean isClicked(double x, double y ) {
 		return shape.isPointInside(x, y); 
 	}
+	
 	/**
 	 * draws the button at specified coord 
 	 * @param p PApplet
@@ -49,8 +50,10 @@ public class Button {
 		 else {
 			 p.fill(128, 128, 0);
 		 }
+
 		 p.textSize(25);
 		// make sure the text color is black ughhh p.text
+		 p.fill(0,0,0);
 		 p.text(text, (float)x, (float)y);
 		 
 	}

@@ -42,10 +42,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		//creating a window for the intro with the below buttons 
 		activeScreen = screens.get(0); 
 	}
+	
 	public void setup() {
 		for (Screen s : screens)
 			s.setup();
 	}
+	
 	public void draw() {
 		ratioX = (float)width/activeScreen.DRAWING_WIDTH;
 		ratioY = (float)height/activeScreen.DRAWING_HEIGHT;
@@ -58,7 +60,15 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		pop();
 	}
+	
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
+		activeScreen.draw();
+	}
+	
+	public void mousePressed() {
+		System.out.println("mouse pressed");
+		System.out.println(activeScreen);
+		activeScreen.mousePressed();
 	}
 }
