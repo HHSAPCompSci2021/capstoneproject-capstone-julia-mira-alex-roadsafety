@@ -17,8 +17,14 @@ public class Palette {
 		divide = 0; 
 		collection = new ArrayList<PaintButton>(); 
 		bg = new Rectangle(); 
+		Paint[] paint; 
 		// create set up all the colors over here 
-		//for(int i = 0; i< 4; )
+		int count = 0; 
+		for(int j = 0; j < 6; j ++ ) {
+			for(int i = 0; i< 4; i++) {
+				
+			}
+		}
 		
 	}
 	protected void sort() {
