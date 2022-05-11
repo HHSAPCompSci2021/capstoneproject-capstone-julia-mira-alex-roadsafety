@@ -26,14 +26,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		keys = new ArrayList<Integer>();
 		screens = new ArrayList<Screen>();
 		
-		//add the the screen classes
+		//add  the screen classes
 		
 //		IntroScreen screen1 = new IntroScreen();
 		
 		
 		//setting up all the other screens 
 		//creating a window for the intro with the below buttons 
-		//buttons: instruction, play game, horizontal, or landscape- actually this is better off as a window 
 
 	}
 }

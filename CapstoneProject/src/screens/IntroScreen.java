@@ -23,7 +23,7 @@ public class IntroScreen extends Screen {
 	
 	public void draw(DrawingSurface surface) {
 		surface.rect(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT); //make it so that it accesses the startButton's properties
-		
+		//the button has a draw method julia
 	}
 	
 	
