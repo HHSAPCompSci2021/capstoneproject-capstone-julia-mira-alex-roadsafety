@@ -20,10 +20,16 @@ public class Button {
 	 * @param text
 	 * @param color
 	 */
-	public Button(Shape shape, String text, int[] color) {
+	public Button(Shape shape, String text, Color color) {
 		this.shape = shape; 
 		this.text = text; 
-		this.color = color; 
+		int r = color.getRed(); 
+		int b = color.getBlue();
+		int g = color.getGreen(); 
+		this.color = new int[3]; 
+		this.color[0] = r; 
+		this.color[1] = b; 
+		this.color[2] = g; 
 	}
 	/**
 	 * 

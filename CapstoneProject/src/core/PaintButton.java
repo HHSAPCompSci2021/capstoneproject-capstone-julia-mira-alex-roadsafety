@@ -26,7 +26,7 @@ public class PaintButton extends Button {
 		else {
 			super.setText(""); 
 		}
-		super.draw(surface,  x, y);
+		super.draw(surface,  x+5, y+20);
 	}
 	public Paint getPaint() {
 		return paint; 

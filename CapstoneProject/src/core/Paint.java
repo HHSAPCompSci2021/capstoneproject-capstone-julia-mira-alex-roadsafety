@@ -1,9 +1,10 @@
 package core;
 import processing.awt.*;
 import processing.core.*;
+import java.awt.Color; 
 
 public class Paint {
-	private int[] color; 
+	private Color color; 
 	private int amount; 
 	private boolean available; 
 	private MixedPalette mixed; 
@@ -12,15 +13,21 @@ public class Paint {
 	 * default amount is 0, default availability is false, created MixedPalette
 	 * @param color 
 	 */
-	public Paint(int[] color, double amount) {
-		available = false; 
-		amount = 0; 
+	public Paint(Color color, int amount) {
+		if(amount == 0) {
+			available = false; 
+			this.amount = 0; 
+		}
+		else {
+			available = true; 
+			this.amount = amount; 
+		}
 		mixed = new MixedPalette(color); 
 	}
 	/**
 	 * @return color of the paint 
 	 */
-	public int[] getColor() {
+	public Color getColor() {
 		return color ; 
 	}
 	public boolean isAvailable() {

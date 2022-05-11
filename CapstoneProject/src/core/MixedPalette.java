@@ -13,7 +13,10 @@ public class MixedPalette extends Palette{
 	 * creates a palette with paints based off of root color c 
 	 * @param c
 	 */
-	public MixedPalette(int[] color ) {
+	public MixedPalette(Color color ) {
+		shades = new PaintButton[5]; 
+		//v light, sort of light, normal, sorta dark, v dark 
 		
 	}
+
 }
