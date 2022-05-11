@@ -12,6 +12,7 @@ import java.awt.Point;
 public class Button {
 	private Shape shape; 
 	private String text; 
+	private int[] textColor; 
 	private int[] color; 
 	/**
 	 * Constructs a button with a given shape and text and color 
@@ -40,9 +41,9 @@ public class Button {
 	 * @param y ycoord 
 	 */
 	public void draw(PApplet p, double x, double y) {
-		shape.setFillColor(Color.BLUE, true);
+		shape.setFillColor(new Color(color[0], color[1], color[2]), true);
 		 shape.draw(p);
-		 p.fill(255, 128,0 );
+		 p.fill(textColor[0], textColor[1], textColor[2]);
 		 p.textSize(25);
 		// make sure the text color is black ughhh p.text
 		 p.text(text, (float)x, (float)y);
@@ -60,7 +61,7 @@ public class Button {
 	 * @param color
 	 */
 	public void setColor(int[] color) {
-		
+		this.color = color; 
 	}
 	/**
 	 * 
@@ -68,5 +69,8 @@ public class Button {
 	 */
 	public Color getColor() {
 		return shape.getFillColor();
+	}
+	public void setTextColor(int[] color) {
+		this.textColor = color; 
 	}
 }
