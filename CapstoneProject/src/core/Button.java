@@ -38,6 +38,7 @@ public class Button {
 	 * @return whether the point with coords x and y is in the button 
 	 */
 	public boolean isClicked(double x, double y ) {
+		System.out.println(x + " " + y + " " + shape.getX() + " " + shape.getY());
 		return shape.isPointInside(x, y); 
 	}
 	
