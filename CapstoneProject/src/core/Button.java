@@ -31,6 +31,16 @@ public class Button {
 		this.color[1] = b; 
 		this.color[2] = g; 
 	}
+	
+	
+	public double getXCoord() {
+		return shape.getData().get(0);
+	}
+	
+	public double getYCoord() {
+		return shape.getData().get(1);
+	}
+	
 	/**
 	 * 
 	 * @param x x coord 
