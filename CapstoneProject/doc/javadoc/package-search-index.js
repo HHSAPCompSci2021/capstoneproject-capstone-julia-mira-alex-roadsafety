@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"mhaldar.shapes"},{"l":"screens"}];updateSearchResults();

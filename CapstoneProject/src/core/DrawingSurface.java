@@ -41,6 +41,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		screens.add(screen4);
 		screens.add(screen5);
 		screens.add(screen6); 
+		screens.add(window); 
 		//setting up all the other screens 
 		//creating a window for the intro with the below buttons 
 		activeScreen = screens.get(0); 
@@ -81,6 +82,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
 	public Point actualCoordinatesToAssumed(Point actual) {
 		return new Point((int)(actual.getX()/ratioX) , (int)(actual.getY()/ratioY));
+	}
+	/**
+	 * 
+	 * @return the number of screens; 
+	 */
+	public ArrayList<Screen> getScreens(){
+		return screens;
 	}
 
 }

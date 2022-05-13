@@ -53,5 +53,14 @@ public class PaintButton extends Button {
 	public boolean isMixed() {
 		return mixed; 
 	}
+	/**
+	 * creates a window 
+	 */
+	public void createWindow(DrawingSurface surface) { 
+		w = new Window(surface, this); 
+		surface.getScreens().remove(surface.WIN); 
+		surface.getScreens().add(w); 
+		surface.switchScreen(surface.WIN);
+	}
 }
 

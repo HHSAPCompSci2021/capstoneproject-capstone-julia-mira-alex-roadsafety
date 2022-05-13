@@ -13,6 +13,7 @@ public interface ScreenSwitcher {
 	
 	public static final int MIXING_SCREEN = 4; 
 	public static final int END_SCREEN = 5; 
+	public static final int WIN = 6; 
 	
 	public void switchScreen(int i);
 	
