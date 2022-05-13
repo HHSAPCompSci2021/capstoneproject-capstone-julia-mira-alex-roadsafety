@@ -11,10 +11,10 @@ import mhaldar.shapes.Shape;
 import processing.core.PApplet;
 import screens.*; 
 public class PaintButton extends Button {
-	//private Window w; 
+	private Window w; 
 //	Shape shape; 
-	JPanel panel; 
 	private Paint paint;  
+	boolean mixed; 
 	public PaintButton(Shape button, String text, Paint p) {
 		super(button, text, p.getColor()); 
 		paint = p; 
@@ -40,11 +40,18 @@ public class PaintButton extends Button {
 	public Paint getPaint() {
 		return paint; 
 	}
-	public void createWindow(JPanel p) {
-		panel = p; 
-		// ok no JPanel just a new screen 
-		//actionlistener eurgh 
-		//p.add(labels, BorderLayout.CENTER);
+	/**
+	 * changes the paint button to false 
+	 */
+	public void setMixed() {
+		mixed = true; 
+	}
+	/**
+	 * 
+	 * @return whether the paint is mixed or not 
+	 */
+	public boolean isMixed() {
+		return mixed; 
 	}
 }
 

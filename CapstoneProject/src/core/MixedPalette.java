@@ -31,6 +31,9 @@ public class MixedPalette extends Palette{
 		collection.add(new PaintButton( new Rectangle(215, 10, 75, 75), "", new Paint(c, 0))); 
 		collection.add(new PaintButton( new Rectangle(325, 100, 75, 100), "", new Paint(newc3, 0)));
 		collection.add(new PaintButton( new Rectangle(425, 100, 75, 100), "", new Paint(newc4, 0))); 
+		for(PaintButton b: collection ) {
+			b.setMixed();
+		}
 	}
 
 }
