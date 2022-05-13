@@ -34,8 +34,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		TypingScreen screen4 = new TypingScreen(this); 
 		MixingScreen screen5 = new MixingScreen(this); 
 		screens.add(screen1);
-		screens.add(screen2);
 		screens.add(screen3);
+		screens.add(screen2);
 		screens.add(screen4);
 		screens.add(screen5);
 		//setting up all the other screens 
@@ -63,6 +63,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
+		this.clear();
 		activeScreen.draw();
 	}
 	
