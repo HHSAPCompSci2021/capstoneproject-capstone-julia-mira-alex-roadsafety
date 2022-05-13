@@ -45,6 +45,10 @@ public class TypingGame {
 	
 	}
 	
+	public void play() {
+		
+		d = new Duration(0, 0);
+	}
 	public double getScore() {
 		return score;
 	}
