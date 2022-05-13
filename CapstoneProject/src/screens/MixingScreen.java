@@ -16,7 +16,7 @@ public class MixingScreen extends Screen{
 	 * @param height the height of the screen
 	 */
 	public MixingScreen (DrawingSurface surface) {
-		super(1600, 800);
+		super(surface);
 		this.surface = surface; 
 		back = new Button(new Rectangle(0, 0, 50, 50), "Back", Color.yellow); 
 	}

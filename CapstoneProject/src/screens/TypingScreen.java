@@ -24,7 +24,7 @@ public class TypingScreen extends Screen{
 	 * @param height the height of the screen
 	 */
 	public TypingScreen (DrawingSurface surface) {
-		super(1600, 800);
+		super(surface);
 		this.surface = surface; 
 		game = new TypingGame("TypingGames"+fileSeparator+"Game"+(int)(Math.random()*1)+".txt");
 	}

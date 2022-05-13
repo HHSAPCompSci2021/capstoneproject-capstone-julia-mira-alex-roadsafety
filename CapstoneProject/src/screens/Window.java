@@ -12,7 +12,7 @@ public class Window extends Screen {
 	 * @param height the height of the screen
 	 */
 	public Window(DrawingSurface surface, PaintButton p) {
-		super(300, 300);
+		super(surface);
 		this.surface = surface; 
 		this.p = p; 
 	}

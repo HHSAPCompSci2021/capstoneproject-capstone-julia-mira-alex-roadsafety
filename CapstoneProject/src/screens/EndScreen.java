@@ -18,16 +18,16 @@ public class EndScreen extends Screen {
 	 * @param height the height of the screen
 	 */
 	public EndScreen(DrawingSurface surface) {
-		super(1600, 800);
+		super(surface);
 		this.surface = surface; 
 	}
 
 	@Override
 	public void draw() {
-		surface.rect(0, 0, super.DRAWING_WIDTH, super.DRAWING_HEIGHT);
+		surface.rect(0, 0, (float)super.DRAWING_WIDTH, (float)super.DRAWING_HEIGHT);
 		String instructions = "Yay you made a painting :D";
 		surface.fill(0, 208, 312);
-		surface.text(instructions, 50, 50, 500, super.DRAWING_HEIGHT);
+		surface.text(instructions, 50, 50, (float)500, (float)super.DRAWING_HEIGHT);
 		surface.fill(255);
 		
 	}
