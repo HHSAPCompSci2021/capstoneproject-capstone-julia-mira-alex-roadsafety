@@ -19,9 +19,14 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public float ratioX, ratioY;
 	private ArrayList<Screen> screens;
 	
+	private double width, height;
+
 	
 	
-	public DrawingSurface() {
+	public DrawingSurface(double width, double height) {
+		
+		this.width = width;
+		this.height = height;
 		
 		keys = new ArrayList<Integer>();
 		screens = new ArrayList<Screen>();
@@ -47,14 +52,28 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(0); 
 	}
 	
+	public int getMaxWidth() {
+		return (int)width;
+	}
+	
+	public int getMaxHeight() {
+		return (int)height;
+	}
+	
+	
+	public void settings() {
+		fullScreen();
+		
+	}
+	
 	public void setup() {
 		for (Screen s : screens)
 			s.setup();
 	}
 	
 	public void draw() {
-		ratioX = (float)width/activeScreen.DRAWING_WIDTH;
-		ratioY = (float)height/activeScreen.DRAWING_HEIGHT;
+		ratioX = (float)(width/activeScreen.DRAWING_WIDTH);
+		ratioY = (float)(height/activeScreen.DRAWING_HEIGHT);
 
 		push();
 		

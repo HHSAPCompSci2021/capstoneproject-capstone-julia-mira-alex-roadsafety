@@ -14,7 +14,7 @@ public class IntroScreen extends Screen {
 	private Button instructionsButton;
 	
 	public IntroScreen(DrawingSurface surface) {
-		super(800, 800);
+		super(surface);
 		this.surface = surface; 
 		
 		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 75), "start!", Color.red);
@@ -34,7 +34,6 @@ public class IntroScreen extends Screen {
 	
 	public void mousePressed() {
 		
-		System.out.println("introScreen");
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (startButton.isClicked(p)) {
 			System.out.println("start");
@@ -47,7 +46,6 @@ public class IntroScreen extends Screen {
 
 			surface.switchScreen(ScreenSwitcher.INSTRUCTIONS_SCREEN);
 		}
-		surface.circle(surface.mouseX, surface.mouseY, 10);
 	}
 
 	
