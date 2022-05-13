@@ -3,7 +3,8 @@ package screens;
 import core.Button;
 import core.DrawingSurface;
 import mhaldar.shapes.Rectangle;
-import java.awt.Color; 
+import java.awt.Color;
+import java.awt.Point; 
 
 public class IntroScreen extends Screen {
 	
@@ -34,14 +35,14 @@ public class IntroScreen extends Screen {
 	public void mousePressed() {
 		
 		System.out.println("introScreen");
-		
-		if (startButton.isClicked(surface.mouseX, surface.mouseY)) {
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		if (startButton.isClicked(p)) {
 			System.out.println("start");
 			
 			surface.switchScreen(ScreenSwitcher.PAINTING_SCREEN);
 		}
 		
-		if (instructionsButton.isClicked(surface.mouseX,surface.mouseY)) {
+		if (instructionsButton.isClicked(p)) {
 			System.out.println("instructions");
 
 			surface.switchScreen(ScreenSwitcher.INSTRUCTIONS_SCREEN);

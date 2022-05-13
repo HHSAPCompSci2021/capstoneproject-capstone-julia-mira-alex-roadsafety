@@ -21,7 +21,7 @@ public class PaintButton extends Button {
 		//draw button at specified coord 
 		
 		if(!paint.isAvailable()) {
-			super.setText("NA");
+			super.setText("X");
 		}
 		else {
 			super.setText(""); 

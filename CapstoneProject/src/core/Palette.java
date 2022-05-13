@@ -18,7 +18,7 @@ public class Palette {
 		divide = 1; 
 		collection = new ArrayList<PaintButton>(); 
 		bg = new Rectangle(500, 0, 300, 600); 
-		Paint[] paints = new Paint[14]; 
+		Paint[] paints = new Paint[24]; 
 		paints[0] = new Paint(Color.black, 100);
 		paints[2] = new Paint(Color.white, 100); 
 		paints[3] = new Paint(Color.red, 0); 
@@ -29,14 +29,28 @@ public class Palette {
 		paints[8] = new Paint(Color.cyan, 0); 
 		paints[9] = new Paint(new Color(255, 0, 127), 0);
 		paints[10] = new Paint(new Color(51, 255, 133), 0); 
+		paints[11] = new Paint(new Color(0, 255, 127), 0); 
+		paints[12] = new Paint(new Color(0, 128, 255), 0); 
+		paints[13] = new Paint(new Color(127, 0, 255), 0); 
+		paints[14] = new Paint(new Color(160, 82, 45), 0) ; 
+		paints[15] = new Paint(new Color(0, 206, 209), 0); 
+		paints[16] = new Paint(new Color(75, 0 , 130), 0); 
+		paints[17] = new Paint(new Color(128, 0, 120), 0); 
+		paints[18] = new Paint(new Color(199, 21, 133), 0); 
+		paints[19] = new Paint(new Color(245, 245, 220), 0);
+		paints[20] = new Paint(new Color(119, 136, 153), 0);
+		paints[21] = new Paint(new Color(107, 142, 35), 0); 
+		paints[22] = new Paint(new Color(218, 165, 32), 0); 
+		paints[23] = new Paint(new Color(250, 160, 122), 0);
 		
 		// create set up all the colors over here 
 		int count = 0; 
 		for(int j = 0; j < 6; j ++ ) {
 			for(int i = 0; i< 4; i++) {
-				count ++; 
 				Rectangle r =  new Rectangle(500 + 50*j, 80*j, 50, 80); 
-				
+				Paint p = paints[count]; 
+				collection.add(new PaintButton(r, "", p)); 
+				count ++; 
 			}
 		}
 		
@@ -76,12 +90,13 @@ public class Palette {
 	 * @param y ycoord
 	 * @return the paint button that the coordinate lands on. null if the point isn't on a paintbutton
 	 */
-	public PaintButton selectPaint( int x, int y) {
-		if(!bg.isPointInside(x, y)) {
+	public PaintButton selectPaint( Point p) {
+		if(!bg.isPointInside(p.getX(), p.getY())) {
 			return null; 
 		}
 		for(PaintButton i: collection) {
-			if(i.isClicked(x, y)) {
+	//		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+			if(i.isClicked(p)) {
 				i.createWindow();
 				return i; 
 			}
