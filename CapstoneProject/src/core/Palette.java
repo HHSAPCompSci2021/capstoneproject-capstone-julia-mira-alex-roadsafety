@@ -8,7 +8,7 @@ import java.awt.Color;
 
 public class Palette {
 // just arrange paints in a nice visual array and have a sort method so you can separate available from unavailable
-	private ArrayList<PaintButton> collection; // it'll end up looking like a nice 4 by six array maybe??? 
+	protected ArrayList<PaintButton> collection; // it'll end up looking like a nice 4 by six array maybe??? 
 	private int divide; 
 	private Rectangle bg; 
 	/**
@@ -55,6 +55,10 @@ public class Palette {
 		}
 		
 	}
+	public Palette(Rectangle r ) {
+		divide = -1; 
+		bg = r; 
+	}
 	protected void sort() {
 		for(int i = 0; i< collection.size(); i++) {
 			Paint p = collection.get(i).getPaint(); 
@@ -69,10 +73,13 @@ public class Palette {
 		}
 	}
 	/**
-	 * draw the Palette onto the surface, with the point being it's upper left coord 
-	 * @param surface
+	 * draw the Palette onto the surface
+	 * @param surface PApplet
 	 */
-	public void draw(PApplet surface) {
+	public void draw(PApplet surface, boolean mix) {
+		if(!mix) {
+			sort(); 
+		}
 		for(PaintButton pb : collection) {
 			pb.draw(surface);
 		}
@@ -80,37 +87,42 @@ public class Palette {
 		//draw 14 evenly paced paints on rectangle 
 	}
 	/**
-	 * changes Paint p to have the given amount 
+	 * changes Paint p to increase/decrease by the given amount 
 	 * @param p the paint 
 	 * @param available whether its available or not 
 	 */
-	public void changePaintAvailability(PaintButton p, int amount) {
-		p.getPaint().makeAvailable(amount);
+	public void changePaintAvailability(int p, int amount) {
+		collection.get(p).getPaint().makeAvailable(collection.get(p).getPaint().getAmount()+  amount);
 	}
 	/**
 	 * 
 	 * @param x xcoord
 	 * @param y ycoord
-	 * @return the paint button that the coordinate lands on. null if the point isn't on a paintbutton
+	 * @return the position of the paint inside the palette 
 	 */
-	public PaintButton selectPaint( Point p) {
+	public int selectPaint( Point p) {
 		if(!bg.isPointInside(p.getX(), p.getY())) {
-			return null; 
+			return -1; 
 		}
-		for(PaintButton i: collection) {
+		for(int i = 0; i< collection.size(); i++ ) {
 	//		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-			if(i.isClicked(p)) {
-				i.createWindow();
+			if(collection.get(i).isClicked(p)) {
+				collection.get(i).createWindow();
 				return i; 
 			}
 		}
 		//make amount decrease
 		//and check if it's available first
 		//if it isn't return null 
-		return null; 
+		return -1; 
 	}
-	public void draw(PApplet surface, int x, int y) {
-		
+	/**
+	 * 
+	 * @param i the index of the paint 
+	 * @return the PaintButton at index i 
+	 */
+	public PaintButton getPaint(int i) {
+		return collection.get(i); 
 	}
 
 

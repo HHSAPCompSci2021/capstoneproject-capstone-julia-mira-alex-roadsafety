@@ -70,6 +70,7 @@ public class Painting {
 	 * @param y y coord
 	 */
 	public void outline(int[] color, int x, int y ) {
+		//ok  look into this color thing fr 
 		int c = 0; 
 	//	color c = color(color[0], color[1], color[2]); 
 		piece.set(x, y, c); 
@@ -90,6 +91,7 @@ public class Painting {
 		outline[x+1][y] = true; 
 		piece.set(x+1, y+1, c); 
 		outline[x+1][y+1] = true; 
+		piece.updatePixels();
 	}
 	/**
 	 * draws the painting onto PApplet 

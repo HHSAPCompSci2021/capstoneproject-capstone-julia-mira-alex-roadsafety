@@ -22,7 +22,7 @@ public class Paint {
 			available = true; 
 			this.amount = amount; 
 		}
-		mixed = new MixedPalette(color); 
+		mixed = new MixedPalette(this); 
 	}
 	/**
 	 * @return color of the paint 
@@ -38,7 +38,7 @@ public class Paint {
 	 * @param amount
 	 */
 	public void makeAvailable(int amount) {
-		if(amount == 0) {
+		if(amount <= 0) {
 			available = false; 
 		}
 		else {
@@ -53,5 +53,11 @@ public class Paint {
 	public int getAmount() {
 		return amount;  
 	}
-
+	/**
+	 * 
+	 * @return available sub shades of paint 
+	 */
+	public MixedPalette getMixes() {
+		return mixed; 
+	}
 }

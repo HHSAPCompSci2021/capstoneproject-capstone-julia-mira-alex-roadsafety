@@ -33,11 +33,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		PaintingScreen screen3 = new PaintingScreen(this); 
 		TypingScreen screen4 = new TypingScreen(this); 
 		MixingScreen screen5 = new MixingScreen(this); 
+		EndScreen screen6 = new EndScreen(this); 
 		screens.add(screen1);
 		screens.add(screen3);
 		screens.add(screen2);
 		screens.add(screen4);
 		screens.add(screen5);
+		screens.add(screen6); 
 		//setting up all the other screens 
 		//creating a window for the intro with the below buttons 
 		activeScreen = screens.get(0); 
