@@ -107,7 +107,7 @@ public class Palette {
 		for(int i = 0; i< collection.size(); i++ ) {
 	//		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 			if(collection.get(i).isClicked(p)) {
-				collection.get(i).createWindow();
+				//collection.get(i).createWindow();
 				return i; 
 			}
 		}

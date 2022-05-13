@@ -1,10 +1,19 @@
 package core;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.JButton; 
+
 import mhaldar.shapes.Shape;
 import processing.core.PApplet;
 import screens.*; 
 public class PaintButton extends Button {
-	private Window w; 
+	//private Window w; 
 //	Shape shape; 
+	JPanel panel; 
 	private Paint paint;  
 	public PaintButton(Shape button, String text, Paint p) {
 		super(button, text, p.getColor()); 
@@ -31,8 +40,11 @@ public class PaintButton extends Button {
 	public Paint getPaint() {
 		return paint; 
 	}
-	public void createWindow() {
-		
+	public void createWindow(JPanel p) {
+		panel = p; 
+		// ok no JPanel just a new screen 
+		//actionlistener eurgh 
+		//p.add(labels, BorderLayout.CENTER);
 	}
 }
 
