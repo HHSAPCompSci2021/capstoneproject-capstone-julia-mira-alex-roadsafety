@@ -65,6 +65,25 @@ public class Button {
 		 
 	}
 	/**
+	 * a more convenient draw method 
+	 * @param p PApplet surface 
+	 */
+	public void draw (PApplet p) {
+		shape.setFillColor(new Color(color[0], color[1], color[2]), true);
+		 shape.draw(p);
+		 if(textColor != null) {
+			 p.fill(textColor[0], textColor[1], textColor[2]);
+		 }
+		 else {
+			 p.fill(128, 128, 0);
+		 }
+
+		 p.textSize(25);
+		// make sure the text color is black ughhh p.text
+		 p.fill(0,0,0);
+		 p.text(text, (float)shape.getX() + 5, (float)shape.getY() + 20);
+	}
+	/**
 	 * change what the button says 
 	 * @param n the new text for the button
 	 */

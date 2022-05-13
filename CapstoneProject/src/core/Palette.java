@@ -9,7 +9,7 @@ import java.awt.Color;
 public class Palette {
 // just arrange paints in a nice visual array and have a sort method so you can separate available from unavailable
 	private ArrayList<PaintButton> collection; // it'll end up looking like a nice 4 by six array maybe??? 
-	int divide; 
+	private int divide; 
 	private Rectangle bg; 
 	/**
 	 * set up a Palette of 14 Paints 
@@ -72,7 +72,10 @@ public class Palette {
 	 * draw the Palette onto the surface, with the point being it's upper left coord 
 	 * @param surface
 	 */
-	public void draw(PApplet surface, Point p) {
+	public void draw(PApplet surface) {
+		for(PaintButton pb : collection) {
+			pb.draw(surface);
+		}
 		//draw a rectangle 
 		//draw 14 evenly paced paints on rectangle 
 	}
