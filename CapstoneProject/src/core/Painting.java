@@ -11,7 +11,7 @@ import java.awt.*;
  *
  */
 public class Painting {
-	private PImage piece; 
+	private PGraphics piece; 
 	//Graphics g; 
 	private boolean[][] outline; 
 	/**
@@ -20,11 +20,11 @@ public class Painting {
 	 * @param height
 	 */
 	public Painting(int width, int height, PApplet surface) {
-		piece = surface.createImage(width, height, surface.ARGB);
+		piece = surface.createGraphics(width, height);
 		//set this to white 
 		piece.loadPixels();
 		for(int i = 0; i< piece.pixels.length; i++) {
-			piece.pixels[i] = 255; 
+			piece.pixels[i] = Color.white.getRGB(); 
 		}
 		outline = new boolean[width][height]; 
 	}
@@ -79,8 +79,12 @@ public class Painting {
 	//	color c = color(color[0], color[1], color[2]); 
 		for(int i = -1; i< 2; i++) {
 			for(int j = -1; j< 2; j++) {
+				y += i; 
+				x+= j; 
 				if(y>= 0 || y<outline.length || x >= 0 || x <outline[y].length) {
-					piece.pixels[(y+i)*piece.width + x+j] = c; 
+					piece.pixels[(y)*piece.width + x] = c; 
+					y-= i; 
+					x-=j; 
 					outline[y][x] = true;
 				}
 			}
@@ -90,12 +94,12 @@ public class Painting {
 	/**
 	 * draws the painting onto PApplet 
 	 * @param surface
-	 * @param fill
+	 * @param fill whether it's drawing or not 
 	 * @param color
 	 */
-	public void draw(PApplet surface, boolean fill, Color color, int x, int y) {
+	public void draw(PApplet surface, boolean draw, Color color, int x, int y) {
 		if(x<= piece.width && y<= piece.height) {
-			if(fill) {
+			if(!draw) {
 				this.fill(color, x, y);
 			}
 			else {
@@ -103,5 +107,12 @@ public class Painting {
 			}
 			surface.image(piece, 0, 0); 
 		}
+	}
+	//public void
+	/**
+	 * the painting starts over 
+	 */
+	public void restart() {
+		
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.*;
 import screens.*;
 /**
  * draws things onto PApplet 
@@ -11,7 +12,7 @@ import screens.*;
  *
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
-	
+	PGraphics pg; 
 	
 	private Screen activeScreen;
 	
@@ -19,7 +20,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	private ArrayList<Screen> screens;
 	
 //	private double width, height;
-
 	
 	
 	public DrawingSurface() {
@@ -37,7 +37,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		TypingScreen screen4 = new TypingScreen(this); 
 		MixingScreen screen5 = new MixingScreen(this); 
 		EndScreen screen6 = new EndScreen(this); 
-		Window window = new Window(this, null); 
+		Window window = new Window(this); 
 		screens.add(screen1);
 		screens.add(screen3);
 		screens.add(screen2);
@@ -67,6 +67,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void setup() {
 		for (Screen s : screens)
 			s.setup();
+
 	}
 	
 	public void draw() {
@@ -109,5 +110,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public ArrayList<Screen> getScreens(){
 		return screens;
 	}
-
+	/**
+	 * return the PGraphics 
+	 */
+	public PGraphics getGraphics() {
+		return pg; 
+	}
 }

@@ -1,5 +1,6 @@
 package core;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -57,8 +58,8 @@ public class PaintButton extends Button {
 	/**
 	 * creates a window 
 	 */
-	public void createWindow(DrawingSurface surface) { 
-		w = new Window(surface, this); 
+	public void createWindow(DrawingSurface surface, PaintingScreen pscreen) { 
+		w = new Window(surface, this, pscreen); 
 		surface.getScreens().remove(surface.WIN); 
 		surface.getScreens().add(w); 
 		surface.switchScreen(surface.WIN);

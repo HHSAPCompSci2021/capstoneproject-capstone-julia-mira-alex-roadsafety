@@ -15,10 +15,18 @@ public class MixingScreen extends Screen{
 	 * @param width the width of the screen
 	 * @param height the height of the screen
 	 */
-	public MixingScreen (DrawingSurface surface) {
+	public MixingScreen (DrawingSurface surface, Paint p) {
 		super(1600, 800);
 		this.surface = surface; 
+		mixed = p.getMixes(); 
 		back = new Button(new Rectangle(0, 0, 50, 50), "Back", Color.yellow); 
+	}
+	/**
+	 * default constructor 
+	 */
+	public MixingScreen(DrawingSurface surface) {
+		super(1600, 800);
+		this.surface = surface; 
 	}
 	/**
 	 * choose which color to mix 

@@ -17,7 +17,7 @@ public class Palette {
 	public Palette() {
 		divide = 1; 
 		collection = new ArrayList<PaintButton>(); 
-		bg = new Rectangle(500, 0, 300, 600); 
+		bg = new Rectangle(800, 0, 900, 400); 
 		Paint[] paints = new Paint[24]; 
 		paints[0] = new Paint(Color.black, 100, true);
 		paints[1] = new Paint(Color.white, 100, true); 
@@ -43,12 +43,12 @@ public class Palette {
 		paints[21] = new Paint(new Color(107, 142, 35), 0, true); 
 		paints[22] = new Paint(new Color(218, 165, 32), 0, true); 
 		paints[23] = new Paint(new Color(250, 160, 122), 0, true);
-		
+		//expand palette later 
 		// create set up all the colors over here 
 		int count = 0; 
 		for(int j = 0; j < 6; j ++ ) {
 			for(int i = 0; i< 4; i++) {
-				Rectangle r =  new Rectangle(900 + 100*i, 80*j, 100, 80); 
+				Rectangle r =  new Rectangle(800 + 150*i, 100*j, 150, 100); 
 				Paint p = paints[count]; 
 				collection.add(new PaintButton(r, "", p)); 
 				count ++; 
@@ -124,6 +124,11 @@ public class Palette {
 	public PaintButton getPaint(int i) {
 		return collection.get(i); 
 	}
-
+	/**
+	 * all amounts are reset 
+	 */
+	public void restart() {
+		
+	}
 
 }

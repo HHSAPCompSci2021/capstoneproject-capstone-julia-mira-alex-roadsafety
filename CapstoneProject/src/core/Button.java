@@ -73,18 +73,20 @@ public class Button {
 	 * @param p PApplet surface 
 	 */
 	public void draw (PApplet p) {
+		shape.setStrokeWeight(2);
 		shape.setFillColor(color, true);
 		 shape.draw(p);
+		// int grayvalue = 255/color.getRGB(); 
+		 
 		 if(textColor != null) {
 			 p.fill(textColor.getRGB());
 		 }
 		 else {
-			 p.fill(128, 128, 0);
+			 p.fill(Color.black.getRGB());
 		 }
 
 		 p.textSize(25);
 		// make sure the text color is black ughhh p.text
-		 p.fill(0,0,0);
 		 p.text(text, (float)shape.getX() + 5, (float)shape.getY() + 20);
 		 p.fill(255);
 	}
