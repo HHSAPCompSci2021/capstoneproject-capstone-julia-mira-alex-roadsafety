@@ -33,6 +33,7 @@ public class PaintButton extends Button {
 			super.setText("X");
 		}
 		else {
+			surface.fill(0);
 			super.setText(" " + paint.getAmount()); 
 		}
 		super.draw(surface,  x+5, y+20);

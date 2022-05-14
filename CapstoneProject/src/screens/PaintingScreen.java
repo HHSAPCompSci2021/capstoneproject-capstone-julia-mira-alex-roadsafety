@@ -21,7 +21,7 @@ public class PaintingScreen extends Screen{
 	private Painting canvas; //the drawing canvas where the user draws on
 	private Palette palette; //the color palette that shows what colors user has
 	
-	private Button exit, finish, startOver, instructions; //other options other than drawing
+	private Button exit, finish, startOver; //other options other than drawing
 	private Button draw, fill, erase; //drawing options
 	
 	private boolean drawState;
@@ -32,20 +32,19 @@ public class PaintingScreen extends Screen{
 	 * @param height the height of the screen
 	 */
 	public PaintingScreen (DrawingSurface surface) {
-		super(surface);
+		super(1600, 1600);
 		this.surface = surface; 
-		
-		drawState = false;
+		drawState = true;
 		
 		exit = new Button(new Rectangle(DRAWING_WIDTH - 150, 10, 100, 40), "exit", Color.red);
 		finish = new Button(new Rectangle(DRAWING_WIDTH - 150, 100, 100, 40), "finish", Color.red);
-		startOver = new Button(new Rectangle(DRAWING_WIDTH - 150, 195, 100, 40), "start over", Color.red);
-		instructions = new Button(new Rectangle(DRAWING_WIDTH - 150, 295, 100, 40), "instructions", Color.red);
+		startOver = new Button(new Rectangle(DRAWING_WIDTH - 150, 300, 125, 40), "start over", Color.red);
+	//	instructions = new Button(new Rectangle(DRAWING_WIDTH - 150, 295, 100, 40), "instructions", Color.red);
 		
 		draw = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2, 100, 40), "draw", Color.red);
 		fill = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2 + 100, 100, 40), "fill", Color.red);
-	
-		canvas = new Painting((int)(DRAWING_WIDTH * 3.0 * 5), (int)(DRAWING_HEIGHT - 10), surface);		
+		palette = new Palette(); 
+		canvas = new Painting((int)(700), (int)(800), surface);		
 	}
 
 	@Override
@@ -54,19 +53,19 @@ public class PaintingScreen extends Screen{
 //		exit.draw(surface, exit.getXCoord(), exit.getYCoord());
 //		finish.draw(surface, finish.getXCoord(), finish.getYCoord());
 //		startOver.draw(surface, startOver.getXCoord(), startOver.getYCoord());
-//		
-		
-		instructions.draw(surface);
+		surface.fill(255);
+	
 		exit.draw(surface);
 		finish.draw(surface);
 		startOver.draw(surface);
 		
-		draw.draw(surface);
 		fill.draw(surface);
+		draw.draw(surface);
 		
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		
-		
-//		canvas.draw(surface, true, new int[] {255, 255, 255}, 0,0);
+		palette.draw(surface, false);
+	//	canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
 	
 		
 	}
@@ -75,12 +74,8 @@ public class PaintingScreen extends Screen{
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 	
-		if (instructions.isClicked(p)) {
-			System.out.println("instructions");
-			
-		}
 		
-		else if (exit.isClicked(p)) {
+		 if (exit.isClicked(p)) {
 			System.out.println("exit");
 		}
 		
@@ -97,8 +92,9 @@ public class PaintingScreen extends Screen{
 			drawState = true;
 		}
 		
-		else if (startOver.isClicked(p)) {
-			System.out.println("drawing");
+		else if (fill.isClicked(p)) {
+			drawState = false;
+			//System.out.println("fill");
 		}
 		
 	}

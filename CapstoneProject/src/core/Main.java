@@ -15,24 +15,24 @@ public class Main {
 
 	public static void main(String args[]) {
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = screenSize.getWidth();
-		double height = screenSize.getHeight();
+//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//		double width = screenSize.getWidth();
+//		double height = screenSize.getHeight();
+//		
 		
-		
-		DrawingSurface drawing = new DrawingSurface(width, height);
+		DrawingSurface drawing = new DrawingSurface();
 		PApplet.runSketch(new String[]{""}, drawing);
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 		JFrame window = (JFrame)canvas.getFrame();
 
 
-		window.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-//		window.setUndecorated(true);
+	//	window.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+	//	window.setUndecorated(true);
 		window.setVisible(true);
 		
 		
-//		window.setSize(800, 600);
+		window.setSize(1600, 1600);
 		window.setMinimumSize(new Dimension(100,100));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(true);

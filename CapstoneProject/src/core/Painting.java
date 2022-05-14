@@ -21,8 +21,12 @@ public class Painting {
 	 */
 	public Painting(int width, int height, PApplet surface) {
 		piece = surface.createImage(width, height, surface.ARGB);
+		//set this to white 
+		piece.loadPixels();
+		for(int i = 0; i< piece.pixels.length; i++) {
+			piece.pixels[i] = 255; 
+		}
 		outline = new boolean[width][height]; 
-		//g = piece.createGraphics();
 	}
 	/**
 	 * fills an area with given color, starting at Point p 
@@ -43,22 +47,22 @@ public class Painting {
 		else {	
 			piece.pixels[y*piece.width + x] = c; 
 			//piece.set(x, y, c); 
-			piece.updatePixels();
+		//	piece.updatePixels();
 			fill(color, x+1, y); 
-			piece.updatePixels();
+		//	piece.updatePixels();
 		//	piece.updatePixels();
 			fill(color, x-1, y); 
-			piece.updatePixels();
+	//		piece.updatePixels();
 			fill(color, x, y+1); 
-			piece.updatePixels();
+		//	piece.updatePixels();
 			fill(color, x, y-1); 
-			piece.updatePixels();
+		//	piece.updatePixels();
 			fill(color, x+1, y-1); 
-			piece.updatePixels();
+		//	piece.updatePixels();
 			fill(color, x+1, y+1); 
-			piece.updatePixels();
+		//	piece.updatePixels();
 			fill(color, x-1, y+1); 
-			piece.updatePixels();
+		//	piece.updatePixels();
 			fill(color, x-1, y-1); 
 			piece.updatePixels();
 		}

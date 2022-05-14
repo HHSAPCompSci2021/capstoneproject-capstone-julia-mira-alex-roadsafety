@@ -12,23 +12,21 @@ import screens.*;
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
-	private ArrayList<Integer> keys; 
 	
 	private Screen activeScreen;
 	
 	public float ratioX, ratioY;
 	private ArrayList<Screen> screens;
 	
-	private double width, height;
+//	private double width, height;
 
 	
 	
-	public DrawingSurface(double width, double height) {
+	public DrawingSurface() {
 		
-		this.width = width;
-		this.height = height;
+//		this.width = width;
+//		this.height = height;
 		
-		keys = new ArrayList<Integer>();
 		screens = new ArrayList<Screen>();
 		
 		//add  the screen classes
@@ -52,28 +50,29 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(0); 
 	}
 	
-	public int getMaxWidth() {
-		return (int)width;
-	}
+//	public int getMaxWidth() {
+//		return (int)width;
+//	}
+//	
+//	public int getMaxHeight() {
+//		return (int)height;
+//	}
+//	
 	
-	public int getMaxHeight() {
-		return (int)height;
-	}
-	
-	
-	public void settings() {
-		fullScreen();
-		
-	}
-	
+//	public void settings() {
+//		fullScreen();
+//		
+//	}
+//	
 	public void setup() {
 		for (Screen s : screens)
 			s.setup();
 	}
 	
 	public void draw() {
-		ratioX = (float)(width/activeScreen.DRAWING_WIDTH);
-		ratioY = (float)(height/activeScreen.DRAWING_HEIGHT);
+		//this.setSize(activeScreen.DRAWING_WIDTH, activeScreen.DRAWING_HEIGHT);
+		ratioX = (float) width/activeScreen.DRAWING_WIDTH;
+		ratioY = (float) height/activeScreen.DRAWING_HEIGHT;
 
 		push();
 		
@@ -87,7 +86,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
 		this.clear();
-		activeScreen.draw();
+		//fill(0);
+		//activeScreen.draw();
 	}
 	
 	public void mousePressed() {

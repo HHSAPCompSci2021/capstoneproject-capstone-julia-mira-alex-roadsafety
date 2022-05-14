@@ -9,7 +9,7 @@ public abstract class Screen {
 	/**
 	 * the dimensions of the screen
 	 */
-	public double DRAWING_WIDTH, DRAWING_HEIGHT;
+	public int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
 	
 	
@@ -20,9 +20,9 @@ public abstract class Screen {
 	 * @param height the height of the screen
 	 * 
 	 */
-	public Screen(DrawingSurface surface) {
-		this.DRAWING_WIDTH = surface.getMaxWidth();
-		this.DRAWING_HEIGHT = surface.getMaxHeight();
+	public Screen(int height, int width) {
+		this.DRAWING_WIDTH = width;
+		this.DRAWING_HEIGHT = height;
 	}
 	
 	

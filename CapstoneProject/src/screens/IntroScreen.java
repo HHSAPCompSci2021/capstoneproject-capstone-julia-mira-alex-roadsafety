@@ -14,7 +14,7 @@ public class IntroScreen extends Screen {
 	private Button instructionsButton;
 	
 	public IntroScreen(DrawingSurface surface) {
-		super(surface);
+		super(1600, 800);
 		this.surface = surface; 
 		
 		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 75), "start!", Color.red);

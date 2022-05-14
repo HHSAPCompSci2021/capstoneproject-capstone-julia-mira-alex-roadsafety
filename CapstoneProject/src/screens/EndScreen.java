@@ -18,7 +18,7 @@ public class EndScreen extends Screen {
 	 * @param height the height of the screen
 	 */
 	public EndScreen(DrawingSurface surface) {
-		super(surface);
+		super(1600, 800);
 		this.surface = surface; 
 	}
 

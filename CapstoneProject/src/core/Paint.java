@@ -13,7 +13,7 @@ public class Paint {
 	 * default amount is 0, default availability is false, created MixedPalette
 	 * @param color 
 	 */
-	public Paint(Color color, int amount) {
+	public Paint(Color color, int amount, boolean shouldMix) {
 		if(amount == 0) {
 			available = false; 
 			this.amount = 0; 
@@ -22,7 +22,11 @@ public class Paint {
 			available = true; 
 			this.amount = amount; 
 		}
-		mixed = new MixedPalette(this); 
+		this.color = color; 
+		if(shouldMix) {
+			 mixed = new MixedPalette(this); 
+		}
+	 
 	}
 	/**
 	 * @return color of the paint 

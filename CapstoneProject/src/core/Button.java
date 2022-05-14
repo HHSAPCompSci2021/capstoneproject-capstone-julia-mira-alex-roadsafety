@@ -12,8 +12,8 @@ import java.awt.Point;
 public class Button {
 	private Shape shape; 
 	private String text; 
-	private int[] textColor; 
-	private int[] color; 
+	private Color textColor; 
+	private Color color; 
 	/**
 	 * Constructs a button with a given shape and text and color 
 	 * @param shape
@@ -22,14 +22,8 @@ public class Button {
 	 */
 	public Button(Shape shape, String text, Color color) {
 		this.shape = shape; 
-		this.text = text; 
-		int r = color.getRed(); 
-		int b = color.getBlue();
-		int g = color.getGreen(); 
-		this.color = new int[3]; 
-		this.color[0] = r; 
-		this.color[1] = b; 
-		this.color[2] = g; 
+		this.text = text;  
+		this.color = color;
 	}
 	
 	
@@ -59,10 +53,10 @@ public class Button {
 	 * @param y ycoord 
 	 */
 	public void draw(PApplet p, double x, double y) {
-		shape.setFillColor(new Color(color[0], color[1], color[2]), true);
+		shape.setFillColor(color, true);
 		 shape.draw(p);
 		 if(textColor != null) {
-			 p.fill(textColor[0], textColor[1], textColor[2]);
+			 p.fill(textColor.getRGB());
 		 }
 		 else {
 			 p.fill(128, 128, 0);
@@ -70,19 +64,19 @@ public class Button {
 
 		 p.textSize(25);
 		// make sure the text color is black ughhh p.text
-		 p.fill(0,0,0);
+		// p.fill(0);
 		 p.text(text, (float)x, (float)y);
-		 
+		// p.fill(255);
 	}
 	/**
 	 * a more convenient draw method 
 	 * @param p PApplet surface 
 	 */
 	public void draw (PApplet p) {
-		shape.setFillColor(new Color(color[0], color[1], color[2]), true);
+		shape.setFillColor(color, true);
 		 shape.draw(p);
 		 if(textColor != null) {
-			 p.fill(textColor[0], textColor[1], textColor[2]);
+			 p.fill(textColor.getRGB());
 		 }
 		 else {
 			 p.fill(128, 128, 0);
@@ -92,6 +86,7 @@ public class Button {
 		// make sure the text color is black ughhh p.text
 		 p.fill(0,0,0);
 		 p.text(text, (float)shape.getX() + 5, (float)shape.getY() + 20);
+		 p.fill(255);
 	}
 	/**
 	 * change what the button says 
@@ -104,7 +99,7 @@ public class Button {
 	 * change hideous color of button 
 	 * @param color
 	 */
-	public void setColor(int[] color) {
+	public void setColor(Color color) {
 		this.color = color; 
 	}
 	/**
@@ -114,7 +109,7 @@ public class Button {
 	public Color getColor() {
 		return shape.getFillColor();
 	}
-	public void setTextColor(int[] color) {
+	public void setTextColor(Color color) {
 		this.textColor = color; 
 	}
 }
