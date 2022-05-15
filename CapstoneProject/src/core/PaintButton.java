@@ -15,10 +15,32 @@ public class PaintButton extends Button {
 	private Window w; 
 //	Shape shape; 
 	private Paint paint;  
-	boolean mixed; 
+	private boolean mixed;
+	private MixedPalette mpalette; 
+	PaintButton parent; 
+	/**
+	 * constructor for a normal paintbutton
+	 * @param button shape 
+	 * @param text message/purpose
+	 * @param p paint 
+	 */
 	public PaintButton(Shape button, String text, Paint p) {
 		super(button, text, p.getColor()); 
 		paint = p; 
+		mpalette = new MixedPalette(this); 
+	}
+	/**
+	 * constructor for mixed paintbuttons 
+	 * @param button
+	 * @param text
+	 * @param p
+	 * @param parent
+	 */
+	public PaintButton(Shape button, String text, Paint p, PaintButton parent) {
+		super(button, text, p.getColor()); 
+		paint = p; 
+		mixed = true; 
+		this.parent = parent; 
 	}
 	//draw paint w/ an x over it if unavailable and do all sorts of things to the window 
 	/**
@@ -42,12 +64,12 @@ public class PaintButton extends Button {
 	public Paint getPaint() {
 		return paint; 
 	}
-	/**
-	 * changes the paint button to false 
-	 */
-	public void setMixed() {
-		mixed = true; 
-	}
+//	/**
+//	 * changes the paint button to false 
+//	 */
+//	public void setMixed() {
+//		mixed = true; 
+//	}
 	/**
 	 * 
 	 * @return whether the paint is mixed or not 
@@ -63,6 +85,20 @@ public class PaintButton extends Button {
 		surface.getScreens().remove(surface.WIN); 
 		surface.getScreens().add(w); 
 		surface.switchScreen(surface.WIN);
+	}
+	/**
+	 * if mixed then this is useful
+	 * @return the parent PaintButton that spawned this one 
+	 */
+	public PaintButton getParent() {
+		return parent; 
+	}
+	/**
+	 * 
+	 * @return available sub shades of paint 
+	 */
+	public MixedPalette getMixes() {
+		return mpalette; 
 	}
 }
 

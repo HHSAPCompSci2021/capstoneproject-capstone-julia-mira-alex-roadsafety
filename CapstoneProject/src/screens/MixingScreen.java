@@ -10,15 +10,17 @@ public class MixingScreen extends Screen{
 	DrawingSurface surface; 
 	MixedPalette mixed; 
 	Button back; 
+	PaintingScreen pscreen; 
 	/**
 	 * creates a MixingScreen with set width and height
 	 * @param width the width of the screen
 	 * @param height the height of the screen
 	 */
-	public MixingScreen (DrawingSurface surface, Paint p) {
+	public MixingScreen (DrawingSurface surface, PaintButton p, PaintingScreen pscreen) {
 		super(1600, 800);
 		this.surface = surface; 
 		mixed = p.getMixes(); 
+		this.pscreen = pscreen; 
 		back = new Button(new Rectangle(0, 0, 50, 50), "Back", Color.yellow); 
 	}
 	/**
@@ -32,7 +34,7 @@ public class MixingScreen extends Screen{
 	 * choose which color to mix 
 	 * @param p og Paint for mixing 
 	 */
-	public void chooseColor(Paint p) {
+	public void chooseColor(PaintButton p) {
 		mixed = p.getMixes(); 
 	}
 
@@ -47,8 +49,7 @@ public class MixingScreen extends Screen{
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		int chosen = mixed.selectPaint(p); 
 		if(chosen >= 0 ) {
-			mixed.changePaintAvailability(chosen, 1);
-			mixed.changePaintAvailability(2, -1);
+			mixed.getPaint(chosen).createWindow(surface, pscreen);
 		}
 		if(mixed.getPaint(2).getPaint().getAmount() <= 0) {
 			surface.switchScreen(surface.PAINTING_SCREEN);

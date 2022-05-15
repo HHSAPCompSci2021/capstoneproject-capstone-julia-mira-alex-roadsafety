@@ -18,7 +18,7 @@ public class PaintingScreen extends Screen{
 
 	private DrawingSurface surface;
 	
-	private Painting canvas; //the drawing canvas where the user draws on
+	//private Painting canvas; //the drawing canvas where the user draws on
 	private Palette palette; //the color palette that shows what colors user has
 	
 	private Button exit, finish, startOver; //other options other than drawing
@@ -26,6 +26,7 @@ public class PaintingScreen extends Screen{
 	
 	private boolean drawState;
 	Color selected; 
+	boolean on; 
 	
 	/**
 	 * creates a PaintingScreen with set width and height
@@ -45,19 +46,17 @@ public class PaintingScreen extends Screen{
 		draw = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2, 100, 40), "draw", Color.red);
 		fill = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2 + 100, 100, 40), "fill", Color.red);
 		palette = new Palette(); 
-		canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);		
+		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);		
 	}
-	public void setup() {
-		surface.g = surface.createGraphics(DRAWING_WIDTH, DRAWING_HEIGHT); 
-	}
+	
 	@Override
 	public void draw() {
 		
 //		exit.draw(surface, exit.getXCoord(), exit.getYCoord());
 //		finish.draw(surface, finish.getXCoord(), finish.getYCoord());
 //		startOver.draw(surface, startOver.getXCoord(), startOver.getYCoord());
-		surface.fill(255);
-	
+		//surface.fill(255);
+	//	surface.background(255);
 		exit.draw(surface);
 		finish.draw(surface);
 		startOver.draw(surface);
@@ -68,7 +67,7 @@ public class PaintingScreen extends Screen{
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		
 		palette.draw(surface, false);
-		canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
+		//canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
 	
 		
 	}
@@ -88,7 +87,7 @@ public class PaintingScreen extends Screen{
 		}
 		
 		else if (startOver.isClicked(p)) {
-			canvas.restart();
+			//canvas.restart();
 			palette.restart();
 		}
 		
@@ -108,7 +107,7 @@ public class PaintingScreen extends Screen{
 				palette.getPaint(pos).createWindow(surface, this);
 			}
 			else if(selected!= null) {
-				canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
+			//	canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
 			}
 		}
 		
@@ -120,8 +119,13 @@ public class PaintingScreen extends Screen{
 	//makes sure the draw option is selected
 	//makes the canvas call its drawing method
 	public void mouseDragged() {
-		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
+		super.mouseDragged(); 
+		//Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		on = true; 
+		//canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
+	}
+	public void mouseReleased() {
+		//on = false; 
 	}
 	/**
 	 * changes the current color  that will be used to another one 
@@ -130,4 +134,19 @@ public class PaintingScreen extends Screen{
 	public void selectedColor(Color c) {
 		selected = c; 
 	}
+	/**
+	 * 
+	 * @return selected current color 
+	 */
+	public Color getColor() {
+		return selected; 
+	}
+	/**
+	 * 
+	 * @return whether it's drawing or filling 
+	 */
+	public boolean drawing() {
+		return drawState; 
+	}
+
 }

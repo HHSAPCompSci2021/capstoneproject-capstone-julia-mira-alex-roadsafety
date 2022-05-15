@@ -30,7 +30,7 @@ public abstract class Screen {
 	 * set up of the Screen 
 	 */
 	public void setup() {
-		
+		//surface.background(255);
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public abstract class Screen {
 	 * depending on where the mouse is dragged, the program will do something
 	 */
 	public void mouseDragged() {
-		
+		//return true; 
 	}
 	
 	/**

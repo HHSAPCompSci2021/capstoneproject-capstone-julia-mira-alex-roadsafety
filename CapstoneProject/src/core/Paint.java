@@ -7,13 +7,13 @@ public class Paint {
 	private Color color; 
 	private int amount; 
 	private boolean available; 
-	private MixedPalette mixed; 
+	//private MixedPalette mixed; 
 	/**
 	 * creates a Paint with the given color
 	 * default amount is 0, default availability is false, created MixedPalette
 	 * @param color 
 	 */
-	public Paint(Color color, int amount, boolean shouldMix) {
+	public Paint(Color color, int amount) {
 		if(amount == 0) {
 			available = false; 
 			this.amount = 0; 
@@ -23,9 +23,9 @@ public class Paint {
 			this.amount = amount; 
 		}
 		this.color = color; 
-		if(shouldMix) {
-			 mixed = new MixedPalette(this); 
-		}
+//		if(shouldMix) {
+//			 mixed = new MixedPalette(this); 
+//		}
 	 
 	}
 	/**
@@ -35,6 +35,12 @@ public class Paint {
 		return color ; 
 	}
 	public boolean isAvailable() {
+		if(amount <= 0) {
+			available = false; 
+		}
+		else {
+			available = true; 
+		}
 		return available; 
 	}
 	/**
@@ -57,11 +63,5 @@ public class Paint {
 	public int getAmount() {
 		return amount;  
 	}
-	/**
-	 * 
-	 * @return available sub shades of paint 
-	 */
-	public MixedPalette getMixes() {
-		return mixed; 
-	}
+
 }

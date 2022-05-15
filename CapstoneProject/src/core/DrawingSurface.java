@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.*;
+import java.awt.Color;
 import screens.*;
 /**
  * draws things onto PApplet 
@@ -13,20 +14,16 @@ import screens.*;
  */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	PGraphics pg; 
-	
 	private Screen activeScreen;
-	
 	public float ratioX, ratioY;
 	private ArrayList<Screen> screens;
-	
+	boolean mouseDragged = false; 
 //	private double width, height;
 	
-	
+
 	public DrawingSurface() {
-		
 //		this.width = width;
 //		this.height = height;
-		
 		screens = new ArrayList<Screen>();
 		
 		//add  the screen classes
@@ -65,9 +62,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //	}
 //	
 	public void setup() {
+		background(255); 
 		for (Screen s : screens)
 			s.setup();
-
+		pg= createGraphics(800, 1600); 
+		frameRate(80); 
 	}
 	
 	public void draw() {
@@ -80,7 +79,25 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		scale(ratioX, ratioY);
 		
 		activeScreen.draw();
-		
+		if(activeScreen == screens.get(PAINTING_SCREEN)) {
+			PaintingScreen pscreen = (PaintingScreen) activeScreen; 
+			Color c = pscreen.getColor();
+			
+			if(c!= null && mousePressed && pscreen.drawing()) {
+				pg.beginDraw();
+				Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
+				Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
+				pg.fill(c.getRGB()); 
+				pg.strokeWeight(5);
+				pg.stroke(c.getRGB()); 
+				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
+//				pg.noStroke(); 
+//				pg.circle((float)p.getX(), (float)p.getY(), 5);
+				pg.endDraw(); 
+			}
+			
+			image(pg, 0, 0); 
+		}
 		pop();
 	}
 	
@@ -95,6 +112,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //		System.out.println("mouse pressed");
 //		System.out.println(activeScreen);
 		activeScreen.mousePressed();
+	}
+	public void mouseDragged() {
+		mouseDragged = true; 
+	}
+	public void mouseReleased() {
+		mouseDragged = false; 
 	}
 	public Point assumedCoordinatesToActual(Point assumed) {
 		return new Point((int)(assumed.getX()*ratioX), (int)(assumed.getY()*ratioY));
@@ -114,6 +137,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 * return the PGraphics 
 	 */
 	public PGraphics getGraphics() {
-		return pg; 
+		return g; 
 	}
 }

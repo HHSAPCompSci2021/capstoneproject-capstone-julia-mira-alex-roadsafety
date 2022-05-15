@@ -20,7 +20,8 @@ public class Main {
 //		double height = screenSize.getHeight();
 //		
 		
-		DrawingSurface drawing = new DrawingSurface();
+		 DrawingSurface drawing = new DrawingSurface();
+		//Tester drawing = new Tester(); 
 		PApplet.runSketch(new String[]{""}, drawing);
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();

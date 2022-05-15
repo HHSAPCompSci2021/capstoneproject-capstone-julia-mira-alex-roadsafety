@@ -10,23 +10,24 @@ import java.awt.*;
  * @author mhaldar640
  *
  */
-public class Painting {
-	private PGraphics piece; 
-	//Graphics g; 
+public class Painting extends PApplet {
+	 PGraphics piece; 
 	private boolean[][] outline; 
+	public void setup() {
+		piece = createGraphics(100, 100) ;
+		assert piece != null; 
+		System.out.println("successful"); 
+	}
 	/**
 	 * constructs an empty painting with given height and width 
 	 * @param width
 	 * @param height
 	 */
 	public Painting(int width, int height, PApplet surface) {
-		piece = surface.createGraphics(width, height);
-		//set this to white 
-		piece.loadPixels();
-		for(int i = 0; i< piece.pixels.length; i++) {
-			piece.pixels[i] = Color.white.getRGB(); 
-		}
-		outline = new boolean[width][height]; 
+		setup(); 
+		piece.beginDraw();
+		piece.background(255);
+		outline = new boolean[height][width]; 
 	}
 	/**
 	 * fills an area with given color, starting at Point p 
@@ -35,34 +36,38 @@ public class Painting {
 	 * @param y y coord 
 	 */
 	public void fill(Color color, int x, int y) {
-		piece.loadPixels();
+		
+	//	piece.beginDraw();
 		int c = color.getRGB(); 
 	//	color c = color(color[0], color[1], color[2]); 
 		if(y< 0 || y>= outline.length || x < 0 || x>= outline[y].length) {
+		//	piece.endDraw();
 			return; 
 		}
 		if(outline[y][x] || piece.pixels[y*piece.width+x] == c) {
+		//	piece.endDraw(); 
 			return; 
 		}
 		else {	
-			piece.pixels[y*piece.width + x] = c; 
+			piece.noStroke(); 
+			piece.circle(x, y, 10); 
 			//piece.set(x, y, c); 
-		//	piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x+1, y); 
 		//	piece.updatePixels();
-		//	piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x-1, y); 
-	//		piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x, y+1); 
-		//	piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x, y-1); 
-		//	piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x+1, y-1); 
-		//	piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x+1, y+1); 
-		//	piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x-1, y+1); 
-		//	piece.updatePixels();
+			piece.updatePixels();
 			fill(color, x-1, y-1); 
 			piece.updatePixels();
 		}
@@ -76,20 +81,9 @@ public class Painting {
 	public void outline(Color color, int x, int y ) {
 		//ok  look into this color thing fr 
 		int c = color.getRGB(); 
-	//	color c = color(color[0], color[1], color[2]); 
-		for(int i = -1; i< 2; i++) {
-			for(int j = -1; j< 2; j++) {
-				y += i; 
-				x+= j; 
-				if(y>= 0 || y<outline.length || x >= 0 || x <outline[y].length) {
-					piece.pixels[(y)*piece.width + x] = c; 
-					y-= i; 
-					x-=j; 
-					outline[y][x] = true;
-				}
-			}
-		}
-		piece.updatePixels();
+		piece.fill(c); 
+		piece.circle(x, y, 5); 
+		//piece.endDraw();
 	}
 	/**
 	 * draws the painting onto PApplet 
@@ -113,6 +107,7 @@ public class Painting {
 	 * the painting starts over 
 	 */
 	public void restart() {
-		
+		piece.endDraw(); 
+		//piece.beginDraw();
 	}
 }
