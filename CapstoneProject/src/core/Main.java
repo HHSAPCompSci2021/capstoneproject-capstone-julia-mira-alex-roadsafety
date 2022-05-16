@@ -20,26 +20,22 @@ public class Main {
 //		double height = screenSize.getHeight();
 //		
 		
-		 DrawingSurface drawing = new DrawingSurface();
-		//Tester drawing = new Tester(); 
+		DrawingSurface drawing = new DrawingSurface();
 		PApplet.runSketch(new String[]{""}, drawing);
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 		JFrame window = (JFrame)canvas.getFrame();
 
-
 	//	window.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 	//	window.setUndecorated(true);
+		
 		window.setVisible(true);
-		
-		
 		window.setSize(1600, 1600);
 		window.setMinimumSize(new Dimension(100,100));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(true);
-
+		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		
 		
 		canvas.requestFocus();
 	}

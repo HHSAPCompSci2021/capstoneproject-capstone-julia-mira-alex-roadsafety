@@ -3,8 +3,7 @@ import core.*;
 import processing.core.*; 
 
 /**
- * screen that is displayed to user whenever they want to view the instructions
- * this is used during the intro screen and in-game
+ * screen that is displayed to user whenever they finish the game
  * 
  * @author 
  *
@@ -29,6 +28,5 @@ public class EndScreen extends Screen {
 		surface.fill(0, 208, 312);
 		surface.text(instructions, 50, 50, (float)500, (float)super.DRAWING_HEIGHT);
 		surface.fill(255);
-		
 	}
 }

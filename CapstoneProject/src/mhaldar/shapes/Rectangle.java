@@ -70,7 +70,6 @@ public class Rectangle extends Shape{
 		double w1 = data.get(2); 
 		double h1 = data.get(3); 
 		if((x1>= this.getX()-.001 && x1<= this.getX()+width+.01) || (x1+w1>= this.getX()-.001 && x1+w1<= this.getX()+width+.01)) {
-			//System.out.println("afdag");
 			if((y1>= y-.001 && y1<= y+height+.01) || (y1+h1>= y-.001 && y1+h1<= y+height+.01)) {
 				return true; 
 			}
