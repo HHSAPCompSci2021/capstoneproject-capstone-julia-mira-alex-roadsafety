@@ -47,7 +47,8 @@ public class TypingGame {
 	
 	public void play() {
 		
-		d = new Duration(0, 0);
+//		d = new Duration(0, 0); //error with this statement
+		
 	}
 	public double getScore() {
 		return score;
