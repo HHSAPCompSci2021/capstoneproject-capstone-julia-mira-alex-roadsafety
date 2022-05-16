@@ -35,6 +35,15 @@ public class Button {
 		return shape.getData().get(1);
 	}
 	
+	public double getWidth() {
+		return shape.getData().get(2);
+		
+	}
+	
+	public double getHeight() {
+		return shape.getData().get(3);
+	}
+	
 	/**
 	 * 
 	 * @param x x coord 

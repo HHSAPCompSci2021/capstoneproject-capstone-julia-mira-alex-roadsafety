@@ -14,17 +14,22 @@ public class IntroScreen extends Screen {
 	private Button startButton;
 	private Button instructionsButton;
 	
-	private final PImage background;
+	private PImage background;
 	
 	public IntroScreen(DrawingSurface surface) {
 		super(1600, 800);
 		this.surface = surface; 
 		
-		background = null; //surface.loadImage();
-		
 		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 75), "start!", Color.red);
-		instructionsButton = new Button(new Rectangle(DRAWING_WIDTH/2 - 50, DRAWING_HEIGHT/2 + 90, 200, 75), "instructions", new Color(0,255,128));
+		instructionsButton = new Button(new Rectangle(DRAWING_WIDTH/2 - 50, DRAWING_HEIGHT/2 + 90, 200, 75), "instructions", new Color(0,208,255));
 		
+	}
+	
+	public void setup() {
+		background = surface.loadImage("/additionalPictures/background-pic.png");
+		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+		
+
 	}
 	
 	
@@ -34,6 +39,30 @@ public class IntroScreen extends Screen {
 		startButton.draw(surface, DRAWING_WIDTH/2 + 5, DRAWING_HEIGHT/2 + 40);
 		instructionsButton.draw(surface, DRAWING_WIDTH/2 - 45, DRAWING_HEIGHT/2 + 130);
 
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		
+		if (startButton.isClicked(p)) {
+			surface.stroke(113, 240, 147);
+			surface.strokeWeight(5);
+			surface.noFill();
+			surface.rect((float)startButton.getXCoord(), (float)startButton.getYCoord(), (float)startButton.getWidth(), (float)startButton.getHeight());
+			
+		}
+		else {
+			surface.stroke(0);
+			surface.strokeWeight(1);
+		}
+		
+		if (instructionsButton.isClicked(p)) {
+			surface.stroke(113, 240, 147);
+			surface.strokeWeight(5);
+			surface.noFill();
+			surface.rect((float)instructionsButton.getXCoord(), (float)instructionsButton.getYCoord(), (float)instructionsButton.getWidth(), (float)instructionsButton.getHeight());
+		}	
+		else {
+			surface.stroke(0);
+			surface.strokeWeight(1);
+		}
 	
 	}
 	
@@ -43,37 +72,11 @@ public class IntroScreen extends Screen {
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (startButton.isClicked(p)) {
-			System.out.println("start");
-			
 			surface.switchScreen(ScreenSwitcher.PAINTING_SCREEN);
 		}
 		
 		if (instructionsButton.isClicked(p)) {
-			System.out.println("instructions");
-
 			surface.switchScreen(ScreenSwitcher.INSTRUCTIONS_SCREEN);
 		}
 	}
-	
-	//trying to make it so it highlights which button you are hovering over
-	public void mouseMoved() {
-		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		
-		if (startButton.isClicked(p)) {
-			System.out.println("start hover");
-			
-			surface.stroke(113, 240, 147);
-			
-		}
-		else {
-			surface.stroke(0);
-		}
-		
-		if (instructionsButton.isClicked(p)) {
-			System.out.println("instructions hover");
-
-		}
-	}
-
-	
 }
