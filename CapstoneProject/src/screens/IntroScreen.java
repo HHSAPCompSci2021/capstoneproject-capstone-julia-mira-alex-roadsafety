@@ -29,7 +29,7 @@ public class IntroScreen extends Screen {
 	
 	
 	public void draw() {
-		surface.image(background,0,0);
+		//surface.image(background,0,0);
 		
 		startButton.draw(surface, DRAWING_WIDTH/2 + 5, DRAWING_HEIGHT/2 + 40);
 		instructionsButton.draw(surface, DRAWING_WIDTH/2 - 45, DRAWING_HEIGHT/2 + 130);

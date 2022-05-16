@@ -20,6 +20,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	private ArrayList<Screen> screens;
 	boolean mouseDragged = false;
 	boolean mouseClicked = false; 
+	float maxStrokeWidth = (float) 7;
+	float minStrokeWidth = 5;
+	private boolean[][] outline; 
 //	private double width, height;
 	
 
@@ -89,15 +92,21 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			if(c!= null && mousePressed && pscreen.drawing()) {
 				Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
 				pg.fill(c.getRGB()); 
-				pg.strokeWeight(5);
+				stroke(0);
+			    float d = dist(mouseX, mouseY, pmouseX, pmouseY); // how fast did the user move the "pen"?
+			    float brushWidth = map(d, 0, 40, maxStrokeWidth, minStrokeWidth); // the slower the move, the wider the stroke
+			    if(brushWidth < minStrokeWidth) brushWidth = minStrokeWidth;
+			    pg.strokeWeight(brushWidth);
+			    System.out.println(brushWidth); 
+				//pg.strokeWeight(5);
 				pg.stroke(c.getRGB()); 
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 //				pg.noStroke(); 
 //				pg.circle((float)p.getX(), (float)p.getY(), 5);
 			}
-			else if(c!= null && mouseClicked) {
-				filler = new Filler(pg); 
-				filler.fill(p, c); 
+			else if(c!= null && mouseClicked && !pscreen.drawing()) {
+				filler = new Filler(); 
+				filler.fill(p, c, outline, pg); 
 			}
 			pg.endDraw(); 
 			image(pg, 0, 0); 

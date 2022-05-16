@@ -18,7 +18,8 @@ public class TypingGame {
 			text = readFile(file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Please select a valid file");
+			//tbh i think we should just throw a random file at them that's what feels right to me
+			//System.out.println("Please select a valid file");
 		}
 	}
 	
