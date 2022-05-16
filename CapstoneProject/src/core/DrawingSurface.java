@@ -103,7 +103,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
-		this.clear();
+		this.background(255,255,255);
 		//fill(0);
 		//activeScreen.draw();
 	}
