@@ -16,8 +16,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	PGraphics pg; 
 	private Screen activeScreen;
 	public float ratioX, ratioY;
+	Filler filler; 
 	private ArrayList<Screen> screens;
-	boolean mouseDragged = false; 
+	boolean mouseDragged = false;
+	boolean mouseClicked = false; 
 //	private double width, height;
 	
 
@@ -82,10 +84,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		if(activeScreen == screens.get(PAINTING_SCREEN)) {
 			PaintingScreen pscreen = (PaintingScreen) activeScreen; 
 			Color c = pscreen.getColor();
-			
+			pg.beginDraw();
+			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
 			if(c!= null && mousePressed && pscreen.drawing()) {
-				pg.beginDraw();
-				Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
 				Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
 				pg.fill(c.getRGB()); 
 				pg.strokeWeight(5);
@@ -93,9 +94,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 //				pg.noStroke(); 
 //				pg.circle((float)p.getX(), (float)p.getY(), 5);
-				pg.endDraw(); 
 			}
-			
+			else if(c!= null && mouseClicked) {
+				filler = new Filler(pg); 
+				filler.fill(p, c); 
+			}
+			pg.endDraw(); 
 			image(pg, 0, 0); 
 		}
 		pop();
@@ -138,5 +142,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	public PGraphics getGraphics() {
 		return g; 
+	}
+	public void mouseClicked() {
+		mouseClicked = true; 
 	}
 }
