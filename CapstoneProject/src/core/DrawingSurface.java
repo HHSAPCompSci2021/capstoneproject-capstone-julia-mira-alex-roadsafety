@@ -3,7 +3,6 @@ package core;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import processing.core.PApplet;
 import processing.core.*;
 import java.awt.Color;
 import screens.*;
@@ -21,8 +20,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	boolean mouseDragged = false;
 	boolean mouseClicked = false; 
 	float maxStrokeWidth = (float) 7;
-	float minStrokeWidth = 5;
-	private boolean[][] outline; 
+	float minStrokeWidth = 4;
+	private PGraphics outline; 
 //	private double width, height;
 	
 
@@ -71,7 +70,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		for (Screen s : screens)
 			s.setup();
 		pg= createGraphics(800, 1600); 
-		frameRate(80); 
+		outline = createGraphics(800, 1600);
+		frameRate(60); 
 	}
 	
 	public void draw() {
@@ -88,26 +88,36 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			PaintingScreen pscreen = (PaintingScreen) activeScreen; 
 			Color c = pscreen.getColor();
 			pg.beginDraw();
+			outline.beginDraw();
 			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
+			int x = (int) p.getX(); 
+			int y = (int)p.getY(); 
 			if(c!= null && mousePressed && pscreen.drawing()) {
 				Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
 				pg.fill(c.getRGB()); 
+				outline.fill(0); 
 				stroke(0);
 			    float d = dist(mouseX, mouseY, pmouseX, pmouseY); // how fast did the user move the "pen"?
 			    float brushWidth = map(d, 0, 40, maxStrokeWidth, minStrokeWidth); // the slower the move, the wider the stroke
 			    if(brushWidth < minStrokeWidth) brushWidth = minStrokeWidth;
 			    pg.strokeWeight(brushWidth);
-			    System.out.println(brushWidth); 
+			    outline.strokeWeight(brushWidth); 
+			   // System.out.println(brushWidth); 
 				//pg.strokeWeight(5);
 				pg.stroke(c.getRGB()); 
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
+				//if()
+				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
+				
 //				pg.noStroke(); 
 //				pg.circle((float)p.getX(), (float)p.getY(), 5);
 			}
 			else if(c!= null && mouseClicked && !pscreen.drawing()) {
-				filler = new Filler(); 
-				filler.fill(p, c, outline, pg); 
+				System.out.println("streammorale"); 
+				fill(x, y, c, outline); 
+				//mouseClicked = false; 
 			}
+			outline.endDraw();
 			pg.endDraw(); 
 			image(pg, 0, 0); 
 		}
@@ -117,6 +127,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
 		this.background(255,255,255);
+		//PImage im = loadImage("background-pic.png");
+	//	this.background(im);
 		//fill(0);
 		//activeScreen.draw();
 	}
@@ -128,9 +140,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	}
 	public void mouseDragged() {
 		mouseDragged = true; 
+		mouseClicked = false; 
 	}
 	public void mouseReleased() {
 		mouseDragged = false; 
+		mouseClicked = false; 
+		
 	}
 	public Point assumedCoordinatesToActual(Point assumed) {
 		return new Point((int)(assumed.getX()*ratioX), (int)(assumed.getY()*ratioY));
@@ -154,5 +169,29 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	}
 	public void mouseClicked() {
 		mouseClicked = true; 
+	}
+	public void fill(int x, int y, Color c, PGraphics outline) {
+			
+			int col = c.getRGB();
+//			if(y< 0 || y>= outline.length || x < 0 || x>= outline[y].length) {
+//				return; 
+//			}
+			int[] p1 = pg.pixels; 
+			int[] p2 = outline.pixels; 
+			if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == 0) {
+				//System.out.println("agfsfgsdg"); 
+				return; 
+			}
+			else {
+				p1[y*pg.width + x] = col; 
+				for(int i = -1; i<2; i++) {
+					for(int j = -1; j< 2; j++) {
+						if(i!= 0 || j!= 0) {
+							fill(x + i, y + j, c, outline); 
+							pg.updatePixels();
+						}
+					}
+				}
+			}
 	}
 }

@@ -69,9 +69,9 @@ public class Window extends Screen {
 			if(p.isMixed()) {
 				p.getParent().getPaint().makeAvailable(p.getPaint().getAmount()-1); 
 			}
-//			else {
-//				surface.switchScreen(surface.TYPING_SCREEN);
-//			}
+			else {
+				surface.switchScreen(surface.TYPING_SCREEN);
+			}
 			
 		}
 		if(back.isClicked(point)) {
