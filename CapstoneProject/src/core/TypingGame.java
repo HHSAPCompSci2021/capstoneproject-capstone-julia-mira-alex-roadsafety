@@ -1,21 +1,21 @@
 package core;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Scanner;
 
 public class TypingGame {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	private String text; 
-	private String file; 
-	private String checked; 
+	private String user;  
 	private double score; 
-	private Duration d;
+	private boolean play = false;
+	private long startTime;
+	private long endTime;
 	public TypingGame (String inputFile) {
-		
-		file = inputFile;
+		startTime = 0;
+		endTime = 0;
 		try {
-			text = readFile(file);
+			text = readFile(inputFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//tbh i think we should just throw a random file at them that's what feels right to me
@@ -47,11 +47,38 @@ public class TypingGame {
 	}
 	
 	public void play() {
-		
-//		d = new Duration(0, 0); //error with this statement
-		
+		startTime = System.currentTimeMillis();
+		play = true;
+	}
+	
+	public String type(char a) {
+		user+=a;
+		return user;
 	}
 	public double getScore() {
 		return score;
 	}
+	public long getTime() {
+		return endTime-startTime;
+	}
+	public boolean gameOn() {
+		return play;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String s) {
+		user = s;
+	}
+
+	public long end() {
+		if (user == text) {
+			endTime = System.currentTimeMillis();
+			play = false;
+			return text.length()*100000/(startTime-endTime);
+		}
+		return -1;
+	}
+	
+	
 }

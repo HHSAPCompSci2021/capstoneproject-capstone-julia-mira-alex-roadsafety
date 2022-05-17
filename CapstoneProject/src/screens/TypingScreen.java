@@ -1,5 +1,7 @@
 package screens;
 
+import java.awt.Point;
+
 import core.Button;
 import core.DrawingSurface;
 import core.Paint;
@@ -41,6 +43,31 @@ public class TypingScreen extends Screen{
 		
 	}
 	public void mousePressed() {
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		if (play.isClicked(p)) {
+			if(!game.gameOn())
+				game.play();
+		}
+	}
+	public void keyPressed() {
+		char key = surface.key;
+		String s = game.getUser();
+		if(game.gameOn()) {
+			if(key == surface.BACKSPACE || key == surface.DELETE) {
+				if(s.length()>0)
+					game.setUser(s.substring(0,s.length()-2));
+			}
+			else if(key == surface.RETURN || key == surface.ENTER) {
+				int money = game.end();
+			}
+			else if (key == surface.TAB || key == surface.ESC) {
+				
+			}
+			else {
+				game.type(key);
+			}
+		}
+		
 		
 	}
 	//blah blah blah 
