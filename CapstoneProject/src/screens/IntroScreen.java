@@ -13,7 +13,8 @@ public class IntroScreen extends Screen {
 	
 	private Button startButton;
 	private Button instructionsButton;
-	
+	public final static String fileSeparator = System.getProperty("file.separator");
+
 	private PImage background;
 	
 	public IntroScreen(DrawingSurface surface) {
@@ -26,7 +27,7 @@ public class IntroScreen extends Screen {
 	}
 	
 	public void setup() {
-		background = surface.loadImage("/additionalPictures/background-pic.png");
+		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 		
 
