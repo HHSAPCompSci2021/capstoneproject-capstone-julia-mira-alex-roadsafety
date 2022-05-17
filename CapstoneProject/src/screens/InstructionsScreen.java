@@ -10,7 +10,7 @@ import processing.core.*;
  * screen that is displayed to user whenever they want to view the instructions
  * this is used during the intro screen and in-game
  * 
- * @author 
+ * @author Julia and Mira
  *
  */
 public class InstructionsScreen extends Screen {
@@ -24,7 +24,8 @@ public class InstructionsScreen extends Screen {
 	public InstructionsScreen(DrawingSurface surface) {
 		super(800, 1600);
 		this.surface = surface; 
-		//back = new Button(new Rectangle(1500, 0, 100, 100), "back", Color.cyan); 
+		back = new Button(new Rectangle(1500, 0, 100, 50), "back", Color.cyan); 
+
 	}
 
 	@Override
@@ -38,9 +39,13 @@ public class InstructionsScreen extends Screen {
 				+ " make a shade, then click on an available color and select the mix option. You'll have four options for shades/tints.";
 		surface.fill(0, 208, 312);
 		surface.text(instructions, 50, 50, (float)500, (float)super.DRAWING_HEIGHT);
-		back = new Button(new Rectangle(1500, 0, 100, 100), "back", Color.cyan); 
+		
 		back.draw(surface);
-		//surface.fill(255);
+		
+		
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		back.highlight(p, surface);
+		
 	}
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));

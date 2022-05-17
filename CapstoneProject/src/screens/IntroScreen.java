@@ -17,7 +17,7 @@ public class IntroScreen extends Screen {
 	private PImage background;
 	
 	public IntroScreen(DrawingSurface surface) {
-		super(1600, 800);
+		super(800, 1600);
 		this.surface = surface; 
 		
 		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 75), "start!", Color.red);
@@ -40,30 +40,8 @@ public class IntroScreen extends Screen {
 		instructionsButton.draw(surface, DRAWING_WIDTH/2 - 45, DRAWING_HEIGHT/2 + 130);
 
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		
-		if (startButton.isClicked(p)) {
-			surface.stroke(113, 240, 147);
-			surface.strokeWeight(5);
-			surface.noFill();
-			surface.rect((float)startButton.getXCoord(), (float)startButton.getYCoord(), (float)startButton.getWidth(), (float)startButton.getHeight());
-			
-		}
-		else {
-			surface.stroke(0);
-			surface.strokeWeight(1);
-		}
-		
-		if (instructionsButton.isClicked(p)) {
-			surface.stroke(113, 240, 147);
-			surface.strokeWeight(5);
-			surface.noFill();
-			surface.rect((float)instructionsButton.getXCoord(), (float)instructionsButton.getYCoord(), (float)instructionsButton.getWidth(), (float)instructionsButton.getHeight());
-		}	
-		else {
-			surface.stroke(0);
-			surface.strokeWeight(1);
-		}
-	
+		startButton.highlight(p, surface);
+		instructionsButton.highlight(p, surface);
 	}
 	
 	

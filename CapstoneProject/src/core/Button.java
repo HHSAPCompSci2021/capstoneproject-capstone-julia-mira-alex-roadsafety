@@ -55,6 +55,16 @@ public class Button {
 		return shape.isPointInside(p.getX(), p.getY()); 
 	}
 	
+	public void highlight(Point p, PApplet surface) {
+		if (shape.isPointInside(p.getX(), p.getY())) {
+			surface.noFill();
+			surface.stroke(113, 240, 147);
+			surface.strokeWeight(5);
+			surface.rect((float)this.getXCoord(), (float)this.getYCoord(), (float)this.getWidth(), (float)this.getHeight());
+		}
+		
+	}
+	
 	/**
 	 * draws the button at specified coord 
 	 * @param p PApplet
@@ -63,18 +73,18 @@ public class Button {
 	 */
 	public void draw(PApplet p, double x, double y) {
 		shape.setFillColor(color, true);
-		 shape.draw(p);
-		 if(textColor != null) {
-			 p.fill(textColor.getRGB());
+		shape.draw(p);
+		if(textColor != null) {
+			p.fill(textColor.getRGB());
 		 }
-		 else {
-			 p.fill(128, 128, 0);
-		 }
+		else {
+			p.fill(128, 128, 0);
+		}
 
-		 p.textSize(25);
+		p.textSize(25);
 		// make sure the text color is black ughhh p.text
 		// p.fill(0);
-		 p.text(text, (float)x, (float)y);
+		p.text(text, (float)x, (float)y);
 		// p.fill(255);
 	}
 	/**
@@ -123,4 +133,6 @@ public class Button {
 	public void setTextColor(Color color) {
 		this.textColor = color; 
 	}
+	
+	
 }
