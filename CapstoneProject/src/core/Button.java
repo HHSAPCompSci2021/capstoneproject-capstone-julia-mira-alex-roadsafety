@@ -63,18 +63,18 @@ public class Button {
 	 */
 	public void draw(PApplet p, double x, double y) {
 		shape.setFillColor(color, true);
-		 shape.draw(p);
-		 if(textColor != null) {
-			 p.fill(textColor.getRGB());
+		shape.draw(p);
+		if(textColor != null) {
+			p.fill(textColor.getRGB());
 		 }
-		 else {
-			 p.fill(128, 128, 0);
-		 }
+		else {
+			p.fill(128, 128, 0);
+		}
 
-		 p.textSize(25);
+		p.textSize(25);
 		// make sure the text color is black ughhh p.text
 		// p.fill(0);
-		 p.text(text, (float)x, (float)y);
+		p.text(text, (float)x, (float)y);
 		// p.fill(255);
 	}
 	/**
