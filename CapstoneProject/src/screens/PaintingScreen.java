@@ -11,7 +11,7 @@ import core.*;
 /**
  * paintingScreen that is the screen with the drawing canvas that the user can draw on
  * 
- * @author 
+ * @author Julia
  *
  */
 public class PaintingScreen extends Screen{
@@ -69,6 +69,8 @@ public class PaintingScreen extends Screen{
 		palette.draw(surface, false);
 		//canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
 	
+		//made array to prevent repeated code for each button
+		
 		
 	}
 	

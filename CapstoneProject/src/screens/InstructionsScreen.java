@@ -10,7 +10,7 @@ import processing.core.*;
  * screen that is displayed to user whenever they want to view the instructions
  * this is used during the intro screen and in-game
  * 
- * @author 
+ * @author Julia and Mira
  *
  */
 public class InstructionsScreen extends Screen {
@@ -24,8 +24,7 @@ public class InstructionsScreen extends Screen {
 	public InstructionsScreen(DrawingSurface surface) {
 		super(800, 1600);
 		this.surface = surface; 
-		//back = new Button(new Rectangle(1500, 0, 100, 100), "back", Color.cyan);
-		back = new Button(new Rectangle(1500, 0, 100, 100), "back", Color.cyan); 
+		back = new Button(new Rectangle(1500, 0, 100, 50), "back", Color.cyan); 
 
 	}
 
@@ -45,13 +44,8 @@ public class InstructionsScreen extends Screen {
 		
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		surface.noFill();
-		if (back.isClicked(p)) {
-			surface.stroke(113, 240, 147);
-			surface.strokeWeight(5);
-			surface.rect((float)back.getXCoord(), (float)back.getYCoord(), (float)back.getWidth(), (float)back.getHeight());
-			
-		}
+		back.highlight(p, surface);
+		
 	}
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));

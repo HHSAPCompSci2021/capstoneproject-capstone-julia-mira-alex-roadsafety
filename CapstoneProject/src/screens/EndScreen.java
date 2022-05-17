@@ -9,7 +9,7 @@ import processing.core.*;
 /**
  * screen that is displayed to user whenever they finish the game
  * 
- * @author 
+ * @author Julia
  *
  */
 public class EndScreen extends Screen {
@@ -24,7 +24,7 @@ public class EndScreen extends Screen {
 	public EndScreen(DrawingSurface surface) {
 		super(800, 1600);
 		this.surface = surface; 
-		back = new Button(new Rectangle(1500, 0, 100, 100), "back", Color.cyan); 
+		back = new Button(new Rectangle(1500, 0, 100, 50), "back", Color.cyan); 
 
 	}
 
@@ -32,23 +32,30 @@ public class EndScreen extends Screen {
 	public void draw() {
 		surface.rect(0, 0, (float)super.DRAWING_WIDTH, (float)super.DRAWING_HEIGHT);
 	
-		String instructions = "Yay you made a painting :D";
+		String instructions = "congratulations on finishing your painting!";
 		
 		surface.fill(0, 208, 312);
-//		surface.background(0,208,312);
-		surface.text(instructions, 50, 50, (float)500, (float)super.DRAWING_HEIGHT);
-//		surface.fill(255);
+	
+		surface.text(instructions, DRAWING_HEIGHT - (surface.textWidth(instructions)/2), 100);
+
+		
 		
 		back.draw(surface);
 		
-//		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-//		if (back.isClicked(p)) {
-//			surface.noFill();
-//			surface.fill(0);
-//			surface.stroke(113, 240, 147);
-//			surface.strokeWeight(5);
-//			surface.rect((float)back.getXCoord(), (float)back.getYCoord(), (float)back.getWidth(), (float)back.getHeight());
-//			
-//		}
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		if (back.isClicked(p)) {
+			surface.noFill();
+			surface.stroke(113, 240, 147);
+			surface.strokeWeight(5);
+			surface.rect((float)back.getXCoord(), (float)back.getYCoord(), (float)back.getWidth(), (float)back.getHeight());
+		}
+	}
+	
+	public void mousePressed() {
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		System.out.println(p.getX() + " " + p.getY()); 
+		if(back.isClicked(p)) {
+			surface.switchScreen(surface.INTRO_SCREEN);
+		}
 	}
 }
