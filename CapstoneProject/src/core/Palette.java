@@ -126,10 +126,27 @@ public class Palette {
 		return collection.get(i); 
 	}
 	/**
+	 * 
+	 * @return all paints in palette
+	 */
+	public ArrayList<PaintButton> getPaints() {
+		return collection; 
+	}
+	/**
 	 * all amounts are reset 
 	 */
 	public void restart() {
-		
+		collection.get(0).getPaint().makeAvailable(100);
+		collection.get(1).getPaint().makeAvailable(100);
+		for(int i = 2; i< collection.size(); i++) {
+			collection.get(i).getPaint().makeAvailable(0); 
+			Palette m = collection.get(i).getMixes(); 
+			if(m != null) {
+				for(PaintButton b: m.getPaints()) {
+					b.getPaint().makeAvailable(0);
+				}
+			}
+		}
 	}
 
 }

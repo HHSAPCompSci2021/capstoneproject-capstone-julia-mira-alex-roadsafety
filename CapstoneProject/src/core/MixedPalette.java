@@ -8,7 +8,6 @@ import java.util.ArrayList;
  *
  */
 public class MixedPalette extends Palette{
-	//ArrayLis shades;
 	//these have text as outlined in readme 
 	//there's like five of them 
 	/**
@@ -36,5 +35,5 @@ public class MixedPalette extends Palette{
 //			b.setMixed();
 //		}
 	}
-
+	
 }

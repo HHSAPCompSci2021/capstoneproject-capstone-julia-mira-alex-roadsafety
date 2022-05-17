@@ -37,7 +37,7 @@ public class PaintingScreen extends Screen{
 		super(1600, 1600);
 		this.surface = surface; 
 		drawState = true;
-		
+		on  = true; 
 		exit = new Button(new Rectangle(DRAWING_WIDTH - 150, 10, 100, 40), "exit", Color.red);
 		finish = new Button(new Rectangle(DRAWING_WIDTH - 150, 100, 100, 40), "finish", Color.red);
 		startOver = new Button(new Rectangle(DRAWING_WIDTH - 150, 300, 125, 40), "start over", Color.red);
@@ -46,6 +46,7 @@ public class PaintingScreen extends Screen{
 		draw = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2, 100, 40), "draw", Color.red);
 		fill = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2 + 100, 100, 40), "fill", Color.red);
 		palette = new Palette(); 
+		selected = palette.getPaint(0).getColor();
 		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);		
 	}
 	
@@ -88,6 +89,7 @@ public class PaintingScreen extends Screen{
 		
 		else if (startOver.isClicked(p)) {
 			//canvas.restart();
+			surface.clearGraphics(); 
 			palette.restart();
 		}
 		
@@ -121,7 +123,7 @@ public class PaintingScreen extends Screen{
 	public void mouseDragged() {
 		super.mouseDragged(); 
 		//Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		on = true; 
+		//on = true; 
 		//canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
 	}
 	public void mouseReleased() {
@@ -148,5 +150,6 @@ public class PaintingScreen extends Screen{
 	public boolean drawing() {
 		return drawState; 
 	}
+	//public 
 
 }

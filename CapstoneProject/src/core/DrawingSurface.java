@@ -15,7 +15,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	PGraphics pg; 
 	private Screen activeScreen;
 	public float ratioX, ratioY;
-	Filler filler; 
 	private ArrayList<Screen> screens;
 	boolean mouseDragged = false;
 	boolean mouseClicked = false; 
@@ -89,6 +88,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			Color c = pscreen.getColor();
 			pg.beginDraw();
 			outline.beginDraw();
+			//if(pscreen.drawing()) {
 			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
@@ -112,11 +112,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //				pg.noStroke(); 
 //				pg.circle((float)p.getX(), (float)p.getY(), 5);
 			}
-			else if(c!= null && mouseClicked && !pscreen.drawing()) {
-				//System.out.println("streammorale"); 
-				fill(x, y, c, outline); 
-				//mouseClicked = false; 
-			}
+//			else if(c!= null && mouseClicked && !pscreen.drawing()) {
+//				fill(x, y, c, outline); 
+//				//mouseClicked = false; 
+//			}
+			//}
 			outline.endDraw();
 			pg.endDraw(); 
 			image(pg, 0, 0); 
@@ -136,6 +136,25 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void mousePressed() {
 //		System.out.println("mouse pressed");
 //		System.out.println(activeScreen);
+		
+		if(activeScreen == screens.get(PAINTING_SCREEN)) {
+			PaintingScreen pscreen = (PaintingScreen) activeScreen; 
+			Color c = pscreen.getColor();
+			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
+			int x = (int) p.getX(); 
+			int y = (int)p.getY(); 
+			if(c!= null && !pscreen.drawing() && y< pg.height && x< pg.width-1 ) {
+				//pg.beginDraw();
+				pg.loadPixels(); 
+				outline.loadPixels(); 
+				fill(p, c, outline); 
+				pg.updatePixels();
+				//outline.updatePixels();
+				//pg.endDraw();
+				//image(pg, 0, 0); 
+			}	
+			
+		}
 		activeScreen.mousePressed();
 	}
 	public void mouseDragged() {
@@ -169,33 +188,47 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	}
 	public void mouseClicked() {
 		mouseClicked = true; 
+		
 	}
-	public void fill(int x, int y, Color c, PGraphics outline) {
-			//pg.beginDraw();
-			int col = c.getRGB();
-//			if(y< 0 || y>= outline.length || x < 0 || x>= outline[y].length) {
-//				return; 
-//			}
-			int[] p1 = pg.pixels; 
-			int[] p2 = outline.pixels; 
-			if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == 0) {
-				//System.out.println("agfsfgsdg"); 
-				//pg.endDraw();
-				image(pg, 0, 0); 
-				return; 
+	public void fill(Point p, Color c, PGraphics outline) { 
+		
+		// list
+		// add x,y
+		// while (!list.isEmpty()) {
+		//remove from list
+		// if needs color, then color & add neighbors
+	//}
+		ArrayList<Point> pixels = new ArrayList<Point>(); 
+		pixels.add(p); 
+		//int i = 0; 
+		int[] p1 = pg.pixels; 
+		int[] p2 = outline.pixels; 
+		int black = Color.BLACK.getRGB();
+		int col = c.getRGB(); 
+		while(pixels.size()!= 0) {
+			p = pixels.get(0); 
+			int x = (int) p.getX(); 
+			int y = (int)p.getY(); 
+			if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == black) {
+				pixels.remove(p); 
 			}
 			else {
 				p1[y*pg.width + x] = col; 
-				pg.updatePixels();
 				for(int i = -1; i<2; i++) {
 					for(int j = -1; j< 2; j++) {
 						if(i!= 0 || j!= 0) {
-							//fill(x + i, y + j, c, outline); 
-							pg.updatePixels();
+							Point point = new Point(x + i, y + j); 
+							pixels.add(point); 
 						}
 					}
 				}
 			}
+		}
 			
+	}
+	public void clearGraphics() {
+		//pg.beginDraw();
+		pg.clear();
+	//	pg.endDraw();
 	}
 }
