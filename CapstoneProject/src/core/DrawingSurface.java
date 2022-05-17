@@ -171,7 +171,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		mouseClicked = true; 
 	}
 	public void fill(int x, int y, Color c, PGraphics outline) {
-			
+			//pg.beginDraw();
 			int col = c.getRGB();
 //			if(y< 0 || y>= outline.length || x < 0 || x>= outline[y].length) {
 //				return; 
@@ -180,18 +180,22 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			int[] p2 = outline.pixels; 
 			if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == 0) {
 				//System.out.println("agfsfgsdg"); 
+				//pg.endDraw();
+				image(pg, 0, 0); 
 				return; 
 			}
 			else {
 				p1[y*pg.width + x] = col; 
+				pg.updatePixels();
 				for(int i = -1; i<2; i++) {
 					for(int j = -1; j< 2; j++) {
 						if(i!= 0 || j!= 0) {
-							fill(x + i, y + j, c, outline); 
+							//fill(x + i, y + j, c, outline); 
 							pg.updatePixels();
 						}
 					}
 				}
 			}
+			
 	}
 }
