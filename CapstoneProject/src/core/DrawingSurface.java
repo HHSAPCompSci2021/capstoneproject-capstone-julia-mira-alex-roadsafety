@@ -113,7 +113,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //				pg.circle((float)p.getX(), (float)p.getY(), 5);
 			}
 			else if(c!= null && mouseClicked && !pscreen.drawing()) {
-				System.out.println("streammorale"); 
+				//System.out.println("streammorale"); 
 				fill(x, y, c, outline); 
 				//mouseClicked = false; 
 			}
