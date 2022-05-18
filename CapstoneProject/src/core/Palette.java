@@ -17,8 +17,8 @@ public class Palette {
 	public Palette() {
 		divide = 1; 
 		collection = new ArrayList<PaintButton>(); 
-		bg = new Rectangle(800, 0, 900, 600); 
-		Paint[] paints = new Paint[24]; 
+		bg = new Rectangle(800, 0, 900, 800); 
+		Paint[] paints = new Paint[32]; 
 		paints[0] = new Paint(Color.black, 100);
 		paints[1] = new Paint(Color.white, 100); 
 		paints[2] =  new Paint(Color.cyan, 0); 
@@ -29,7 +29,7 @@ public class Palette {
 		paints[7] = new Paint(Color.yellow, 0); 
 		paints[8] =  new Paint(new Color(127, 0, 127), 0);
 		paints[9] = new Paint(new Color(255, 0, 127), 0);
-		paints[10] = new Paint(new Color(51, 255, 133), 0); 
+		paints[10] = new Paint(Color.gray, 0); 
 		paints[11] = new Paint(new Color(0, 255, 127), 0); 
 		paints[12] = new Paint(new Color(0, 128, 255), 0); 
 		paints[13] = new Paint(new Color(127, 0, 255), 0); 
@@ -43,10 +43,20 @@ public class Palette {
 		paints[21] = new Paint(new Color(107, 142, 35), 0); 
 		paints[22] = new Paint(new Color(218, 165, 32), 0); 
 		paints[23] = new Paint(new Color(250, 160, 122), 0);
+		paints[24] = new Paint(new Color(255,69,0), 0); 
+		paints[25] = new Paint(new Color(189,183,107), 0); 
+		paints[26] = new Paint(new Color(152,251,152), 0); 
+		paints[27] = new Paint(new Color(176,224,230), 0); 
+		paints[28] = new Paint(new Color(218,112,214), 0); 
+		paints[29] = new Paint(new Color(205,133,63), 0); 
+		paints[30] = new Paint(new Color(188,143,143), 0);
+		paints[31] = new Paint(new Color(240,255,240), 0); 
+		 
+		
 		//expand palette later 
 		// create set up all the colors over here 
 		int count = 0; 
-		for(int j = 0; j < 6; j ++ ) {
+		for(int j = 0; j < 8; j ++ ) {
 			for(int i = 0; i< 4; i++) {
 				Rectangle r =  new Rectangle(800 + 150*i, 100*j, 150, 100); 
 				Paint p = paints[count]; 

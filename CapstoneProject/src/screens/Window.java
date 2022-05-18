@@ -36,7 +36,7 @@ public class Window extends Screen {
 		back.draw(surface);
 		if(p.getPaint().isAvailable()) {
 			surface.text("Amount: " + p.getPaint().getAmount(), 100, 75);
-			use = new Button(new Rectangle(150, 200, 50, 50), "use", new Color(60,179,113)); 
+			use = new Button(new Rectangle(120, 200, 50, 50), "use", new Color(60,179,113)); 
 			if( p.getColor() != Color.white && p.getColor() != Color.black && !p.isMixed()) { 
 				mix = new Button(new Rectangle(180, 200, 30, 30), "mix", new Color(60, 179, 113)); 
 				mix.draw(surface);
