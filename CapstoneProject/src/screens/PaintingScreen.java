@@ -91,6 +91,7 @@ public class PaintingScreen extends Screen{
 		}
 		
 		else if (finish.isClicked(p)) {
+			surface.finish(); 
 			surface.switchScreen(surface.END_SCREEN);
 		}
 		
