@@ -106,7 +106,7 @@ public class Button {
 
 		 p.textSize(25);
 		// make sure the text color is black ughhh p.text
-		 p.text(text, (float)shape.getX() + 5, (float)shape.getY() + 20);
+		 p.text(text, (float)shape.getCenterX() - (p.textWidth(text)/2), (float)shape.getCenterY());
 		 p.fill(255);
 	}
 	/**

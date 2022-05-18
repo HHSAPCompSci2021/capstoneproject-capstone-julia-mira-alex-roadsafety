@@ -21,7 +21,7 @@ public class PaintingScreen extends Screen{
 	//private Painting canvas; //the drawing canvas where the user draws on
 	private Palette palette; //the color palette that shows what colors user has
 	
-	private Button exit, finish, startOver; //other options other than drawing
+	private Button exit, finish, startOver, instructions; //other options other than drawing
 	private Button draw, fill, erase; //drawing options
 	
 	private int drawState; // 0 is draw, 1 is fill, 2 is erase 
@@ -41,7 +41,7 @@ public class PaintingScreen extends Screen{
 		exit = new Button(new Rectangle(DRAWING_WIDTH - 150, 10, 100, 40), "exit", Color.red);
 		finish = new Button(new Rectangle(DRAWING_WIDTH - 150, 100, 100, 40), "finish", Color.red);
 		startOver = new Button(new Rectangle(DRAWING_WIDTH - 150, 300, 125, 40), "start over", Color.red);
-	//	instructions = new Button(new Rectangle(DRAWING_WIDTH - 150, 295, 100, 40), "instructions", Color.red);
+		instructions = new Button(new Rectangle(DRAWING_WIDTH - 150, 295, 125, 40), "instructions", Color.red);
 		
 		draw = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2, 100, 40), "draw", Color.red);
 		erase = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2 +200, 100, 40), "erase", Color.red); 
@@ -76,7 +76,18 @@ public class PaintingScreen extends Screen{
 		//canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
 	
 		//made array to prevent repeated code for each button
-		
+		//keep this? or change to for each loop
+				exit.highlight(p, surface);
+				finish.highlight(p, surface);
+				startOver.highlight(p, surface);
+				draw.highlight(p, surface);
+				fill.highlight(p, surface);
+//				erase.highlight(p, surface);
+				
+				//go through each button to see if it is being hovered over (made array to prevent repeated code for each button)
+//				for (Button e : buttonList) {
+//					e.highlight(p, surface);
+//				}
 		
 	}
 	
