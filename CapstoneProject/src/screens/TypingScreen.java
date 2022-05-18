@@ -58,7 +58,9 @@ public class TypingScreen extends Screen{
 					game.setUser(s.substring(0,s.length()-2));
 			}
 			else if(key == surface.RETURN || key == surface.ENTER) {
-//				int money = game.end();
+
+				long money = game.end();
+
 			}
 			else if (key == surface.TAB || key == surface.ESC) {
 				
