@@ -38,14 +38,15 @@ public class PaintingScreen extends Screen{
 		this.surface = surface; 
 		drawState = 0;
 		on  = true; 
-		exit = new Button(new Rectangle(DRAWING_WIDTH - 150, 10, 100, 40), "exit", Color.red);
-		finish = new Button(new Rectangle(DRAWING_WIDTH - 150, 100, 100, 40), "finish", Color.red);
-		startOver = new Button(new Rectangle(DRAWING_WIDTH - 150, 300, 125, 40), "start over", Color.red);
-		instructions = new Button(new Rectangle(DRAWING_WIDTH - 150, 295, 125, 40), "instructions", Color.red);
+		exit = new Button(new Rectangle(DRAWING_WIDTH - 180, 10, 150, 40), "exit", Color.red);
+		finish = new Button(new Rectangle(DRAWING_WIDTH - 180, 100, 150, 40), "finish", Color.red);
+		instructions = new Button(new Rectangle(DRAWING_WIDTH - 180, 195, 150, 40), "instructions", Color.red);
+		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "start over", Color.red);
 		
-		draw = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2, 100, 40), "draw", Color.red);
-		erase = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2 +200, 100, 40), "erase", Color.red); 
-		fill = new Button(new Rectangle(DRAWING_WIDTH - 150, DRAWING_HEIGHT/2 + 100, 100, 40), "fill", Color.red);
+		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", Color.red);
+		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", Color.red); 
+		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", Color.red);
+		
 		palette = new Palette(); 
 		selected = palette.getPaint(0).getColor();
 		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);		
@@ -61,58 +62,40 @@ public class PaintingScreen extends Screen{
 	//	surface.background(255);
 		exit.draw(surface);
 		finish.draw(surface);
+		instructions.draw(surface);
 		startOver.draw(surface);
-		
 		fill.draw(surface);
 		draw.draw(surface);
 		erase.draw(surface);
 
+		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		
+		exit.highlight(p, surface);
+		finish.highlight(p, surface);
+		instructions.highlight(p, surface);
+		startOver.highlight(p, surface);
 		fill.highlight(p, surface);
 		draw.highlight(p, surface);
 		erase.highlight(p, surface);
+		
+		
 		palette.draw(surface, false);
 		//canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
 	
 		//made array to prevent repeated code for each button
 		//keep this? or change to for each loop
-				exit.highlight(p, surface);
-				finish.highlight(p, surface);
-				startOver.highlight(p, surface);
-				draw.highlight(p, surface);
-				fill.highlight(p, surface);
-//				erase.highlight(p, surface);
 				
 				//go through each button to see if it is being hovered over (made array to prevent repeated code for each button)
 //				for (Button e : buttonList) {
 //					e.highlight(p, surface);
 //				}
-		
 	}
 	
 	
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-	
-		
-		 if (exit.isClicked(p)) {
-			//System.out.println("exit");
-			surface.switchScreen(surface.INTRO_SCREEN);
-		}
-		
-		else if (finish.isClicked(p)) {
-			surface.finish(); 
-			surface.switchScreen(surface.END_SCREEN);
-		}
-		
-		else if (startOver.isClicked(p)) {
-			//canvas.restart();
-			surface.clearGraphics(); 
-			palette.restart();
-		}
-		
-		else if (draw.isClicked(p)) {
+		if (draw.isClicked(p)) {
 			System.out.println("drawing");
 			drawState = 0;
 		}
@@ -124,6 +107,27 @@ public class PaintingScreen extends Screen{
 		else if(erase.isClicked(p)) {
 			drawState = 2; 
 		}
+		
+		else if (exit.isClicked(p)) {
+			//System.out.println("exit");
+			surface.switchScreen(surface.INTRO_SCREEN);
+		}
+		
+		else if (finish.isClicked(p)) {
+			surface.finish(); 
+			surface.switchScreen(surface.END_SCREEN);
+		}
+		 
+		else if(instructions.isClicked(p)) {
+			surface.switchScreen(surface.INSTRUCTIONS_SCREEN);
+		}
+		 
+		else if (startOver.isClicked(p)) {
+			//canvas.restart();
+			surface.clearGraphics(); 
+			palette.restart();
+		}
+		
 		else {
 			int pos = palette.selectPaint(p); 
 			if(pos >= 0) {
@@ -134,8 +138,6 @@ public class PaintingScreen extends Screen{
 			//	canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
 			}
 		}
-		
-		
 	}
 	
 	
