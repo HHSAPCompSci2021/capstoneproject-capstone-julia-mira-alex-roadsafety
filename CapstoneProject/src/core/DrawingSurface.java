@@ -240,11 +240,17 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			
 	}
 	public void clearGraphics() {
+		push();
+		
+		scale(ratioX, ratioY);
 		pg.beginDraw();
 		pg.clear();
+		pg.fill(255);
+		pg.rect(0, 0, 800, 1600);
 		outline.clear(); 
 		pg.endDraw();
 		image(pg, 0, 0); 
+		pop(); 
 	}
 	public void finish() {
 		pg.save("additionalPictures/Painting.png"); 
