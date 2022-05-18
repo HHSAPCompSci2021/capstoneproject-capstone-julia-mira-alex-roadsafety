@@ -15,6 +15,10 @@ import processing.core.*;
 public class EndScreen extends Screen {
 	
 	Button back;
+	private PImage background;
+	public final static String fileSeparator = System.getProperty("file.separator");
+
+
 	
 	/**
 	 * creates the endScreen with set width and height
@@ -24,22 +28,24 @@ public class EndScreen extends Screen {
 	public EndScreen(DrawingSurface surface) {
 		super(800, 1600);
 		this.surface = surface; 
+		
 		back = new Button(new Rectangle(1500, 0, 100, 50), "back", Color.cyan); 
 
 	}
-
+	public void setup() {
+		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
+		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+	}
+	
+	
 	@Override
 	public void draw() {
-		surface.rect(0, 0, (float)super.DRAWING_WIDTH, (float)super.DRAWING_HEIGHT);
-	
+		surface.image(background,0,0);
+		
 		String instructions = "congratulations on finishing your painting!";
 		
-		surface.fill(0, 208, 312);
-	
 		surface.text(instructions, DRAWING_HEIGHT - (surface.textWidth(instructions)/2), 100);
 
-		
-		
 		back.draw(surface);
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));

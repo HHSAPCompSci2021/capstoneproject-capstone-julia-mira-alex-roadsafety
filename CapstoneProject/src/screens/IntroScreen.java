@@ -10,7 +10,6 @@ import java.awt.Point;
 
 public class IntroScreen extends Screen {
 	
-	
 	private Button startButton;
 	private Button instructionsButton;
 	public final static String fileSeparator = System.getProperty("file.separator");
@@ -29,17 +28,16 @@ public class IntroScreen extends Screen {
 	public void setup() {
 		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
-		
-
 	}
 	
 	
 	public void draw() {
-		//surface.image(background,0,0);
+		surface.image(background,0,0);
 		
-		startButton.draw(surface, DRAWING_WIDTH/2 + 5, DRAWING_HEIGHT/2 + 40);
-		instructionsButton.draw(surface, DRAWING_WIDTH/2 - 45, DRAWING_HEIGHT/2 + 130);
+		startButton.draw(surface);
+		instructionsButton.draw(surface);
 
+		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		startButton.highlight(p, surface);
 		instructionsButton.highlight(p, surface);
