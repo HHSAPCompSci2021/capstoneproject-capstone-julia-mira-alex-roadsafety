@@ -92,11 +92,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
-			if(c!= null && mousePressed && pscreen.drawing()) {
-				Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
+			Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
+			if(c!= null && mousePressed && pscreen.mode() == 0) {
+				
 				pg.fill(c.getRGB()); 
 				outline.fill(0); 
-				stroke(0);
+				outline.stroke(0);
 			    float d = dist(mouseX, mouseY, pmouseX, pmouseY); // how fast did the user move the "pen"?
 			    float brushWidth = map(d, 0, 40, maxStrokeWidth, minStrokeWidth); // the slower the move, the wider the stroke
 			    if(brushWidth < minStrokeWidth) brushWidth = minStrokeWidth;
@@ -112,10 +113,18 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //				pg.noStroke(); 
 //				pg.circle((float)p.getX(), (float)p.getY(), 5);
 			}
-//			else if(c!= null && mouseClicked && !pscreen.drawing()) {
+			else if( mousePressed && pscreen.mode() == 2) {
+				pg.fill(Color.white.getRGB()); 
+				outline.stroke(Color.white.getRGB()); 
+				pg.stroke(255); 
+				pg.strokeWeight(10); 
+				outline.strokeWeight(10);
+				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
+				//if()
+				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 //				fill(x, y, c, outline); 
 //				//mouseClicked = false; 
-//			}
+			}
 			//}
 			outline.endDraw();
 			pg.endDraw(); 
@@ -143,7 +152,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
-			if(c!= null && !pscreen.drawing() && y< pg.height && x< pg.width-1 ) {
+			if(c!= null && pscreen.mode() == 1 && y< pg.height && x< pg.width-1 ) {
 				//pg.beginDraw();
 				pg.loadPixels(); 
 				outline.loadPixels(); 
@@ -209,7 +218,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			p = pixels.get(0); 
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
-			if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == black) {
+			if(y*pg.width + x < 0 || y*pg.width + x >= 1280000 ) {
+				System.out.println(y*pg.width + x); 
+				pixels.remove(p); 
+			}
+			else if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == black) {
 				pixels.remove(p); 
 			}
 			else {
@@ -227,8 +240,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			
 	}
 	public void clearGraphics() {
-		//pg.beginDraw();
+		pg.beginDraw();
 		pg.clear();
-	//	pg.endDraw();
+		outline.clear(); 
+		pg.endDraw();
+		image(pg, 0, 0); 
+	}
+	public void finish() {
+		pg.save("additionalPictures/Painting.png"); 
 	}
 }
