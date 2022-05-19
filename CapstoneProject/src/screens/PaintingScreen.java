@@ -26,8 +26,8 @@ public class PaintingScreen extends Screen{
 	private Palette palette; //the color palette that shows what colors user has
 	
 	private Button exit, finish, startOver, instructions; //other options other than drawing
-	private Color buttonColor;
 	private Button draw, fill, erase, blur; //drawing options
+	private Color buttonColor;
 	
 	private int drawState; // 0 is draw, 1 is fill, 2 is erase, 3 is blur 
 	Color selected; 
@@ -50,10 +50,10 @@ public class PaintingScreen extends Screen{
 		finish = new Button(new Rectangle(DRAWING_WIDTH - 180, 100, 150, 40), "finish", buttonColor);
 		instructions = new Button(new Rectangle(DRAWING_WIDTH - 180, 195, 150, 40), "instructions", buttonColor);
 		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "start over", buttonColor);
-		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", Color.red);
-		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", Color.red); 
-		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", Color.red);
-		blur = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 300, 150, 40), "blur", Color.red); 
+		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", buttonColor);
+		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", buttonColor); 
+		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", buttonColor);
+		blur = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 300, 150, 40), "blur", buttonColor); 
 		
 		palette = new Palette(); 
 		selected = palette.getPaint(0).getColor();
@@ -63,17 +63,11 @@ public class PaintingScreen extends Screen{
 	public void setup() {
 		background = surface.loadImage("additionalPictures"+fileSeparator+"pink-mountains.jpg");
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+		
 	}
 	
 	@Override
 	public void draw() {
-		
-//		exit.draw(surface, exit.getXCoord(), exit.getYCoord());
-//		finish.draw(surface, finish.getXCoord(), finish.getYCoord());
-//		startOver.draw(surface, startOver.getXCoord(), startOver.getYCoord());
-		//surface.fill(255);
-	//	surface.background(255);
-		
 		surface.image(background, 0, 0);
 		
 		exit.draw(surface);
@@ -118,14 +112,12 @@ public class PaintingScreen extends Screen{
 		
 		else if (fill.isClicked(p)) {
 			drawState = 1;
-			//System.out.println("fill");
 		}
 		else if(erase.isClicked(p)) {
 			drawState = 2; 
 		}
 		
 		else if (exit.isClicked(p)) {
-			//System.out.println("exit");
 			surface.switchScreen(surface.INTRO_SCREEN);
 		}
 		
@@ -139,7 +131,6 @@ public class PaintingScreen extends Screen{
 		}
 		 
 		else if (startOver.isClicked(p)) {
-			//canvas.restart();
 			surface.clearGraphics(); 
 			palette.restart();
 		}
@@ -192,6 +183,5 @@ public class PaintingScreen extends Screen{
 	public int mode() {
 		return drawState; 
 	}
-	//public 
 
 }
