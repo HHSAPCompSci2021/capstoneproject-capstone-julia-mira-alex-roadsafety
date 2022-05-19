@@ -2,6 +2,7 @@ package screens;
 
 import core.DrawingSurface;
 import mhaldar.shapes.Rectangle;
+import processing.core.PImage;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -18,11 +19,15 @@ public class PaintingScreen extends Screen{
 
 	private DrawingSurface surface;
 	
+	private PImage background;
+	public final static String fileSeparator = System.getProperty("file.separator");
+	
 	//private Painting canvas; //the drawing canvas where the user draws on
 	private Palette palette; //the color palette that shows what colors user has
 	
 	private Button exit, finish, startOver, instructions; //other options other than drawing
 	private Button draw, fill, erase; //drawing options
+	private Color buttonColor;
 	
 	private int drawState; // 0 is draw, 1 is fill, 2 is erase 
 	Color selected; 
@@ -37,19 +42,26 @@ public class PaintingScreen extends Screen{
 		super(1600, 1600);
 		this.surface = surface; 
 		drawState = 0;
-		on  = true; 
-		exit = new Button(new Rectangle(DRAWING_WIDTH - 180, 10, 150, 40), "exit", Color.red);
-		finish = new Button(new Rectangle(DRAWING_WIDTH - 180, 100, 150, 40), "finish", Color.red);
-		instructions = new Button(new Rectangle(DRAWING_WIDTH - 180, 195, 150, 40), "instructions", Color.red);
-		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "start over", Color.red);
+		on  = true;
 		
-		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", Color.red);
-		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", Color.red); 
-		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", Color.red);
+		buttonColor = new Color(239, 183, 192, 255);
+		
+		exit = new Button(new Rectangle(DRAWING_WIDTH - 180, 10, 150, 40), "exit", buttonColor);
+		finish = new Button(new Rectangle(DRAWING_WIDTH - 180, 100, 150, 40), "finish", buttonColor);
+		instructions = new Button(new Rectangle(DRAWING_WIDTH - 180, 195, 150, 40), "instructions", buttonColor);
+		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "start over", buttonColor);
+		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", buttonColor);
+		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", buttonColor); 
+		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", buttonColor);
 		
 		palette = new Palette(); 
 		selected = palette.getPaint(0).getColor();
-		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);		
+		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);	
+	}
+
+	public void setup() {
+		background = surface.loadImage("additionalPictures"+fileSeparator+"pink-mountains.jpg");
+		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 	
 	@Override
@@ -60,6 +72,9 @@ public class PaintingScreen extends Screen{
 //		startOver.draw(surface, startOver.getXCoord(), startOver.getYCoord());
 		//surface.fill(255);
 	//	surface.background(255);
+		
+		surface.image(background, 0, 0);
+		
 		exit.draw(surface);
 		finish.draw(surface);
 		instructions.draw(surface);
