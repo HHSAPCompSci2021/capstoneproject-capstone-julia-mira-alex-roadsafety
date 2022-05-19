@@ -29,6 +29,7 @@ public class TypingScreen extends Screen{
 		super(1600, 800);
 		this.surface = surface; 
 		game = new TypingGame("TypingGames"+fileSeparator+"Game"+(int)(Math.random()*1)+".txt");
+		//initialize the buttons 
 	}
 	/**
 	 * choose the paint you're typing for 

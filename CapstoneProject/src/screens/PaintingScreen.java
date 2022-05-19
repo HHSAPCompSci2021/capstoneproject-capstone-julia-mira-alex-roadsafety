@@ -22,9 +22,9 @@ public class PaintingScreen extends Screen{
 	private Palette palette; //the color palette that shows what colors user has
 	
 	private Button exit, finish, startOver, instructions; //other options other than drawing
-	private Button draw, fill, erase; //drawing options
+	private Button draw, fill, erase, blur; //drawing options
 	
-	private int drawState; // 0 is draw, 1 is fill, 2 is erase 
+	private int drawState; // 0 is draw, 1 is fill, 2 is erase, 3 is blur 
 	Color selected; 
 	boolean on; 
 	
@@ -46,6 +46,7 @@ public class PaintingScreen extends Screen{
 		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", Color.red);
 		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", Color.red); 
 		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", Color.red);
+		blur = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 300, 150, 40), "blur", Color.red); 
 		
 		palette = new Palette(); 
 		selected = palette.getPaint(0).getColor();
@@ -67,7 +68,7 @@ public class PaintingScreen extends Screen{
 		fill.draw(surface);
 		draw.draw(surface);
 		erase.draw(surface);
-
+		blur.draw(surface);
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		
@@ -78,7 +79,7 @@ public class PaintingScreen extends Screen{
 		fill.highlight(p, surface);
 		draw.highlight(p, surface);
 		erase.highlight(p, surface);
-		
+		blur.highlight(p, surface);
 		
 		palette.draw(surface, false);
 		//canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
@@ -127,7 +128,9 @@ public class PaintingScreen extends Screen{
 			surface.clearGraphics(); 
 			palette.restart();
 		}
-		
+		else if(blur.isClicked(p)) {
+			drawState = 3; 
+		}
 		else {
 			int pos = palette.selectPaint(p); 
 			if(pos >= 0) {

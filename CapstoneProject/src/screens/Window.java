@@ -67,6 +67,7 @@ public class Window extends Screen {
 		if(create.isClicked(point)) {
 			p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 			if(p.isMixed()) {
+				p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 				p.getParent().getPaint().makeAvailable(p.getPaint().getAmount()-1); 
 			}
 //			else {

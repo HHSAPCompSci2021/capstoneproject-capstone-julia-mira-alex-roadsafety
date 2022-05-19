@@ -11,6 +11,7 @@ public class Palette {
 	protected ArrayList<PaintButton> collection; // it'll end up looking like a nice 4 by six array maybe??? 
 	private int divide; 
 	private Rectangle bg; 
+	private ColorSorter cs; 
 	/**
 	 * set up a Palette of 14 Paints 
 	 */
@@ -55,7 +56,7 @@ public class Palette {
 		paints[33] = new Paint(new Color(127,255,212), 0); 
 		paints[34] = new Paint(new Color(123,104,238), 0); 
 		paints[35] = new Paint(new Color(255, 254, 113), 0); 
-
+		cs = new ColorSorter(); 
 		//expand palette later 
 		// create set up all the colors over here 
 		int count = 0; 
@@ -67,7 +68,8 @@ public class Palette {
 				count ++; 
 			}
 		}
-		System.out.println(collection.size()); 
+		//System.out.println(collection.size()); 
+		Collections.sort(collection, cs);
 		
 	}
 	public Palette(Rectangle r ) {
@@ -75,16 +77,7 @@ public class Palette {
 		bg = r; 
 	}
 	private void sort() {
-//		for(int i = 0; i< collection.size(); i++) {
-//			Paint p = collection.get(i).getPaint(); 
-//			if(!p.isAvailable() && i<= divide) {
-//				collection.add(collection.remove(i)); 
-//				divide --; 
-//			}
-//			else if(p.isAvailable() && i> divide) {
-//				collection.add(0, collection.remove(i)); 
-//				divide ++; 
-//			}
+		
 	}
 //	}
 	/**
