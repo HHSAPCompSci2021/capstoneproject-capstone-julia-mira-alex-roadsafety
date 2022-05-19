@@ -1,1 +1,13 @@
-Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun. Art is fun.
+Color is one of the most powerful tools for visual communication. It can influence our emotions, 
+our mood, and our behavior. That’s why it’s so important for product designers to select colors carefully.
+In this article, we’ll explore the basics of color theory for designers and provide information to help you design effective and visually interesting color schemes.
+Color is an essential part of human-computer interaction, and similar to other elements like typography, designers should select colors with care. 
+Color scheme is a term that designers use to describe color combinations that they use in GUI design. Since there are infinite color combinations 
+out there, it can be hard to decide what color scheme will work the best for your product. Fortunately, we have color theory, a discipline 
+that helps us select balanced and effective color combinations.Here are a few practical recommendations from color theory that will help you 
+select powerful color combinations for your design system.
+Achieving harmony in color combinations is one of the main color theory principles. When you create a new scheme, it might be tempting to add 
+dozens of colors to it. But it’s better to avoid that temptation. Why? Because it’s really hard to achieve a visual balance when you use too many colors.
+You can also easily overwhelm your users. So how do you avoid this? Keep your color scheme simple, with a maximum of two or three colors. Some designers think 
+that two or three colors will limit their creativity, but that’s not true. It’s possible to create interesting visual combinations by playing with shades and 
+tints of those colors. Simple schemes also work best for your users.

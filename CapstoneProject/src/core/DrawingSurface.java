@@ -20,6 +20,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	boolean mouseClicked = false; 
 	float maxStrokeWidth = (float) 7;
 	float minStrokeWidth = 4;
+	static int paintingnum; 
+	float v = (float)( 1.0 / 9.0);
+	float[][] kernel = {{ v, v, v }, 
+	                    { v, v, v }, 
+	                    { v, v, v }};
 	private PGraphics outline; 
 //	private double width, height;
 	
@@ -30,7 +35,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		screens = new ArrayList<Screen>();
 		
 		//add  the screen classes
-		
+		paintingnum = 0; 
 		IntroScreen screen1 = new IntroScreen(this);
 		InstructionsScreen screen2 = new InstructionsScreen(this);
 		PaintingScreen screen3 = new PaintingScreen(this); 
@@ -93,13 +98,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
 			Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
+			float d = dist(mouseX, mouseY, pmouseX, pmouseY); // how fast did the user move the "pen"?
+			 float brushWidth = map(d, 0, 40, maxStrokeWidth, minStrokeWidth); // the slower the move, the wider the stroke
 			if(c!= null && mousePressed && pscreen.mode() == 0) {
-				
 				pg.fill(c.getRGB()); 
 				outline.fill(0); 
 				outline.stroke(0);
-			    float d = dist(mouseX, mouseY, pmouseX, pmouseY); // how fast did the user move the "pen"?
-			    float brushWidth = map(d, 0, 40, maxStrokeWidth, minStrokeWidth); // the slower the move, the wider the stroke
+			   
 			    if(brushWidth < minStrokeWidth) brushWidth = minStrokeWidth;
 			    pg.strokeWeight(brushWidth);
 			    outline.strokeWeight(brushWidth); 
@@ -124,6 +129,30 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 //				fill(x, y, c, outline); 
 //				//mouseClicked = false; 
+			}
+			else if( mousePressed && pscreen.mode() == 3) {
+				pg.loadPixels();
+				for(int j = y - (int)brushWidth/2; j < y + (int)brushWidth; j++) { // ask shelby how brushstroke works
+					float sumr = 0; // Kernel sum for this pixel
+					float sumg = 0;
+					float sumb = 0; 
+				      for (int ky = -1; ky <= 1; ky++) {
+				        for (int kx = -1; kx <= 1; kx++) {
+				          // Calculate the adjacent pixel for this kernel point
+				          int pos = (y + ky)*pg.width + (x + kx);
+				          // Image is grayscale, red/green/blue are identical //ok but it ISNT actually 
+				          float valr = red(pg.pixels[pos]);
+				          float valg = green(pg.pixels[pos]); 
+				          float valb = blue(pg.pixels[pos]); 
+				          // Multiply adjacent pixels based on the kernel values
+				          sumr += kernel[ky+1][kx+1] * valr; // questionable considering color 
+				          sumg += kernel[ky+1][kx+1] * valg; 
+				          sumb += kernel[ky+1][kx+1] * valb; 
+				        }
+				      }
+				      Color bcol = new Color(sumr, sumg, sumb); 
+				      pg.pixels[j*pg.width + x ] = bcol.getRGB();
+				}
 			}
 			//}
 			outline.endDraw();
@@ -253,6 +282,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		pop(); 
 	}
 	public void finish() {
-		pg.save("additionalPictures/Painting.png"); 
+		String paintingnm = "additionalPictures/Painting" + paintingnum + ".png"; 
+		pg.save(paintingnm); 
+		paintingnum ++; 
 	}
 }

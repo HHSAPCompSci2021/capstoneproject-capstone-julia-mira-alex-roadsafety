@@ -1,0 +1,10 @@
+Focusing on the psychological aspects of color is an essential part of understanding color theory. When you select a UX color palette for your product, you’ll usually think about how things will look, but it’s equally important to think about how they feel, too. Color has a powerful psychological influence on the human brain, with each color representing different meanings and emotions for your users.
+While there are no universally acceptable meanings, here are some general feelings that colors evoke for most people:
+Red: danger, importance, love. Red is known as the color of energy—simply looking at it can increase a person’s pulse, heart rate, and metabolism. It’s an excellent color for grabbing a visitor’s attention; try using it to highlight the most important elements on your page.
+Orange: energy, optimism, fun. Orange has a positive energetic vibe. It’s also associated with inexpensive products, making it a good color for e-commerce stores if you want to highlight the best price.
+Yellow: happiness, attention, warmth. Yellow denotes a sunny disposition; when combined with black, it will quickly command attention. (Think about yellow cabs in NYC, for example.)
+Green: growth, success, nature. Green is fantastic for products that are close to nature. It’s also a popular color to use within user interfaces, giving users a signal that an operation completed successfully.
+Blue: trust, comfort, calmness. Blue represents relaxation and comfort. Brands love this color because it gives customers an impression of inner security.
+Purple: luxury, creativity, wisdom. Purple is usually linked to royalty as well as luxury products.
+Black: power, sophistication, mystery. Most brands limit black to text and accents. As a primary color, black may be prominent on fashion websites to convey a feeling of luxury.
+White: cleanliness, health, innocence. White usually makes us think of health and cleanliness. Designers typically choose this color to suggest a product’s safety, especially for medical equipment and high-tech products.

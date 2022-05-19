@@ -29,6 +29,7 @@ public class TypingScreen extends Screen{
 		super(1600, 800);
 		this.surface = surface; 
 		game = new TypingGame("TypingGames"+fileSeparator+"Game"+(int)(Math.random()*1)+".txt");
+		//initialize the buttons 
 	}
 	/**
 	 * choose the paint you're typing for 
@@ -58,7 +59,9 @@ public class TypingScreen extends Screen{
 					game.setUser(s.substring(0,s.length()-2));
 			}
 			else if(key == surface.RETURN || key == surface.ENTER) {
-//				int money = game.end();
+
+				long money = game.end();
+
 			}
 			else if (key == surface.TAB || key == surface.ESC) {
 				
