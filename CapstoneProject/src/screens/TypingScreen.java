@@ -21,7 +21,8 @@ public class TypingScreen extends Screen{
 	private DrawingSurface surface; 
 	private Paint paint; 
 	private TypingGame game;
-	String text; 
+	private String text; 
+	private String instructions; 
 	private Button play;
 	private Button quit; 
 	private int time; 
@@ -39,7 +40,7 @@ public class TypingScreen extends Screen{
 		
 		play = new Button(new Rectangle(400, 250, 150, 300), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
-		
+		instructions = "Once you click start, you'll enter a typing game! Do your best to type accurately and speedily for a minute. The better your typing, the more paint you receive.";
 		y = 0; 
 		//System.out.println(text); 
 	}
@@ -63,8 +64,11 @@ public class TypingScreen extends Screen{
 		if(!playing) {
 			play.draw(surface);	
 			play.highlight(p, surface); 
+			surface.fill(0);
+			surface.text(instructions, 0, 50, 375, 500);
 		}
 		if(playing) {
+			surface.fill(255);
 			surface.rect(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT);
 			quit.draw(surface);
 			quit.highlight(p, surface);
@@ -73,7 +77,7 @@ public class TypingScreen extends Screen{
 			ArrayList<Boolean> scored = game.getScored();
 			//surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
 			if(game.gameOn()) {
-				surface.textSize(50); 
+				surface.textSize(30); 
 				surface.fill(125); 
 				int x = 50; 
 				int y = 10; 
@@ -104,11 +108,11 @@ public class TypingScreen extends Screen{
 				double res = game.getScore()*100.0/text.length(); 
 				int amount = game.getScore()/10; 
 
-				if(res <= 5) {
+				if(res <= 15) {
 					amount = 0; 
 				}
 				else if (res <= 50) {
-					amount = 1; 
+					amount = 2; 
 				}
 				else if (res <= 70) {
 					amount = 3; 
@@ -123,7 +127,7 @@ public class TypingScreen extends Screen{
 					amount = 10; 
 				}
 				surface.textSize(50); 
-				String result = "You scored " + res + "% accuracy. \n You will receive " + amount + " uses."; 
+				String result = "You scored " + res + "% accuracy. \n You will receive " + amount + " use(s)."; 
 				surface.text(result, 50, 0, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
 				paint.makeAvailable(amount);
 			}
