@@ -82,7 +82,7 @@ public class PaintingScreen extends Screen{
 	public void draw() {
 		surface.image(background, 0, 0);
 		
-		surface.rect(20, 20, DRAWING_WIDTH/2 -40, DRAWING_HEIGHT-40);
+		surface.rect(0, 0, DRAWING_WIDTH/2 , DRAWING_HEIGHT);
 		
 		surface.strokeWeight(2);
 		surface.fill(239, 183, 192, 255);

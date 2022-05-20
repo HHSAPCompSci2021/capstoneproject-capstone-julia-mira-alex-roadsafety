@@ -25,6 +25,7 @@ public class TypingScreen extends Screen{
 	private Button play;
 	private Button quit; 
 	private int time; 
+	private float y; 
 	boolean playing; 
 	/**
 	 * creates a TypingScreen object with set width and height
@@ -39,6 +40,7 @@ public class TypingScreen extends Screen{
 		play = new Button(new Rectangle(400, 800, 300, 300), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
 		text = game.getFile(); 
+		y = 0; 
 		//System.out.println(text); 
 	}
 	/**
@@ -69,11 +71,11 @@ public class TypingScreen extends Screen{
 			String user = game.getUser();
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
-			surface.text( text, DRAWING_WIDTH/2, 0, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
+			surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
 			if(game.gameOn()) {
 				//surface.clear(); 
 				surface.fill(0); 
-				surface.text(user, 50, 0, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
+				surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
 				//two text boxes 
 				//loop thru and determine accuracy  
 				game.end(); 
@@ -85,6 +87,7 @@ public class TypingScreen extends Screen{
 				surface.text(result, 50, 0, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
 				paint.makeAvailable(amount);
 			}
+			y-=.2; 
 		}
 		
 		

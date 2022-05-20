@@ -75,7 +75,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			s.setup();
 		pg= createGraphics(800, 1600); 
 		outline = createGraphics(800, 1600);
-		frameRate(60); 
+		frameRate(80); 
 	}
 	
 	public void draw() {
