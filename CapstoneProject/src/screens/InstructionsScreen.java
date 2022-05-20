@@ -14,11 +14,13 @@ import processing.core.*;
  *
  */
 public class InstructionsScreen extends Screen {
-	Button back; 
+	private Button back, back2;
+	private boolean showBack2;
 	private PImage background;
-	Color themeColor;
+	private Color themeColor;
 	public final static String fileSeparator = System.getProperty("file.separator");
 
+	private int count;
 	
 	/**
 	 * creates the instructionScreen with set width and height
@@ -28,6 +30,8 @@ public class InstructionsScreen extends Screen {
 	public InstructionsScreen(DrawingSurface surface) {
 		super(800, 1600);
 		this.surface = surface; 
+		
+		count = 0;
 		
 		themeColor = new Color(239, 183, 192, 255);
 		back = new Button(new Rectangle(1500, 0, 100, 50), "back", themeColor); 
@@ -54,13 +58,29 @@ public class InstructionsScreen extends Screen {
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		back.highlight(p, surface);
+		
+//		if (showBack2) {
+//			back2 = new Button(new Rectangle(1350, 100, 250, 50), "back to drawing", themeColor); 
+//			back2.draw(surface);
+//			back2.highlight(p, surface);
+//		}
 	}
-
+	
+	public void setBack2(boolean var) {
+		showBack2 = var;
+	}
+	
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		System.out.println(p.getX() + " " + p.getY()); 
-		if(back.isClicked(p)) {
+		if(back.isClicked(p) && count == 0) {
+			count++;
 			surface.switchScreen(surface.INTRO_SCREEN);
 		}
+		
+		else if (back.isClicked(p) && count != 0) {
+			surface.switchScreen(surface.PAINTING_SCREEN);
+		}
+		
 	}
 }

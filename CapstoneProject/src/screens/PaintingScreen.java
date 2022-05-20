@@ -165,7 +165,8 @@ public class PaintingScreen extends Screen{
 		}
 		
 		else if (exit.isClicked(p)) {
-			surface.switchScreen(surface.INTRO_SCREEN);
+			surface.exit();
+//			surface.switchScreen(surface.INTRO_SCREEN);
 		}
 		
 		else if (finish.isClicked(p)) {
@@ -175,6 +176,8 @@ public class PaintingScreen extends Screen{
 		 
 		else if(instructions.isClicked(p)) {
 			surface.switchScreen(surface.INSTRUCTIONS_SCREEN);
+//			surface.setBack2();
+
 		}
 		 
 		else if (startOver.isClicked(p)) {
