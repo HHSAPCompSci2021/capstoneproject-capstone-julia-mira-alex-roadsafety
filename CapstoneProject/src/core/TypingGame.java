@@ -100,7 +100,7 @@ public class TypingGame {
 		if (System.currentTimeMillis() - startTime >= 60000) { //ends after a minute 
 			endTime = System.currentTimeMillis();
 			play = false;
-			return text.length()*100000/(startTime-endTime);
+			return text.length()*100000/(endTime-startTime);
 		}
 		return -1;
 	}
