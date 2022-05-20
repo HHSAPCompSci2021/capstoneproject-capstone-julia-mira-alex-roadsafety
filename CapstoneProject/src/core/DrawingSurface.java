@@ -251,7 +251,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
 			if(y*pg.width + x < 0 || y*pg.width + x >= 1280000 ) {
-				System.out.println(y*pg.width + x); 
+				//System.out.println(y*pg.width + x); 
 				pixels.remove(p); 
 			}
 			else if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == black) {
