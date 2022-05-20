@@ -65,14 +65,14 @@ public class Window extends Screen {
 			}
 		}
 		if(create.isClicked(point)) {
-			p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
+		//	p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 			if(p.isMixed()) {
 				p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 				p.getParent().getPaint().makeAvailable(p.getPaint().getAmount()-1); 
 			}
-//			else {
-//				surface.switchScreen(surface.TYPING_SCREEN);
-//			}
+			else {
+				surface.switchScreen(surface.TYPING_SCREEN);
+			}
 			
 		}
 		if(back.isClicked(point)) {

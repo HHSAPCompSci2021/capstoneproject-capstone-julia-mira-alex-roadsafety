@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class TypingGame {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	private String text; 
-	private String user;  
+	private String user; 
+	private boolean[] userscored; 
 	private double score; 
 	private boolean play = false;
 	private long startTime;

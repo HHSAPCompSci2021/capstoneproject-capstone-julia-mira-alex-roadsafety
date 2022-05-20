@@ -33,7 +33,7 @@ public class EndScreen extends Screen {
 
 	}
 	public void setup() {
-		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
+		background = surface.loadImage("additionalPictures"+fileSeparator+"pink-mountains.jpg");
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 	

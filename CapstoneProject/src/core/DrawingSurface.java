@@ -21,7 +21,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	float maxStrokeWidth = (float) 7;
 	float minStrokeWidth = 4;
 	static int paintingnum; 
-	float v = (float)( 1.0 / 9.0);
+	float v = (float)( .5 / 9.0);
 	float[][] kernel = {{ v, v, v }, 
 	                    { v, v, v }, 
 	                    { v, v, v }};

@@ -1,7 +1,7 @@
 package screens;
 
 import java.awt.Point;
-
+import mhaldar.shapes.*;
 import core.Button;
 import core.DrawingSurface;
 import core.Paint;
@@ -29,7 +29,7 @@ public class TypingScreen extends Screen{
 		super(1600, 800);
 		this.surface = surface; 
 		game = new TypingGame("TypingGames"+fileSeparator+"Game"+(int)(Math.random()*1)+".txt");
-		//initialize the buttons 
+		play = new Button(0, 0, 50, 50, "Start", )
 	}
 	/**
 	 * choose the paint you're typing for 

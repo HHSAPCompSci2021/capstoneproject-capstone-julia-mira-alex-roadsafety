@@ -134,4 +134,10 @@ public class Rectangle extends Shape{
 		double y = this.getY(); 
 		return y + height/2;
 	}
+	public double getHeight() {
+		return height; 
+	}
+	public double getWidth() {
+		return width; 
+	}
 }

@@ -61,14 +61,14 @@ public class PaintingScreen extends Screen{
 	}
 
 	public void setup() {
-		background = surface.loadImage("additionalPictures"+fileSeparator+"pink-mountains.jpg");
-		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+		
+	//	background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 		
 	}
 	
 	@Override
 	public void draw() {
-		surface.image(background, 0, 0);
+		//surface.image(background, 0, 0);
 		
 		exit.draw(surface);
 		finish.draw(surface);
