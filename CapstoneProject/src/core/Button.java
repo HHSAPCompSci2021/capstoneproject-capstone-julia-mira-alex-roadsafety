@@ -106,7 +106,7 @@ public class Button {
 
 		 p.textSize(25);
 		// make sure the text color is black ughhh p.text
-		 p.text(text, (float)shape.getCenterX() - (p.textWidth(text)/2), (float)shape.getCenterY());
+		 p.text(text, (float)shape.getCenterX() - (p.textWidth(text)/2), (float)shape.getCenterY() + 8);
 		 p.fill(255);
 	}
 	/**
@@ -134,5 +134,8 @@ public class Button {
 		this.textColor = color; 
 	}
 	
-	
+	public void changeLocation(Point p) {
+		shape.setPoint(p.getX() - 25, getYCoord());
+//		shape.setPoint(p.getX(), p.getY());
+	}
 }

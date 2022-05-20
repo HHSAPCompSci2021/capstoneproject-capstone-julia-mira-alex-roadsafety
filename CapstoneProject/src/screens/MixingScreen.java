@@ -29,14 +29,16 @@ public class MixingScreen extends Screen{
 	 * default constructor 
 	 */
 	public MixingScreen(DrawingSurface surface) {
-		super(1600, 800);
+		super(800, 1600);
 		this.surface = surface; 
 	}
-	public void setup() {
-		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
-		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
-			
-		}
+	
+//	public void setup() {
+//		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
+//		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+//			
+//		}
+	
 	/**
 	 * choose which color to mix 
 	 * @param p og Paint for mixing 
