@@ -25,7 +25,7 @@ public class TypingScreen extends Screen{
 	private Button play;
 	private Button quit; 
 	private int time; 
-	private float x, starty; 
+	private float y; 
 	boolean playing; 
 	/**
 	 * creates a TypingScreen object with set width and height
@@ -33,15 +33,14 @@ public class TypingScreen extends Screen{
 	 * @param height the height of the screen
 	 */
 	public TypingScreen (DrawingSurface surface) {
-		super(1600, 1600);
+		super(1600, 800);
 		this.surface = surface; 
 		//buttonColor = new Color(239, 183, 192, 255); 
 		game = new TypingGame("TypingGames"+fileSeparator+"Game"+(int)(Math.random()*11 +1)+".txt");
 		play = new Button(new Rectangle(400, 800, 300, 300), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
 		text = game.getFile(); 
-		//x = 50; 
-		starty = 10; 
+		y = 0; 
 		//System.out.println(text); 
 	}
 	/**
@@ -72,68 +71,23 @@ public class TypingScreen extends Screen{
 			String user = game.getUser();
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
-			//surface.text( text, DRAWING_WIDTH/2, 0, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
+			surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
 			if(game.gameOn()) {
 				//surface.clear(); 
-				int x = 50; 
-				float y = starty; 
-				surface.textSize(50); 
-				surface.fill(125); 
-				for(int i = 0; i< text.length(); i++) {
-					if(i > user.length()-1 || i> scored.size() -1) {
-						surface.fill(125);
-					}
-					else if(scored.get(i)) {
-						surface.fill(34,139,34);
-					}
-					else{
-						surface.fill(220,20,60);
-					}
-					
-					surface.text(text.charAt(i), x, y +  surface.textDescent() + surface.textAscent()); 
-					x += surface.textWidth(text.charAt(i));
-					if(x>= DRAWING_WIDTH -50) {
-						x = 0; 
-						y+= surface.textDescent() + surface.textAscent(); 
-					}
-					if(y == DRAWING_HEIGHT/2 && i< user.length()-1) {
-						starty-=10; 
-					}
-				}
-				//surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
-				//for(int i)
+				surface.fill(0); 
+				surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
 				//two text boxes 
 				//loop thru and determine accuracy  
 				game.end(); 
 			}
 			else {
-				double res = game.getScore()*100.0/text.length(); 
-				int amount = 0; 
-				
-				if(res <= 2) {
-					amount = 0; 
-				}
-				else if (res <= 50) {
-					amount = 1; 
-				}
-				else if (res <= 70) {
-					amount = 3; 
-				}
-				else if(res<= 85) {
-					amount = 5; 
-				}
-				else if (res <= 95) {
-					amount = 7; 
-				}
-				else {
-					amount = 10; 
-				}
-				surface.textSize(50); 
-				String result = "You scored " + res + "% accuracy. \n You will receive " + amount + " uses."; 
-				surface.text(result, 50, 0, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
+				double res = game.getScore()*1.0/game.getScored().size(); 
+				int amount = game.getScore()/10; 
+				String result = "You scored " + res + "% accuracy. You will receive " + amount + " uses."; 
+				surface.text(result, 50, 0, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
 				paint.makeAvailable(amount);
 			}
-			
+//			y-=.2; 
 		}
 		
 		
@@ -156,14 +110,10 @@ public class TypingScreen extends Screen{
 		if(game.gameOn()) {
 			if(key == surface.BACKSPACE || key == surface.DELETE) {
 				if(s.length()>0)
-					game.setUser(s.substring(0,s.length()-1));
+					game.delete();
 			}
 			else if(key == surface.RETURN || key == surface.ENTER) {
 
-				long money = game.end();
-				if (money != -1) {
-					//give back the paint
-				}
 
 				game.setUser(s + "\n"); 
 
@@ -175,7 +125,9 @@ public class TypingScreen extends Screen{
 			else {
 				
 			}
+			
 		}
+		System.out.println(key==surface.SHIFT);
 		
 		
 	}

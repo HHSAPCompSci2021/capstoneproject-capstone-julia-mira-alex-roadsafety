@@ -56,14 +56,23 @@ public class TypingGame {
 	}
 	
 	public String type(char a) {
-		user+=a;
-		if(a == text.charAt(user.length()-1)) {
-			scored.add(true); 
-		}
-		else { 
-			scored.add(false); 
+		int x = (int) a;
+		if(x>=32 && x<=127) {
+			user+=a;
+			
+			if(a == text.charAt(user.length()-1)) {
+				scored.add(true); 
+			}
+			else { 
+				scored.add(false); 
+			}
+			
 		}
 		return user;
+	}
+	public void delete() {
+		scored.remove(scored.size()-1);
+		user = user.substring(0, user.length()-1);
 	}
 	public int getScore() {
 		int count = 0; 
@@ -96,13 +105,14 @@ public class TypingGame {
 		user = s;
 	}
 
-	public long end() {
-		if (System.currentTimeMillis() - startTime >= 60000) { //ends after a minute 
+	public int end() {
+		if (System.currentTimeMillis() - startTime >= 6000) { //ends after a minute 
 			endTime = System.currentTimeMillis();
 			play = false;
-			return text.length()*100000/(endTime-startTime);
+			return getScore();
+			
 		}
-		return -1;
+		return 0;
 	}
 	
 	
