@@ -62,12 +62,14 @@ public class TypingGame {
 			
 			if(a == text.charAt(user.length()-1)) {
 				scored.add(true); 
+				System.out.println("reslvede");
 			}
 			else { 
 				scored.add(false); 
 			}
 			
 		}
+		
 		return user;
 	}
 	public void delete() {

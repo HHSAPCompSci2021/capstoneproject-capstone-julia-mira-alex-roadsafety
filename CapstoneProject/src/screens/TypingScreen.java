@@ -36,10 +36,10 @@ public class TypingScreen extends Screen{
 		super(1600, 800);
 		this.surface = surface; 
 		//buttonColor = new Color(239, 183, 192, 255); 
-		game = new TypingGame("TypingGames"+fileSeparator+"Game"+(int)(Math.random()*11 +1)+".txt");
+		
 		play = new Button(new Rectangle(400, 800, 300, 300), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
-		text = game.getFile(); 
+		
 		y = 0; 
 		//System.out.println(text); 
 	}
@@ -81,7 +81,7 @@ public class TypingScreen extends Screen{
 				game.end(); 
 			}
 			else {
-				double res = game.getScore()*1.0/game.getScored().size(); 
+				double res = game.getScore()*100.0/game.getScored().size(); 
 				int amount = game.getScore()/10; 
 				String result = "You scored " + res + "% accuracy. You will receive " + amount + " uses."; 
 				surface.text(result, 50, 0, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
@@ -95,12 +95,15 @@ public class TypingScreen extends Screen{
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (play.isClicked(p) && !playing) {
+			game = new TypingGame("TypingGames"+fileSeparator+"Game"+(int)(Math.random()*11 +1)+".txt");
+			text = game.getFile(); 
 			if(!game.gameOn())
 				game.play();
 				playing = true; 
 		}
 		if(quit.isClicked(p)) {
 			surface.switchScreen(surface.PAINTING_SCREEN);
+			playing=false;
 		}
 	}
 	public void keyPressed() { /// y does keyPressed not work?? puzzling 
@@ -127,7 +130,7 @@ public class TypingScreen extends Screen{
 			}
 			
 		}
-		System.out.println(key==surface.SHIFT);
+		
 		
 		
 	}
