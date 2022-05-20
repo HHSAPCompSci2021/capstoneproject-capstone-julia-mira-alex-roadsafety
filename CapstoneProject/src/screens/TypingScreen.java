@@ -16,7 +16,7 @@ import java.util.*;
  *
  */
 public class TypingScreen extends Screen{
-// lets make it a side by side comparison of user input and actual text+ figure out how to do a scrolling feature???
+
 	public final static String fileSeparator = System.getProperty("file.separator");
 	private DrawingSurface surface; 
 	private Paint paint; 
@@ -33,11 +33,11 @@ public class TypingScreen extends Screen{
 	 * @param height the height of the screen
 	 */
 	public TypingScreen (DrawingSurface surface) {
-		super(1600, 800);
+		super(800, 800);
 		this.surface = surface; 
 		//buttonColor = new Color(239, 183, 192, 255); 
 		
-		play = new Button(new Rectangle(400, 800, 300, 300), "Start", new Color(239, 183, 192, 255)); 
+		play = new Button(new Rectangle(400, 250, 150, 300), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
 		
 		y = 0; 
@@ -71,20 +71,60 @@ public class TypingScreen extends Screen{
 			String user = game.getUser();
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
-			surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
+			//surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
 			if(game.gameOn()) {
-				//surface.clear(); 
-				surface.fill(0); 
-				surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
-				//two text boxes 
-				//loop thru and determine accuracy  
+				surface.textSize(50); 
+				surface.fill(125); 
+				int x = 50; 
+				int y = 10; 
+				for(int i = 0; i< text.length(); i++) {
+					if(i > user.length()-1 || i> scored.size() -1) {
+						surface.fill(125);
+					}
+					else if(scored.get(i)) {
+						surface.fill(34,139,34);
+					}
+					else{
+						surface.fill(220,20,60);
+					}
+
+					surface.text(text.charAt(i), x, y +  surface.textDescent() + surface.textAscent()); 
+					x += surface.textWidth(text.charAt(i));
+					if(x>= DRAWING_WIDTH -50) {
+						x = 0; 
+						y+= surface.textDescent() + surface.textAscent(); 
+					}
+
+				}
 				game.end(); 
+				//surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
+				//for(int i)
 			}
 			else {
-				double res = game.getScore()*100.0/game.getScored().size(); 
+				double res = game.getScore()*100.0/text.length(); 
 				int amount = game.getScore()/10; 
-				String result = "You scored " + res + "% accuracy. You will receive " + amount + " uses."; 
-				surface.text(result, 50, 0, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
+
+				if(res <= 5) {
+					amount = 0; 
+				}
+				else if (res <= 50) {
+					amount = 1; 
+				}
+				else if (res <= 70) {
+					amount = 3; 
+				}
+				else if(res<= 85) {
+					amount = 5; 
+				}
+				else if (res <= 95) {
+					amount = 7; 
+				}
+				else {
+					amount = 10; 
+				}
+				surface.textSize(50); 
+				String result = "You scored " + res + "% accuracy. \n You will receive " + amount + " uses."; 
+				surface.text(result, 50, 0, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
 				paint.makeAvailable(amount);
 			}
 //			y-=.2; 
