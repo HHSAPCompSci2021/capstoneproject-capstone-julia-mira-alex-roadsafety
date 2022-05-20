@@ -9,44 +9,71 @@ public class Window extends Screen {
 	PaintButton p; 
 	PaintingScreen pscreen; 
 	Button create, back, use, mix; 
+	Color buttonColor;
+	
 	/**
 	 * creates the window with set width and height
 	 * @param surface PApplet
 	 */
 	public Window(DrawingSurface surface, PaintButton p, PaintingScreen screen) {
-		super(300, 300);
+		super(800, 600);
+		
 		this.surface = surface; 
 		this.p = p; 
 		pscreen = screen; 
+		
+		buttonColor = new Color(239, 183, 192, 255);
+		
+		create = new Button(new Rectangle(10, 10, 150, 80), "get more", buttonColor); 
+		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
+		
 	}
 	/**
 	 * default constructor 
 	 * @param surface PApplet
 	 */
 	public Window(DrawingSurface surface) {
-		super(300, 300);
+		super(800, 600);
+		
+		buttonColor = new Color(239, 183, 192, 255);
+		
+		create = new Button(new Rectangle(10, 10, 150, 80), "get more", buttonColor); 
+		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
+		
 	}
 	public void draw() {
+		
 		surface.fill(p.getColor().getRGB()); 
 		surface.rect(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT);
 		surface.fill(Color.white.getRGB());
-		create = new Button(new Rectangle(5, 5, 70, 70), "get\nmore", new Color(221,160,221)); 
-		back = new Button(new Rectangle(200, 5, 100, 20), "back", new Color(240, 128, 128)); 
+		
 		create.draw(surface);
 		back.draw(surface);
+		
 		if(p.getPaint().isAvailable()) {
-			surface.text("Amount: " + p.getPaint().getAmount(), 100, 75);
-			use = new Button(new Rectangle(120, 200, 50, 50), "use", new Color(60,179,113)); 
+			surface.text("Amount: " + p.getPaint().getAmount(), 300, 150);
+			use = new Button(new Rectangle(120, 200, 50, 50), "use", buttonColor); 
 			if( p.getColor() != Color.white && p.getColor() != Color.black && !p.isMixed()) { 
-				mix = new Button(new Rectangle(180, 200, 30, 30), "mix", new Color(60, 179, 113)); 
+				mix = new Button(new Rectangle(180, 200, 30, 30), "mix", buttonColor); 
 				mix.draw(surface);
 			}
 			use.draw(surface);
 			
 		}
 		else {
-			surface.text("Not Available", 100, 75);
+			surface.text("Not Available", 300 - 25, 150);
 		}
+		
+		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		create.highlight(point, surface);
+		back.highlight(point, surface);
+		if (use != null) {
+			use.highlight(point, surface);
+		}
+		if (mix != null) {
+			mix.highlight(point, surface);
+		}
+		
 	}
 	public void mousePressed() {
 		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
@@ -65,14 +92,19 @@ public class Window extends Screen {
 			}
 		}
 		if(create.isClicked(point)) {
-			p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
+		//	p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 			if(p.isMixed()) {
 				p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 				p.getParent().getPaint().makeAvailable(p.getPaint().getAmount()-1); 
 			}
-//			else {
-//				surface.switchScreen(surface.TYPING_SCREEN);
-//			}
+			else if(p.getColor() == Color.white || p.getColor() == Color.black) {
+				p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
+			}
+			else {
+				TypingScreen t = (TypingScreen) surface.getScreens().get(surface.TYPING_SCREEN); 
+				t.chooseColor(p.getPaint()); 
+				surface.switchScreen(surface.TYPING_SCREEN);
+			}
 			
 		}
 		if(back.isClicked(point)) {

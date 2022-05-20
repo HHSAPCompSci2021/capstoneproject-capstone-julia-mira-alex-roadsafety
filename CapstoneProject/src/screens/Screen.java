@@ -66,6 +66,7 @@ public abstract class Screen {
 	 */
 	public void mouseDragged() {
 		//return true; 
+		System.out.println("mouseDragged in Screen");
 	}
 	
 	/**
@@ -75,7 +76,9 @@ public abstract class Screen {
 		
 	}
 	
-	
+	public void keyPressed() {
+		
+	}
 	
 }
 

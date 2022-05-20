@@ -3,14 +3,16 @@ import java.awt.Point;
 import java.awt.Color; 
 import mhaldar.shapes.*;
 import core.*; 
-
+import processing.core.*;
 import core.DrawingSurface;
 
 public class MixingScreen extends Screen{
-	DrawingSurface surface; 
-	MixedPalette mixed; 
-	Button back; 
-	PaintingScreen pscreen; 
+	private DrawingSurface surface; 
+	private MixedPalette mixed; 
+	private Button back; 
+	private PaintingScreen pscreen; 
+	private PImage background; 
+	public final static String fileSeparator = System.getProperty("file.separator");
 	/**
 	 * creates a MixingScreen with set width and height
 	 * @param width the width of the screen
@@ -27,9 +29,16 @@ public class MixingScreen extends Screen{
 	 * default constructor 
 	 */
 	public MixingScreen(DrawingSurface surface) {
-		super(1600, 800);
+		super(800, 1600);
 		this.surface = surface; 
 	}
+	
+//	public void setup() {
+//		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
+//		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+//			
+//		}
+	
 	/**
 	 * choose which color to mix 
 	 * @param p og Paint for mixing 

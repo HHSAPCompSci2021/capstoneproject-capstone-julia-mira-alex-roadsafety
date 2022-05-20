@@ -27,6 +27,10 @@ public class PaintingScreen extends Screen{
 	
 	private Button exit, finish, startOver, instructions; //other options other than drawing
 	private Button draw, fill, erase, blur; //drawing options
+	
+	private Button widthSlider, widthButton;
+	private int width;
+	
 	private Color buttonColor;
 	
 	private int drawState; // 0 is draw, 1 is fill, 2 is erase, 3 is blur 
@@ -57,6 +61,10 @@ public class PaintingScreen extends Screen{
 		
 		palette = new Palette(); 
 		selected = palette.getPaint(0).getColor();
+		
+		width = 1;
+		widthSlider = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 350, 40), "", Color.WHITE);
+		widthButton = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 50, 40), "1", buttonColor);
 		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);	
 	}
 
@@ -66,9 +74,25 @@ public class PaintingScreen extends Screen{
 		
 	}
 	
+	public int getWidth() {
+		return width;
+	}
+	
 	@Override
 	public void draw() {
 		surface.image(background, 0, 0);
+		
+		surface.rect(0, 0, DRAWING_WIDTH/2 , DRAWING_HEIGHT);
+		
+		surface.strokeWeight(2);
+		surface.fill(239, 183, 192, 255);
+		surface.rect(DRAWING_WIDTH/2 +75, DRAWING_HEIGHT-300, 400, 40);
+		surface.fill(0);
+		surface.textSize(23);
+		surface.text("brush thickness: (click on bar)", DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 310);
+		
+		widthSlider.draw(surface);
+		widthButton.draw(surface);
 		
 		exit.draw(surface);
 		finish.draw(surface);
@@ -100,8 +124,31 @@ public class PaintingScreen extends Screen{
 //				for (Button e : buttonList) {
 //					e.highlight(p, surface);
 //				}
+		
+		
 	}
 	
+	//total length of bar is 350
+	//starts at 
+	//divide by 25? 50? to get 14? 7? different widths
+	public void clickToIndex(Point p) {
+		double x = p.getX();
+		double start = DRAWING_WIDTH/2 + 100;
+		if (x < start+50)
+			width = 1;
+		else if (x < start+100)
+			width = 3;
+		else if (x < start+150)
+			width = 5;
+		else if (x < start+200)
+			width = 7;
+		else if (x < start+250)
+			width = 9;
+		else if (x < start+300)
+			width = 11;
+		else if (x < start+350)
+			width = 13;
+	}
 	
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
@@ -137,6 +184,14 @@ public class PaintingScreen extends Screen{
 		else if(blur.isClicked(p)) {
 			drawState = 3; 
 		}
+		
+		else if(widthSlider.isClicked(p)) {
+			clickToIndex(p);
+			widthButton.setText(Integer.toString(width));
+			widthButton.changeLocation(p);
+			
+		}
+			
 		else {
 			int pos = palette.selectPaint(p); 
 			if(pos >= 0) {
@@ -149,19 +204,19 @@ public class PaintingScreen extends Screen{
 		}
 	}
 	
+
 	
 	//the drawing aspect of the drawing
 	//makes sure the draw option is selected
 	//makes the canvas call its drawing method
 	public void mouseDragged() {
-		super.mouseDragged(); 
+//		super.mouseDragged(); 
+		System.out.println("s;dfhlsjf");
 		//Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		//on = true; 
 		//canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
 	}
-	public void mouseReleased() {
-		//on = false; 
-	}
+	
 	/**
 	 * changes the current color  that will be used to another one 
 	 * @param c the new color 

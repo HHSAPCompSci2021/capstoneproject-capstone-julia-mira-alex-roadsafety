@@ -2,18 +2,22 @@ package core;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList; 
 
 public class TypingGame {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	private String text; 
-	private String user;  
-	private double score; 
+	private String user; 
+	private ArrayList<Boolean> scored; 
+	//private double score; 
 	private boolean play = false;
 	private long startTime;
 	private long endTime;
 	public TypingGame (String inputFile) {
 		startTime = 0;
 		endTime = 0;
+		scored = new ArrayList<Boolean> (); 
+		user = ""; 
 		try {
 			text = readFile(inputFile);
 		} catch (IOException e) {
@@ -53,10 +57,28 @@ public class TypingGame {
 	
 	public String type(char a) {
 		user+=a;
+		if(a == text.charAt(user.length()-1)) {
+			scored.add(true); 
+		}
+		else { 
+			scored.add(false); 
+		}
 		return user;
 	}
-	public double getScore() {
-		return score;
+	public int getScore() {
+		int count = 0; 
+		for(boolean check: scored) {
+			 if(check) {
+				 count++; 
+			 }
+		}
+		//double ratio = count*1.0/scored.size(); 
+		return count; 
+		//calc accuracy by counting how many true in boolean array and dividing by length of array it doesn't have to be hard 
+		
+	}
+	public ArrayList<Boolean> getScored() {
+		return scored; 
 	}
 	public long getTime() {
 		return endTime-startTime;
@@ -67,12 +89,15 @@ public class TypingGame {
 	public String getUser() {
 		return user;
 	}
+	public String getFile() {
+		return text; 
+	}
 	public void setUser(String s) {
 		user = s;
 	}
 
 	public long end() {
-		if (user == text) {
+		if (System.currentTimeMillis() - startTime >= 60000) { //ends after a minute 
 			endTime = System.currentTimeMillis();
 			play = false;
 			return text.length()*100000/(startTime-endTime);
