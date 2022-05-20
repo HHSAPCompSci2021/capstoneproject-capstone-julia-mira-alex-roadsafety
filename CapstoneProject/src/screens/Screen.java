@@ -2,7 +2,6 @@ package screens;
 import core.*; 
 
 public abstract class Screen {
-	Button[] buttons ; 
 	
 	public DrawingSurface surface;
 	
@@ -10,8 +9,6 @@ public abstract class Screen {
 	 * the dimensions of the screen
 	 */
 	public int DRAWING_WIDTH, DRAWING_HEIGHT;
-	
-	
 	
 	/**
 	 * creates a screen with set width and height
@@ -30,7 +27,7 @@ public abstract class Screen {
 	 * set up of the Screen 
 	 */
 	public void setup() {
-		//surface.background(255);
+
 	}
 	
 	/**
@@ -38,19 +35,12 @@ public abstract class Screen {
 	 */
 	public void draw() {
 		
-		
 	}
 	
 	/**
 	 * depending on where (or what) the mouse presses on, the program will do something
 	 */
 	public void mousePressed() {
-//		for(Button b : buttons) {
-//			if(b.isClicked(x, y))
-//				return b; 
-//		}
-//		return null; 
-		System.out.println("screen class");
 		
 	}
 	
@@ -81,4 +71,3 @@ public abstract class Screen {
 	}
 	
 }
-

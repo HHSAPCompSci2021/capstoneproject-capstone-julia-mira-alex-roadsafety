@@ -278,6 +278,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		pg.beginDraw();
 		pg.clear();
 		pg.fill(255);
+		pg.noStroke();
 		pg.rect(0, 0, 800, 1600);
 		outline.clear(); 
 		pg.endDraw();
