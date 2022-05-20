@@ -24,8 +24,8 @@ public class Window extends Screen {
 		
 		buttonColor = new Color(239, 183, 192, 255);
 		
-		create = new Button(new Rectangle(10, 10, 100, 80), "get\nmore", buttonColor); 
-		back = new Button(new Rectangle(500, 10, 100, 80), "back", buttonColor); 
+		create = new Button(new Rectangle(10, 10, 150, 80), "get more", buttonColor); 
+		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
 		
 	}
 	/**
@@ -37,8 +37,8 @@ public class Window extends Screen {
 		
 		buttonColor = new Color(239, 183, 192, 255);
 		
-		create = new Button(new Rectangle(10, 10, 100, 80), "get\nmore", buttonColor); 
-		back = new Button(new Rectangle(500, 10, 100, 80), "back", buttonColor); 
+		create = new Button(new Rectangle(10, 10, 150, 80), "get more", buttonColor); 
+		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
 		
 	}
 	public void draw() {
@@ -51,7 +51,7 @@ public class Window extends Screen {
 		back.draw(surface);
 		
 		if(p.getPaint().isAvailable()) {
-			surface.text("Amount: " + p.getPaint().getAmount(), 100, 75);
+			surface.text("Amount: " + p.getPaint().getAmount(), 200, 75);
 			use = new Button(new Rectangle(120, 200, 50, 50), "use", buttonColor); 
 			if( p.getColor() != Color.white && p.getColor() != Color.black && !p.isMixed()) { 
 				mix = new Button(new Rectangle(180, 200, 30, 30), "mix", buttonColor); 

@@ -16,12 +16,17 @@ public class IntroScreen extends Screen {
 
 	private PImage background;
 	
+	Color themeColor;
+	
 	public IntroScreen(DrawingSurface surface) {
 		super(800, 1600);
 		this.surface = surface; 
 		
-		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 75), "start!", Color.red);
-		instructionsButton = new Button(new Rectangle(DRAWING_WIDTH/2 - 50, DRAWING_HEIGHT/2 + 90, 200, 75), "instructions", new Color(0,208,255));
+		themeColor = new Color(239, 183, 192, 255);
+		
+		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 75), "start!", new Color(239, 183, 192, 255));
+		instructionsButton = new Button(new Rectangle(DRAWING_WIDTH/2 - 50, DRAWING_HEIGHT/2 + 90, 200, 75), "instructions", themeColor);
+		
 		
 	}
 	
@@ -36,6 +41,15 @@ public class IntroScreen extends Screen {
 		
 		startButton.draw(surface);
 		instructionsButton.draw(surface);
+
+		surface.fill(0);
+		surface.textSize(50);
+		String message = "WELCOME TO HAPPY LITTLE ACCIDENTS";
+		surface.text(message, DRAWING_WIDTH/2 - surface.textWidth(message)/2+3, 200+3);
+		
+		surface.fill(themeColor.getRGB());
+		surface.textSize(50);
+		surface.text(message, DRAWING_WIDTH/2 - surface.textWidth(message)/2, 200);
 
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));

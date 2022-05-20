@@ -64,14 +64,13 @@ public class PaintingScreen extends Screen{
 		
 		width = 1;
 		widthSlider = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 350, 40), "", Color.WHITE);
-		
-		widthButton = new Button(new Rectangle(DRAWING_WIDTH/2 + 200, DRAWING_HEIGHT - 300, 50, 40), "1", buttonColor);
+		widthButton = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 50, 40), "1", buttonColor);
 		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);	
 	}
 
 	public void setup() {
-		
-	//	background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+		background = surface.loadImage("additionalPictures"+fileSeparator+"pink-mountains.jpg");
+		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 		
 	}
 	
@@ -81,12 +80,16 @@ public class PaintingScreen extends Screen{
 	
 	@Override
 	public void draw() {
-		//surface.image(background, 0, 0);
+		surface.image(background, 0, 0);
+		
+		surface.rect(20, 20, DRAWING_WIDTH/2 -40, DRAWING_HEIGHT-40);
+		
 		surface.strokeWeight(2);
 		surface.fill(239, 183, 192, 255);
 		surface.rect(DRAWING_WIDTH/2 +75, DRAWING_HEIGHT-300, 400, 40);
-		
-		surface.text("brush thickness: ", DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 310);
+		surface.fill(0);
+		surface.textSize(23);
+		surface.text("brush thickness: (click on bar)", DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 310);
 		
 		widthSlider.draw(surface);
 		widthButton.draw(surface);
