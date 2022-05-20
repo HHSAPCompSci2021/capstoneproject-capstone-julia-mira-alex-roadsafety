@@ -156,7 +156,14 @@ public class TypingScreen extends Screen{
 					game.setUser(s.substring(0,s.length()-1));
 			}
 			else if(key == surface.RETURN || key == surface.ENTER) {
+
+				long money = game.end();
+				if (money != -1) {
+					//give back the paint
+				}
+
 				game.setUser(s + "\n"); 
+
 
 			}
 			else if (key != surface.TAB || key != surface.ESC || key != surface.SHIFT) { //figure out how to COUNT OUT SHIFT

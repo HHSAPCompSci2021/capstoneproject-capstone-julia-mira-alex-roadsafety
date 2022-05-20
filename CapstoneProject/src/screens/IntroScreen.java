@@ -24,8 +24,8 @@ public class IntroScreen extends Screen {
 		
 		themeColor = new Color(239, 183, 192, 255);
 		
-		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 75), "start!", new Color(239, 183, 192, 255));
-		instructionsButton = new Button(new Rectangle(DRAWING_WIDTH/2 - 50, DRAWING_HEIGHT/2 + 90, 200, 75), "instructions", themeColor);
+		startButton = new Button(new Rectangle(DRAWING_WIDTH/2, DRAWING_HEIGHT/2, 100, 50), "start!", themeColor);
+		instructionsButton = new Button(new Rectangle(DRAWING_WIDTH/2 - 50, DRAWING_HEIGHT/2 + 70, 200, 50), "instructions", themeColor);
 		
 		
 	}
