@@ -28,7 +28,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	private PGraphics outline; 
 //	private double width, height;
 	
-
+	
 	public DrawingSurface() {
 //		this.width = width;
 //		this.height = height;
@@ -293,4 +293,11 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void keyPressed() {
 		activeScreen.keyPressed(); 
 	}
+	
+//	public void setBack2() {
+//		if (activeScreen == screen2) {
+//			screen2.setBack2(true);
+//		}
+//	}
+	
 }
