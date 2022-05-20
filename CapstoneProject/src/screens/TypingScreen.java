@@ -61,6 +61,9 @@ public class TypingScreen extends Screen{
 			else if(key == surface.RETURN || key == surface.ENTER) {
 
 				long money = game.end();
+				if (money != -1) {
+					//give back the paint
+				}
 
 			}
 			else if (key == surface.TAB || key == surface.ESC) {
