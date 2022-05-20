@@ -70,6 +70,9 @@ public class Window extends Screen {
 				p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 				p.getParent().getPaint().makeAvailable(p.getPaint().getAmount()-1); 
 			}
+			else if(p.getColor() == Color.white || p.getColor() == Color.black) {
+				p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
+			}
 			else {
 				TypingScreen t = (TypingScreen) surface.getScreens().get(surface.TYPING_SCREEN); 
 				t.chooseColor(p.getPaint()); 

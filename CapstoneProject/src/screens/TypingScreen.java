@@ -56,15 +56,14 @@ public class TypingScreen extends Screen{
 	public void draw() {
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		
+		quit.draw(surface);
+		quit.highlight(p, surface);
 		if(!playing) {
 			play.draw(surface);	
 			play.highlight(p, surface); 
 		}
 		if(playing) {
 			surface.rect(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT);
-			quit.draw(surface);
-			quit.highlight(p, surface);
 			String user = game.getUser();
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
@@ -78,8 +77,11 @@ public class TypingScreen extends Screen{
 				game.end(); 
 			}
 			else {
-				// print a bunch of stuff 
-				paint.makeAvailable(game.getScore());
+				double res = game.getScore()*1.0/game.getScored().size(); 
+				int amount = game.getScore()/10; 
+				String result = "You scored " + res + "% accuracy. You will receive " + amount + " uses."; 
+				surface.text(result, 50, 0, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
+				paint.makeAvailable(amount);
 			}
 		}
 		
@@ -96,24 +98,24 @@ public class TypingScreen extends Screen{
 			surface.switchScreen(surface.PAINTING_SCREEN);
 		}
 	}
-	public void keyPressed() {
+	public void keyPressed() { /// y does keyPressed not work?? puzzling 
 		char key = surface.key;
-		System.out.println(" "  + key); 
+		//System.out.println(" "  + key); 
 		String s = game.getUser();
 		if(game.gameOn()) {
 			if(key == surface.BACKSPACE || key == surface.DELETE) {
 				if(s.length()>0)
-					game.setUser(s.substring(0,s.length()-2));
+					game.setUser(s.substring(0,s.length()-1));
 			}
 			else if(key == surface.RETURN || key == surface.ENTER) {
 				game.setUser(s + "\n"); 
 
 			}
-			else if (key == surface.TAB || key == surface.ESC) {
-				
+			else if (key != surface.TAB || key != surface.ESC || key != surface.SHIFT) { //figure out how to COUNT OUT SHIFT
+				game.type(key);
 			}
 			else {
-				game.type(key);
+				
 			}
 		}
 		

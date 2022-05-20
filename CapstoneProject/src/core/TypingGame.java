@@ -72,22 +72,8 @@ public class TypingGame {
 				 count++; 
 			 }
 		}
-		double ratio = count*1.0/scored.size(); 
-		if(ratio <= .2) {
-			return 0; 
-		}
-		else if( ratio <= .5) {
-			return 5; 
-		}
-		else if (ratio <= .8) {
-			return 10; 
-		}
-		else if (ratio <= .95) {
-			return 15; 
-		}
-		else {
-			return 20; 
-		}
+		//double ratio = count*1.0/scored.size(); 
+		return count; 
 		//calc accuracy by counting how many true in boolean array and dividing by length of array it doesn't have to be hard 
 		
 	}

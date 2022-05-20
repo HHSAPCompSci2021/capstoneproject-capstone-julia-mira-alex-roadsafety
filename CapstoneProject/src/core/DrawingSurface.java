@@ -286,4 +286,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		pg.save(paintingnm); 
 		paintingnum ++; 
 	}
+	public void keyPressed() {
+		activeScreen.keyPressed(); 
+	}
 }
