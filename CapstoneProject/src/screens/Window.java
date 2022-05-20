@@ -51,7 +51,7 @@ public class Window extends Screen {
 		back.draw(surface);
 		
 		if(p.getPaint().isAvailable()) {
-			surface.text("Amount: " + p.getPaint().getAmount(), 200, 75);
+			surface.text("Amount: " + p.getPaint().getAmount(), 300, 150);
 			use = new Button(new Rectangle(120, 200, 50, 50), "use", buttonColor); 
 			if( p.getColor() != Color.white && p.getColor() != Color.black && !p.isMixed()) { 
 				mix = new Button(new Rectangle(180, 200, 30, 30), "mix", buttonColor); 
@@ -61,7 +61,7 @@ public class Window extends Screen {
 			
 		}
 		else {
-			surface.text("Not Available", 100, 75);
+			surface.text("Not Available", 300 - 25, 150);
 		}
 		
 		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));

@@ -64,6 +64,8 @@ public class TypingScreen extends Screen{
 		}
 		if(playing) {
 			surface.rect(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT);
+			quit.draw(surface);
+			quit.highlight(p, surface);
 			String user = game.getUser();
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
