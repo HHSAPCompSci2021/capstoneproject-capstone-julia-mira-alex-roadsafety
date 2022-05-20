@@ -57,6 +57,7 @@ public class TypingGame {
 		return user;
 	}
 	public double getScore() {
+		//calc accuracy by counting how many true in boolean array and dividing by length of array it doesn't have to be hard 
 		return score;
 	}
 	public long getTime() {
@@ -68,12 +69,15 @@ public class TypingGame {
 	public String getUser() {
 		return user;
 	}
+	public String getFile() {
+		return text; 
+	}
 	public void setUser(String s) {
 		user = s;
 	}
 
 	public long end() {
-		if (user == text) {
+		if (System.currentTimeMillis() - startTime >= 60000) { //ends after a minute 
 			endTime = System.currentTimeMillis();
 			play = false;
 			return text.length()*100000/(startTime-endTime);

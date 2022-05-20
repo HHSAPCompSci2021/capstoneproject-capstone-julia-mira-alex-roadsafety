@@ -71,6 +71,8 @@ public class Window extends Screen {
 				p.getParent().getPaint().makeAvailable(p.getPaint().getAmount()-1); 
 			}
 			else {
+				TypingScreen t = (TypingScreen) surface.getScreens().get(surface.TYPING_SCREEN); 
+				t.chooseColor(p.getPaint()); 
 				surface.switchScreen(surface.TYPING_SCREEN);
 			}
 			
