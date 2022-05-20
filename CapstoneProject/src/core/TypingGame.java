@@ -2,19 +2,22 @@ package core;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList; 
 
 public class TypingGame {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	private String text; 
 	private String user; 
-	private boolean[] userscored; 
-	private double score; 
+	private ArrayList<Boolean> scored; 
+	//private double score; 
 	private boolean play = false;
 	private long startTime;
 	private long endTime;
 	public TypingGame (String inputFile) {
 		startTime = 0;
 		endTime = 0;
+		scored = new ArrayList<Boolean> (); 
+		user = ""; 
 		try {
 			text = readFile(inputFile);
 		} catch (IOException e) {
@@ -54,11 +57,42 @@ public class TypingGame {
 	
 	public String type(char a) {
 		user+=a;
+		if(a == text.charAt(user.length()-1)) {
+			scored.add(true); 
+		}
+		else { 
+			scored.add(false); 
+		}
 		return user;
 	}
-	public double getScore() {
+	public int getScore() {
+		int count = 0; 
+		for(boolean check: scored) {
+			 if(check) {
+				 count++; 
+			 }
+		}
+		double ratio = count*1.0/scored.size(); 
+		if(ratio <= .2) {
+			return 0; 
+		}
+		else if( ratio <= .5) {
+			return 5; 
+		}
+		else if (ratio <= .8) {
+			return 10; 
+		}
+		else if (ratio <= .95) {
+			return 15; 
+		}
+		else {
+			return 20; 
+		}
 		//calc accuracy by counting how many true in boolean array and dividing by length of array it doesn't have to be hard 
-		return score;
+		
+	}
+	public ArrayList<Boolean> getScored() {
+		return scored; 
 	}
 	public long getTime() {
 		return endTime-startTime;
