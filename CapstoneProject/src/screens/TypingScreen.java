@@ -25,7 +25,7 @@ public class TypingScreen extends Screen{
 	private Button play;
 	private Button quit; 
 	private int time; 
-	private float y; 
+	private float x, starty; 
 	boolean playing; 
 	/**
 	 * creates a TypingScreen object with set width and height
@@ -40,7 +40,8 @@ public class TypingScreen extends Screen{
 		play = new Button(new Rectangle(400, 800, 300, 300), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
 		text = game.getFile(); 
-		y = 0; 
+		//x = 50; 
+		starty = 10; 
 		//System.out.println(text); 
 	}
 	/**
@@ -74,10 +75,10 @@ public class TypingScreen extends Screen{
 			//surface.text( text, DRAWING_WIDTH/2, 0, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
 			if(game.gameOn()) {
 				//surface.clear(); 
+				int x = 50; 
+				float y = starty; 
 				surface.textSize(50); 
 				surface.fill(125); 
-				int x = 50; 
-				int y = 10; 
 				for(int i = 0; i< text.length(); i++) {
 					if(i > user.length()-1 || i> scored.size() -1) {
 						surface.fill(125);
@@ -95,7 +96,9 @@ public class TypingScreen extends Screen{
 						x = 0; 
 						y+= surface.textDescent() + surface.textAscent(); 
 					}
-					
+					if(y == DRAWING_HEIGHT/2 && i< user.length()-1) {
+						starty-=10; 
+					}
 				}
 				//surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
 				//for(int i)
@@ -105,9 +108,9 @@ public class TypingScreen extends Screen{
 			}
 			else {
 				double res = game.getScore()*100.0/text.length(); 
-				int amount = game.getScore()/10; 
+				int amount = 0; 
 				
-				if(res <= 5) {
+				if(res <= 2) {
 					amount = 0; 
 				}
 				else if (res <= 50) {
