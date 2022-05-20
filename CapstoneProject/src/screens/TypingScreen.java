@@ -116,17 +116,10 @@ public class TypingScreen extends Screen{
 					game.delete();
 			}
 			else if(key == surface.RETURN || key == surface.ENTER) {
-
-
 				game.setUser(s + "\n"); 
-
-
 			}
 			else if (key != surface.TAB || key != surface.ESC || key != surface.SHIFT) { //figure out how to COUNT OUT SHIFT
 				game.type(key);
-			}
-			else {
-				
 			}
 			
 		}
@@ -134,6 +127,4 @@ public class TypingScreen extends Screen{
 		
 		
 	}
-	//blah blah blah 
-	//then you get the score and after you get the score you assign an amount which you can the add to your color 
 }

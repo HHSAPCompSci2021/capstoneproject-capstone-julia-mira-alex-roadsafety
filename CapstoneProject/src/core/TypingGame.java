@@ -62,7 +62,6 @@ public class TypingGame {
 			
 			if(a == text.charAt(user.length()-1)) {
 				scored.add(true); 
-				System.out.println("reslvede");
 			}
 			else { 
 				scored.add(false); 
@@ -108,7 +107,7 @@ public class TypingGame {
 	}
 
 	public int end() {
-		if (System.currentTimeMillis() - startTime >= 6000) { //ends after a minute 
+		if (System.currentTimeMillis() - startTime >= 30000) { //ends after a minute 
 			endTime = System.currentTimeMillis();
 			play = false;
 			return getScore();
