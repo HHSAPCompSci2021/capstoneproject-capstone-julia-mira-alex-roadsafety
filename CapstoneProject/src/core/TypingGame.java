@@ -8,6 +8,7 @@ public class TypingGame {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	private String text; 
 	private String user; 
+	private int words; 
 	private ArrayList<Boolean> scored; 
 	//private double score; 
 	private boolean play = false;
@@ -44,9 +45,11 @@ public class TypingGame {
 			if(scan!=null)
 				scan.close();
 		}
+		String t = fileData.toString();
 		
-		
-		return fileData.toString();
+//		String[] util = t.split(" "); 
+//		words = util.length; 
+		return t;
 	
 	}
 	
@@ -62,11 +65,14 @@ public class TypingGame {
 			
 			if(a == text.charAt(user.length()-1)) {
 				scored.add(true); 
+				
 			}
 			else { 
 				scored.add(false); 
 			}
-			
+			if(a == text.charAt(user.length()-1)) {
+				words ++; 
+			}
 		}
 		
 		return user;
@@ -75,15 +81,16 @@ public class TypingGame {
 		scored.remove(scored.size()-1);
 		user = user.substring(0, user.length()-1);
 	}
-	public int getScore() {
-		int count = 0; 
+	public double getScore() {
+		double count = 0.0; 
 		for(boolean check: scored) {
 			 if(check) {
 				 count++; 
 			 }
+			 System.out.println(words); 
 		}
 		//double ratio = count*1.0/scored.size(); 
-		return count; 
+		return count/words; 
 		//calc accuracy by counting how many true in boolean array and dividing by length of array it doesn't have to be hard 
 		
 	}
@@ -106,7 +113,7 @@ public class TypingGame {
 		user = s;
 	}
 
-	public int end() {
+	public double end() {
 		if (System.currentTimeMillis() - startTime >= 30000) { //ends after a minute 
 			endTime = System.currentTimeMillis();
 			play = false;

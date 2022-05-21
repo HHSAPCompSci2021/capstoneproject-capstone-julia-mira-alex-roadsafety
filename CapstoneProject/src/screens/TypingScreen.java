@@ -41,7 +41,7 @@ public class TypingScreen extends Screen{
 		play = new Button(new Rectangle(400, 250, 150, 300), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
 		instructions = "Once you click start, you'll enter a typing game! Do your best to type accurately and speedily for a minute. The better your typing, the more paint you receive.";
-		y = 0; 
+		y = 10; 
 		//System.out.println(text); 
 	}
 	/**
@@ -65,7 +65,7 @@ public class TypingScreen extends Screen{
 			play.draw(surface);	
 			play.highlight(p, surface); 
 			surface.fill(0);
-			surface.text(instructions, 0, 50, 375, 500);
+			surface.text(instructions, 25, 50, 600, 500);
 		}
 		if(playing) {
 			surface.fill(255);
@@ -76,39 +76,58 @@ public class TypingScreen extends Screen{
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
 			//surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
+			Color textCol; 
 			if(game.gameOn()) {
 				surface.textSize(30); 
-				surface.fill(125); 
-				int x = 50; 
-				int y = 10; 
+				surface.fill(150); 
+				int x = 55; 
+				float newy = y; 
 				for(int i = 0; i< text.length(); i++) {
 					if(i > user.length()-1 || i> scored.size() -1) {
-						surface.fill(125);
+						textCol = Color.darkGray; 
+						//surface.fill(125);
 					}
 					else if(scored.get(i)) {
-						surface.fill(34,139,34);
+						textCol = new Color(34,139,34); 
+						//surface.fill(34,139,34);
 					}
 					else{
-						surface.fill(220,20,60);
+						textCol = new Color(220,20,60); 
+						//surface.fill(220,20,60);
 					}
-
-					surface.text(text.charAt(i), x, y +  surface.textDescent() + surface.textAscent()); 
+					if(textCol != Color.darkGray && i >= text.length()/2) {
+					//	System.out.println(i + "sgsdfg");
+						y-=.02; 
+					}
+					surface.fill(textCol.getRGB()); 
+					surface.text(text.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()); 
 					x += surface.textWidth(text.charAt(i));
-					if(x>= DRAWING_WIDTH -50) {
-						x = 0; 
-						y+= surface.textDescent() + surface.textAscent(); 
+					if(x>= DRAWING_WIDTH -55) {
+						x = 55; 
+						newy+= 2*(surface.textDescent() + surface.textAscent()); 
 					}
 
+				}
+				x= 55; 
+				newy = y+ (surface.textDescent() + surface.textAscent()); 
+				for(int i = 0; i< user.length(); i++) {
+					surface.fill(145); 
+					surface.text(user.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()); 
+					x += surface.textWidth(user.charAt(i));
+					if(x>= DRAWING_WIDTH -55) {
+						x = 55; 
+						newy+= 2*(surface.textDescent() + surface.textAscent()); 
+					}
 				}
 				game.end(); 
 				//surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
 				//for(int i)
 			}
 			else {
-				double res = game.getScore()*100.0/text.length(); 
-				int amount = game.getScore()/10; 
+				double res = game.getScore(); 
+				int amount = 0; 
 
-				if(res <= 15) {
+				if(res <= 10) {
 					amount = 0; 
 				}
 				else if (res <= 50) {

@@ -53,7 +53,7 @@ public class PaintingScreen extends Screen{
 		exit = new Button(new Rectangle(DRAWING_WIDTH - 180, 10, 150, 40), "exit", buttonColor);
 		finish = new Button(new Rectangle(DRAWING_WIDTH - 180, 100, 150, 40), "finish", buttonColor);
 		instructions = new Button(new Rectangle(DRAWING_WIDTH - 180, 195, 150, 40), "instructions", buttonColor);
-		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "start over", buttonColor);
+		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "clear", buttonColor);
 		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", buttonColor);
 		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", buttonColor); 
 		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", buttonColor);

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"core","l":"Button"},{"p":"core","l":"DrawingSurface"},{"p":"core","l":"Main"},{"p":"core","l":"MixedPalette"},{"p":"core","l":"Paint"},{"p":"core","l":"PaintButton"},{"p":"core","l":"Painting"},{"p":"core","l":"Palette"},{"p":"core","l":"TypingGame"}];updateSearchResults();
