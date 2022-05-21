@@ -92,6 +92,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		scale(ratioX, ratioY);
 		
 		activeScreen.draw();
+		if(activeScreen != screens.get(PAINTING_SCREEN)){
+			cursor(ARROW); 
+		}
 		if(activeScreen == screens.get(PAINTING_SCREEN)) {
 			PaintingScreen pscreen = (PaintingScreen) activeScreen; 
 			Color c = pscreen.getColor();
@@ -123,7 +126,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 				//if()
 				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
-				cursor(ARROW); 
+				if(p.getX() <= width) {
+				cursor(brush, 0, 30); 
+				}
 //				pg.noStroke(); 
 //				pg.circle((float)p.getX(), (float)p.getY(), 5);
 			}
@@ -131,12 +136,14 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 				pg.fill(Color.white.getRGB()); 
 				outline.stroke(Color.white.getRGB()); 
 				pg.stroke(255); 
-				pg.strokeWeight(pscreen.getWidth()*(float)1.5); 
-				outline.strokeWeight(pscreen.getWidth()*(float)1.5);
+				pg.strokeWeight(pscreen.getWidth()*(float)2); 
+				outline.strokeWeight(pscreen.getWidth()*(float)2);
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 				//if()
 				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
-				cursor(eraser, 0, 0); 
+				if(p.getX() <= width) {
+					cursor(eraser, 16, 16); 
+				}
 //				fill(x, y, c, outline); 
 //				//mouseClicked = false; 
 			}
