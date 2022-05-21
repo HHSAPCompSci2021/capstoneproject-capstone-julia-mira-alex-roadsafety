@@ -52,9 +52,9 @@ public class Paint {
 			available = false; 
 		}
 		else {
-			available = true; 
-			this.amount = amount; 
+			available = true; 	
 		}
+		this.amount = amount; 
 	}
 	/**
 	 * 
