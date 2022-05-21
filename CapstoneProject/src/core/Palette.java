@@ -72,6 +72,10 @@ public class Palette {
 		Collections.sort(collection, cs);
 		
 	}
+	/**
+	 * default constructor 
+	 * @param r rectangle 
+	 */
 	public Palette(Rectangle r ) {
 		divide = -1; 
 		bg = r; 

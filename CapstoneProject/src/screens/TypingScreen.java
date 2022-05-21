@@ -130,23 +130,23 @@ public class TypingScreen extends Screen{
 				if(res <= 10) {
 					amount = 0; 
 				}
-				else if (res <= 50) {
-					amount = 2; 
+				else if (res <= 30) {
+					amount = 1; 
 				}
-				else if (res <= 70) {
+				else if (res <= 50) {
 					amount = 3; 
 				}
-				else if(res<= 85) {
+				else if(res<= 60) {
 					amount = 5; 
 				}
-				else if (res <= 95) {
+				else if (res <= 80) {
 					amount = 7; 
 				}
 				else {
 					amount = 10; 
 				}
 				surface.textSize(50); 
-				String result = "You scored " + res + "% accuracy. \n You will receive " + amount + " use(s)."; 
+				String result = "You scored " + res + "\n You will receive " + amount + " use(s)."; 
 				surface.text(result, 50, 0, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
 				paint.makeAvailable(amount);
 			}

@@ -26,20 +26,32 @@ public class Button {
 		this.color = color;
 	}
 	
-	
+	/**
+	 * 
+	 * @return x coord 
+	 */
 	public double getXCoord() {
 		return shape.getData().get(0);
 	}
-	
+	/**
+	 * 
+	 * @return y coord 
+	 */
 	public double getYCoord() {
 		return shape.getData().get(1);
 	}
-	
+	/**
+	 * 
+	 * @return width of button
+	 */
 	public double getWidth() {
 		return shape.getData().get(2);
 		
 	}
-	
+	/**
+	 * 
+	 * @return height of button
+	 */
 	public double getHeight() {
 		return shape.getData().get(3);
 	}
@@ -130,10 +142,17 @@ public class Button {
 	public Color getColor() {
 		return shape.getFillColor();
 	}
+	/**
+	 * 
+	 * @param color new text color 
+	 */
 	public void setTextColor(Color color) {
 		this.textColor = color; 
 	}
-	
+	/**
+	 * move the button
+	 * @param p Point of destination 
+	 */
 	public void changeLocation(Point p) {
 		shape.setPoint(p.getX() - 25, getYCoord());
 //		shape.setPoint(p.getX(), p.getY());
