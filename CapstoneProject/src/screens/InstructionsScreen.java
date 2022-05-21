@@ -48,7 +48,7 @@ public class InstructionsScreen extends Screen {
 		
 		String instructions = "In the main screen, you'll be able to draw (after clicking the draw button) by clicking on an available color, choosing the paint option"
 				+ " and then hovering your mouse over the painting surface. You can fill by clicking the fill button and then following the same process. Clicking on an area"
-				+ " in the painting will fill it. If you want to get an unavailable color(they have an X) then click on it and play a typing game to earn amounts. If you want to "
+				+ " in the painting will fill it. If you want to get an unavailable color then click on it and play a typing game to earn amounts. If you want to "
 				+ " make a shade, then click on an available color and select the mix option. You'll have four options for shades/tints.";
 		surface.fill(0);
 		surface.textSize(30);

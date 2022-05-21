@@ -23,14 +23,15 @@ public class MixingScreen extends Screen{
 		this.surface = surface; 
 		mixed = p.getMixes(); 
 		this.pscreen = pscreen; 
-		back = new Button(new Rectangle(0, 0, 50, 50), "Back", Color.yellow); 
+		
 	}
 	/**
 	 * default constructor 
 	 */
-	public MixingScreen(DrawingSurface surface) {
-		super(800, 1600);
+	public MixingScreen(DrawingSurface surface, PaintingScreen pscreen) {
+		super(800, 800);
 		this.surface = surface; 
+		back = new Button(new Rectangle(0, 0, 50, 50), "Back", Color.yellow); 
 	}
 	
 //	public void setup() {

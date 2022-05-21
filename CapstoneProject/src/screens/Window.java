@@ -37,7 +37,7 @@ public class Window extends Screen {
 		
 		buttonColor = new Color(239, 183, 192, 255);
 		
-		create = new Button(new Rectangle(10, 10, 150, 80), "get more", buttonColor); 
+		create = new Button(new Rectangle(10, 10, 150, 80), "buy", buttonColor); 
 		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
 		
 	}
@@ -49,21 +49,21 @@ public class Window extends Screen {
 		
 		create.draw(surface);
 		back.draw(surface);
-		
+		String amount; 
 		if(p.getPaint().isAvailable()) {
-			surface.text("Amount: " + p.getPaint().getAmount(), 300, 150);
-			use = new Button(new Rectangle(120, 200, 50, 50), "use", buttonColor); 
+			amount = "Amount: " + p.getPaint().getAmount();
+			use = new Button(new Rectangle(10, 200, 50, 50), "use", buttonColor); 
 			if( p.getColor() != Color.white && p.getColor() != Color.black && !p.isMixed()) { 
-				mix = new Button(new Rectangle(180, 200, 30, 30), "mix", buttonColor); 
+				mix = new Button(new Rectangle(10, 110, 40, 40), "mix", buttonColor); 
 				mix.draw(surface);
 			}
 			use.draw(surface);
 			
 		}
 		else {
-			surface.text("Not Available", 300 - 25, 150);
+			amount = "Not available"; 
 		}
-		
+		surface.text(amount, DRAWING_WIDTH/2 - surface.textWidth(amount)/2, 30);
 		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		create.highlight(point, surface);
 		back.highlight(point, surface);
@@ -84,10 +84,8 @@ public class Window extends Screen {
 				surface.switchScreen(surface.PAINTING_SCREEN);
 			}
 			if(mix != null && mix.isClicked(point)) {
-				MixingScreen m = new MixingScreen(surface, p, pscreen); 
-				surface.getScreens().remove(surface.MIXING_SCREEN); 
-				surface.getScreens().add(surface.MIXING_SCREEN, m); 
-				surface.switchScreen(surface.MIXING_SCREEN);
+				MixingScreen m = (MixingScreen) surface.getScreens().get(surface.MIXING_SCREEN); 
+				m.chooseColor(p);
 				surface.switchScreen(surface.MIXING_SCREEN);
 			}
 		}
@@ -105,6 +103,10 @@ public class Window extends Screen {
 				TypingScreen t = (TypingScreen) surface.getScreens().get(surface.TYPING_SCREEN); 
 				t.chooseColor(p.getPaint()); 
 				surface.switchScreen(surface.TYPING_SCREEN);
+				if(t.win()) {
+					pscreen.selectedColor(p.getColor());
+				}
+				t.restart();
 			}
 			
 		}

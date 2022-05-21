@@ -25,7 +25,7 @@ public class TypingScreen extends Screen{
 	private String instructions; 
 	private Button play;
 	private Button quit; 
-	private int time; 
+	private int amount; 
 	private float y; 
 	boolean playing; 
 	/**
@@ -38,7 +38,7 @@ public class TypingScreen extends Screen{
 		this.surface = surface; 
 		//buttonColor = new Color(239, 183, 192, 255); 
 		
-		play = new Button(new Rectangle(400, 250, 150, 300), "Start", new Color(239, 183, 192, 255)); 
+		play = new Button(new Rectangle(25, 150, 80, 80), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
 		instructions = "Once you click start, you'll enter a typing game! Do your best to type accurately and speedily for a minute. The better your typing, the more paint you receive.";
 		y = 10; 
@@ -54,6 +54,7 @@ public class TypingScreen extends Screen{
 		play.setTextColor(Color.white);
 		quit.setTextColor(Color.white);
 		paint = p; 
+		amount = 0; 
 	}
 	@Override
 	public void draw() {
@@ -125,12 +126,12 @@ public class TypingScreen extends Screen{
 			}
 			else {
 				double res = game.getScore(); 
-				int amount = 0; 
+				//int amount = 0; 
 
 				if(res <= 10) {
 					amount = 0; 
 				}
-				else if (res <= 30) {
+				else if (res <= 20) {
 					amount = 1; 
 				}
 				else if (res <= 50) {
@@ -186,8 +187,25 @@ public class TypingScreen extends Screen{
 			}
 			
 		}
-		
-		
-		
+
+	}
+	/**
+	 * checks whether the user won any paint 
+	 */
+	public boolean win() {
+		boolean ret; 
+		if(amount>0) {
+			ret =  false; 
+		}
+		else {
+			ret =  true; 
+		}
+		return ret; 
+	}
+	/**
+	 * resets game 
+	 */
+	public void restart() {
+		amount = 0; 
 	}
 }
