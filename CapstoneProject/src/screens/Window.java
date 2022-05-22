@@ -96,7 +96,7 @@ public class Window extends Screen {
 		//	p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
 			if(p.isMixed()) {
 				p.getPaint().makeAvailable(p.getPaint().getAmount()+1);
-				p.getParent().getPaint().makeAvailable(p.getPaint().getAmount()-1); 
+				p.getParent().getPaint().makeAvailable(p.getParent().getPaint().getAmount()-1); 
 				System.out.println(p.getParent().getPaint().getAmount());
 			}
 			else if(p.getColor() == Color.white || p.getColor() == Color.black) {

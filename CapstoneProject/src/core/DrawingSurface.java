@@ -19,8 +19,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	private ArrayList<Screen> screens;
 	private boolean mouseDragged = false;
 	private boolean mouseClicked = false; 
-	private static final float MAX_BRUSH = (float) 2;
-	private static final float MIN_BRUSH = -1;
+//	private static final float MAX_BRUSH = (float) 2;
+//	private static final float MIN_BRUSH = -1;
 	public final static String fileSeparator = System.getProperty("file.separator");
 	private static int paintingnum; 
 	private float v = (float)( .5 / 9.0);
@@ -74,6 +74,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void setup() {
 		brush = loadImage("additionalPictures" +   fileSeparator + "brush.png");
 		eraser = loadImage("additionalPictures" +  fileSeparator + "eraser.png"); 
+		blur = loadImage("additionalPictures" +  fileSeparator + "blur.png");
 		cursor(); 
 		background(255); 
 		for (Screen s : screens)
@@ -165,7 +166,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 					}
 					pg.image(space, x- size/2, y-size/2);
 				}
-				
+				if(p.getX() <= pg.width) {
+					cursor(blur, 16, 16); 
+				}
 			}
 			//}
 		//	if(pscreen.mode() != 3) {
