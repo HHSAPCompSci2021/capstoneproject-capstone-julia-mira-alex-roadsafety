@@ -15,7 +15,7 @@ public class MixedPalette extends Palette{
 	 * @param c
 	 */
 	public MixedPalette(PaintButton paint) {
-		super(new Rectangle(10, 100, 500, 100)); 
+		super(new Rectangle(10, 400, 525, 100)); 
 	//	shades = new PaintButton[5]; 
 		//v light, sort of light, normal, sorta dark, v dark 
 		collection = new ArrayList<PaintButton>(); 
@@ -26,11 +26,11 @@ public class MixedPalette extends Palette{
 		Color newc3 = c.brighter(); 
 		Color newc4 = newc3.brighter(); 
 		//shades[0] = ; 
-		collection.add(new PaintButton( new Rectangle(10, 400, 75, 100), "X", new Paint(newc, 0), paint)); 
-		collection.add(new PaintButton( new Rectangle(110, 400, 75, 100), "X", new Paint(newc2, 0), paint)); 
+		collection.add(new PaintButton( new Rectangle(10, 400, 100, 100), "X", new Paint(newc, 0), paint)); 
+		collection.add(new PaintButton( new Rectangle(110, 400, 100, 100), "X", new Paint(newc2, 0), paint)); 
 		collection.add(new PaintButton( new Rectangle(215, 250, 75, 75), "", paint.getPaint(), null)); 
-		collection.add(new PaintButton( new Rectangle(325, 100, 75, 100), "", new Paint(newc3, 0), paint));
-		collection.add(new PaintButton( new Rectangle(425, 100, 75, 100), "", new Paint(newc4, 0), paint)); 
+		collection.add(new PaintButton( new Rectangle(325, 400, 100, 100), "", new Paint(newc3, 0), paint));
+		collection.add(new PaintButton( new Rectangle(425, 400, 100, 100), "", new Paint(newc4, 0), paint)); 
 //		for(PaintButton b: collection ) {
 //			b.setMixed();
 //		}

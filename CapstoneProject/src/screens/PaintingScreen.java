@@ -199,7 +199,8 @@ public class PaintingScreen extends Screen{
 			int pos = palette.selectPaint(p); 
 			if(pos >= 0) {
 				System.out.println(pos); 
-				palette.getPaint(pos).createWindow(surface, this);
+				selected = null; 
+				palette.getPaint(pos).createWindow(surface);
 			}
 			else if(selected!= null) {
 			//	canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
@@ -214,7 +215,7 @@ public class PaintingScreen extends Screen{
 	//makes the canvas call its drawing method
 	public void mouseDragged() {
 //		super.mouseDragged(); 
-		System.out.println("s;dfhlsjf");
+		//System.out.println("s;dfhlsjf");
 		//Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		//on = true; 
 		//canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
@@ -236,7 +237,7 @@ public class PaintingScreen extends Screen{
 	}
 	/**
 	 * 
-	 * @return whether it's drawing or filling 
+	 * @return return its mode(draw, erase, or fill) 
 	 */
 	public int mode() {
 		return drawState; 

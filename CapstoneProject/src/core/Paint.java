@@ -48,13 +48,14 @@ public class Paint {
 	 * @param amount
 	 */
 	public void makeAvailable(int amount) {
+		this.amount = amount; 
 		if(amount <= 0) {
 			available = false; 
 		}
 		else {
 			available = true; 	
 		}
-		this.amount = amount; 
+		
 	}
 	/**
 	 * 

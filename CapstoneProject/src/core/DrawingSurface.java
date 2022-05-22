@@ -21,11 +21,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	private boolean mouseClicked = false; 
 	private static final float MAX_BRUSH = (float) 2;
 	private static final float MIN_BRUSH = -1;
+	public final static String fileSeparator = System.getProperty("file.separator");
 	private static int paintingnum; 
 	private float v = (float)( .5 / 9.0);
-	private float[][] kernel = {{ v, v, v }, 
-	                    { v, v, v }, 
-	                    { v, v, v }};
+	private float[][] kernel = {{ (float).0947416, (float).118318, (float).0947416 }, 
+	                    		{(float).118318, (float).147761, (float).118318 }, 
+	                    		{(float).0947416, (float).118318, (float).0947416 }};
 	private PGraphics outline; 
 //	private double width, height;
 	
@@ -43,7 +44,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		TypingScreen screen4 = new TypingScreen(this); 
 		MixingScreen screen5 = new MixingScreen(this, screen3); 
 		EndScreen screen6 = new EndScreen(this); 
-		Window window = new Window(this); 
+		Window window = new Window(this, screen3); 
 		screens.add(screen1);
 		screens.add(screen3);
 		screens.add(screen2);
@@ -71,8 +72,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //	}
 //	
 	public void setup() {
-		brush = loadImage("additionalPictures/brush.png");
-		eraser = loadImage("additionalPictures/eraser.png"); 
+		brush = loadImage("additionalPictures" +   fileSeparator + "brush.png");
+		eraser = loadImage("additionalPictures" +  fileSeparator + "eraser.png"); 
 		cursor(); 
 		background(255); 
 		for (Screen s : screens)
@@ -103,8 +104,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			
 			//if(pscreen.drawing()) {
 			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
+			PImage space = null; 
+			int size = (int) pscreen.getWidth(); 
+			int y = (int) p.getY(); 
 			int x = (int) p.getX(); 
-			int y = (int)p.getY(); 
+
+		//	int x = (int) p.getX(); 
+			//int y = (int)p.getY(); 
 			Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
 //			float d = dist(mouseX, mouseY, pmouseX, pmouseY); // how fast did the user move the "pen"?
 //			float maxStrokeWidth = pscreen.getWidth() + MAX_BRUSH; 
@@ -118,8 +124,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 				outline.rect(0, 0, outline.width, outline.height); 
 //			    if(brushWidth < minStrokeWidth) 
 //			    brushWidth = minStrokeWidth;
-			    pg.strokeWeight(pscreen.getWidth());
-			    outline.strokeWeight(pscreen.getWidth()); 
+			    pg.strokeWeight(size);
+			    outline.strokeWeight(size); 
 			   // System.out.println(brushWidth); 
 				//pg.strokeWeight(5);
 				pg.stroke(c.getRGB()); 
@@ -136,8 +142,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 				pg.fill(Color.white.getRGB()); 
 				outline.stroke(Color.white.getRGB()); 
 				pg.stroke(255); 
-				pg.strokeWeight(pscreen.getWidth()*(float)2); 
-				outline.strokeWeight(pscreen.getWidth()*(float)2);
+				pg.strokeWeight(size*(float)2); 
+				outline.strokeWeight(size*(float)2);
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 				//if()
 				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
@@ -147,34 +153,29 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //				fill(x, y, c, outline); 
 //				//mouseClicked = false; 
 			}
-			else if( mousePressed && pscreen.mode() == 3) {
-				pg.loadPixels();
-				for(int j = y - (int)pscreen.getWidth()/2; j < y + (int)pscreen.getWidth(); j++) { // ask shelby how brushstroke works
-					float sumr = 0; // Kernel sum for this pixel
-					float sumg = 0;
-					float sumb = 0; 
-				      for (int ky = -1; ky <= 1; ky++) {
-				        for (int kx = -1; kx <= 1; kx++) {
-				          // Calculate the adjacent pixel for this kernel point
-				          int pos = (y + ky)*pg.width + (x + kx);
-				          // Image is grayscale, red/green/blue are identical //ok but it ISNT actually 
-				          float valr = red(pg.pixels[pos]);
-				          float valg = green(pg.pixels[pos]); 
-				          float valb = blue(pg.pixels[pos]); 
-				          // Multiply adjacent pixels based on the kernel values
-				          sumr += kernel[ky+1][kx+1] * valr; // questionable considering color 
-				          sumg += kernel[ky+1][kx+1] * valg; 
-				          sumb += kernel[ky+1][kx+1] * valb; 
-				        }
-				      }
-				      Color bcol = new Color(sumr, sumg, sumb); 
-				      pg.pixels[j*pg.width + x ] = bcol.getRGB();
+			else if( mousePressed && pscreen.mode() == 3 && p.getX() < pg.width) {
+				
+//				int size = (int) pscreen.getWidth()/2; 
+//				int y = (int) p.getY(); 
+//				int x = (int) p.getX(); 
+				space = pg.get(x-size/2, y-size/2, size, size); 
+				if(space!= null || space.pixels.length >0) {
+					for(int i  = 0; i< 7; i++) {
+						space.filter(BLUR); 
+					}
+					pg.image(space, x- size/2, y-size/2);
 				}
+				
 			}
 			//}
-			outline.endDraw();
-			pg.endDraw(); 
-			image(pg, 0, 0); 
+		//	if(pscreen.mode() != 3) {
+				outline.endDraw();
+				pg.endDraw(); 
+				image(pg, 0, 0); 
+			//}
+			if(space!= null) {
+				image(space, x-size/2, y-size/2);
+			}
 		}
 		pop();
 	}
@@ -217,6 +218,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		mouseClicked = false; 
 	}
 	public void mouseReleased() {
+		Point p = assumedCoordinatesToActual(new Point(mouseX, mouseY)); 
+	
+		cursor(ARROW); 
 		mouseDragged = false; 
 		mouseClicked = false; 
 		
@@ -245,6 +249,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		mouseClicked = true; 
 		
 	}
+	/**
+	 * fill an area in the painting 
+	 * @param p Point of origin 
+	 * @param c desired color 
+	 * @param outline outline to check borders 
+	 */
 	public void fill(Point p, Color c, PGraphics outline) { 
 		
 		// list
@@ -285,6 +295,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		}
 			
 	}
+	/**
+	 * start over 
+	 */
 	public void clearGraphics() {
 		push();
 		
@@ -299,10 +312,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		image(pg, 0, 0); 
 		pop(); 
 	}
+	/**
+	 * download the paintings 
+	 */
 	public void finish() {
 		ratioX = (float) pg.width/(2*activeScreen.DRAWING_WIDTH);
 		ratioY = (float) pg.height/activeScreen.DRAWING_HEIGHT;
-		String paintingnm = "additionalPictures/Painting" + paintingnum + ".png"; 
+		String paintingnm = "additionalPictures" + fileSeparator + "Painting" + paintingnum + ".png"; 
 		push(); 
 		pg.scale(ratioX, ratioY);
 		pop(); 
@@ -312,7 +328,40 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void keyPressed() {
 		activeScreen.keyPressed(); 
 	}
-	
+	public void blur(int size, Point p) {
+		//pg.loadPixels();
+		
+//		
+//		for(int j = y - size; j < y + size; j++) { 
+//			for(int i = x = size; i< x + size; i++) {
+//				if(j> 0 && j < pg.height && i>0 && i < pg.width) {
+//					//check if valid 
+//					System.out.println(j + " " + y); 
+//					float sumr = 0; // Kernel sum for this pixel
+//					float sumg = 0;
+//					float sumb = 0; 
+//				      for (int ky = -1; ky <= 1; ky++) {
+//				        for (int kx = -1; kx <= 1; kx++) {
+//				        
+//				          // Calculate the adjacent pixel for this kernel point
+//				          int pos = (j + ky)*pg.width + (i + kx);
+//				          // Image is grayscale, red/green/blue are identical //ok but it ISNT actually 
+//				          float valr = red(pg.pixels[pos]);
+//				          float valg = green(pg.pixels[pos]); 
+//				          float valb = blue(pg.pixels[pos]); 
+//				          // Multiply adjacent pixels based on the kernel values
+//				          sumr += kernel[ky+1][kx+1] * valr; // questionable considering color 
+//				          sumg += kernel[ky+1][kx+1] * valg; 
+//				          sumb += kernel[ky+1][kx+1] * valb; 
+//				        }
+//				      }
+//				      Color bcol = new Color(sumr, sumg, sumb); 
+//				      pg.pixels[j*pg.width + x ] = bcol.getRGB();
+//				}
+//		}
+//		}
+		pg.updatePixels();
+	}
 //	public void setBack2() {
 //		if (activeScreen == screen2) {
 //			screen2.setBack2(true);

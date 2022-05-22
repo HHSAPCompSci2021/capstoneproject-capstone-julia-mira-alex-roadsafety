@@ -80,10 +80,9 @@ public class PaintButton extends Button {
 	/**
 	 * creates a window 
 	 */
-	public void createWindow(DrawingSurface surface, PaintingScreen pscreen) { 
-		w = new Window(surface, this, pscreen); 
-		surface.getScreens().remove(surface.WIN); 
-		surface.getScreens().add(w); 
+	public void createWindow(DrawingSurface surface) { 
+		w = (Window) surface.getScreens().get(surface.WIN); 
+		w.choosePaint(this);
 		surface.switchScreen(surface.WIN);
 	}
 	/**

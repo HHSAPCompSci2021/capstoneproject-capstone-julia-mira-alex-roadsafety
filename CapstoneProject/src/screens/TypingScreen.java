@@ -38,7 +38,7 @@ public class TypingScreen extends Screen{
 		this.surface = surface; 
 		//buttonColor = new Color(239, 183, 192, 255); 
 		
-		play = new Button(new Rectangle(25, 150, 80, 80), "Start", new Color(239, 183, 192, 255)); 
+		play = new Button(new Rectangle(25, 220, 80, 80), "Start", new Color(239, 183, 192, 255)); 
 		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
 		instructions = "Once you click start, you'll enter a typing game! Do your best to type accurately and speedily for a minute. The better your typing, the more paint you receive.";
 		y = 10; 
@@ -171,21 +171,23 @@ public class TypingScreen extends Screen{
 		}
 	}
 	public void keyPressed() { /// y does keyPressed not work?? puzzling 
-		char key = surface.key;
-		//System.out.println(" "  + key); 
-		String s = game.getUser();
-		if(game.gameOn()) {
-			if(key == surface.BACKSPACE || key == surface.DELETE) {
-				if(s.length()>0)
-					game.delete();
-			}
-			else if(key == surface.RETURN || key == surface.ENTER) {
-				game.setUser(s + "\n"); 
-			}
-			else if (key != surface.TAB || key != surface.ESC || key != surface.SHIFT) { //figure out how to COUNT OUT SHIFT
-				game.type(key);
-			}
-			
+		if(game != null) {
+			char key = surface.key;
+			//System.out.println(" "  + key); 
+			String s = game.getUser();
+			if(game.gameOn()) {
+				if(key == surface.BACKSPACE || key == surface.DELETE) {
+					if(s.length()>0)
+						game.delete();
+				}
+				else if(key == surface.RETURN || key == surface.ENTER) {
+					game.setUser(s + "\n"); 
+				}
+				else if (key != surface.TAB || key != surface.ESC || key != surface.SHIFT) { //figure out how to COUNT OUT SHIFT
+					game.type(key);
+				}
+				
+		}
 		}
 
 	}

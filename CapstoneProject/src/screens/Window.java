@@ -15,7 +15,7 @@ public class Window extends Screen {
 	 * creates the window with set width and height
 	 * @param surface PApplet
 	 */
-	public Window(DrawingSurface surface, PaintButton p, PaintingScreen screen) {
+	public Window(DrawingSurface surface, PaintingScreen screen) {
 		super(800, 600);
 		
 		this.surface = surface; 
@@ -28,18 +28,21 @@ public class Window extends Screen {
 		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
 		
 	}
-	/**
-	 * default constructor 
-	 * @param surface PApplet
-	 */
-	public Window(DrawingSurface surface) {
-		super(800, 600);
-		
-		buttonColor = new Color(239, 183, 192, 255);
-		
-		create = new Button(new Rectangle(10, 10, 150, 80), "buy", buttonColor); 
-		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
-		
+//	/**
+//	 * default constructor 
+//	 * @param surface PApplet
+//	 */
+//	public Window(DrawingSurface surface) {
+//		super(800, 600);
+//		
+//		buttonColor = new Color(239, 183, 192, 255);
+//		
+//		create = new Button(new Rectangle(10, 10, 150, 80), "buy", buttonColor); 
+//		back = new Button(new Rectangle(450, 10, 100, 80), "back", buttonColor); 
+//		
+//	}
+	public void choosePaint(PaintButton p) {
+		this.p = p; 
 	}
 	public void draw() {
 		
@@ -53,12 +56,12 @@ public class Window extends Screen {
 		if(p.getPaint().isAvailable()) {
 			amount = "Amount: " + p.getPaint().getAmount();
 			use = new Button(new Rectangle(10, 200, 50, 50), "use", buttonColor); 
-			if( p.getColor() != Color.white && p.getColor() != Color.black && !p.isMixed()) { 
+			if(!p.isMixed()) { 
 				mix = new Button(new Rectangle(10, 110, 40, 40), "mix", buttonColor); 
 				mix.draw(surface);
 			}
 			use.draw(surface);
-			
+			// p.getColor() != Color.white && p.getColor() != Color.black && 
 		}
 		else {
 			amount = "Not available"; 
