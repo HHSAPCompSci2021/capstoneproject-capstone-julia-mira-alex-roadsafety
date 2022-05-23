@@ -27,7 +27,7 @@ public class MixingScreen extends Screen{
 	public MixingScreen(DrawingSurface surface, PaintingScreen pscreen) {
 		super(800, 800);
 		this.surface = surface; 
-		back = new Button(new Rectangle(0, 0, 50, 50), "Back", Color.yellow); 
+		back = new Button(new Rectangle(0, 0, 100, 50), "Back", Color.yellow); 
 	}
 	
 
