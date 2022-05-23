@@ -72,7 +72,7 @@ public class Button {
 			surface.noFill();
 			surface.stroke(113, 240, 147);
 			surface.strokeWeight(5);
-			surface.rect((float)this.getXCoord(), (float)this.getYCoord(), (float)this.getWidth(), (float)this.getHeight());
+			surface.rect((float)this.getXCoord()+1, (float)this.getYCoord()+1, (float)(this.getWidth()-1.5), (float)(this.getHeight()-1.5));
 		}
 		
 	}
@@ -106,6 +106,7 @@ public class Button {
 	public void draw (PApplet p) {
 		shape.setStrokeWeight(2);
 		shape.setFillColor(color, true);
+		shape.setStrokeColor(new Color(0));
 		 shape.draw(p);
 		// int grayvalue = 255/color.getRGB(); 
 		 

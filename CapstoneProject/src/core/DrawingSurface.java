@@ -332,43 +332,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen.keyPressed(); 
 	}
 	public void blur(int size, Point p) {
-		//pg.loadPixels();
-		
-//		
-//		for(int j = y - size; j < y + size; j++) { 
-//			for(int i = x = size; i< x + size; i++) {
-//				if(j> 0 && j < pg.height && i>0 && i < pg.width) {
-//					//check if valid 
-//					System.out.println(j + " " + y); 
-//					float sumr = 0; // Kernel sum for this pixel
-//					float sumg = 0;
-//					float sumb = 0; 
-//				      for (int ky = -1; ky <= 1; ky++) {
-//				        for (int kx = -1; kx <= 1; kx++) {
-//				        
-//				          // Calculate the adjacent pixel for this kernel point
-//				          int pos = (j + ky)*pg.width + (i + kx);
-//				          // Image is grayscale, red/green/blue are identical //ok but it ISNT actually 
-//				          float valr = red(pg.pixels[pos]);
-//				          float valg = green(pg.pixels[pos]); 
-//				          float valb = blue(pg.pixels[pos]); 
-//				          // Multiply adjacent pixels based on the kernel values
-//				          sumr += kernel[ky+1][kx+1] * valr; // questionable considering color 
-//				          sumg += kernel[ky+1][kx+1] * valg; 
-//				          sumb += kernel[ky+1][kx+1] * valb; 
-//				        }
-//				      }
-//				      Color bcol = new Color(sumr, sumg, sumb); 
-//				      pg.pixels[j*pg.width + x ] = bcol.getRGB();
-//				}
-//		}
-//		}
 		pg.updatePixels();
 	}
-//	public void setBack2() {
-//		if (activeScreen == screen2) {
-//			screen2.setBack2(true);
-//		}
-//	}
+
 	
 }

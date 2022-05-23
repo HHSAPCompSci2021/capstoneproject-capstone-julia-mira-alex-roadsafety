@@ -7,12 +7,9 @@ import processing.core.*;
 import core.DrawingSurface;
 
 public class MixingScreen extends Screen{
-	private DrawingSurface surface; 
 	private MixedPalette mixed; 
 	private Button back; 
 	private PaintingScreen pscreen; 
-	private PImage background; 
-	public final static String fileSeparator = System.getProperty("file.separator");
 	/**
 	 * creates a MixingScreen with set width and height
 	 * @param width the width of the screen
@@ -23,7 +20,6 @@ public class MixingScreen extends Screen{
 		this.surface = surface; 
 		mixed = p.getMixes(); 
 		this.pscreen = pscreen; 
-		
 	}
 	/**
 	 * default constructor 
@@ -31,16 +27,12 @@ public class MixingScreen extends Screen{
 	public MixingScreen(DrawingSurface surface, PaintingScreen pscreen) {
 		super(800, 800);
 		this.surface = surface; 
-		back = new Button(new Rectangle(0, 0, 50, 50), "Back", Color.yellow); 
+		back = new Button(new Rectangle(0, 0, 100, 50), "Back", Color.yellow); 
 	}
 	
-//	public void setup() {
-//		background = surface.loadImage("additionalPictures"+fileSeparator+"background-pic.png");
-//		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
-//			
-//		}
+
 	public void setup() {
-		background = surface.loadImage("additionalPictures"+fileSeparator+"mixing-background.jpg");
+		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 	/**
@@ -53,6 +45,8 @@ public class MixingScreen extends Screen{
 
 	@Override
 	public void draw() {
+		setup();
+		back.setColor(themeColor);
 		surface.image(background, 0, 0);
 		back.draw(surface);
 		mixed.draw(surface, true);

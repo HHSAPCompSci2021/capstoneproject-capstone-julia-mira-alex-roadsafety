@@ -3,6 +3,7 @@ package screens;
 import java.awt.Color;
 import java.awt.Point;
 import mhaldar.shapes.*;
+import processing.core.PImage;
 import core.Button;
 import core.DrawingSurface;
 import core.Paint;
@@ -17,8 +18,6 @@ import java.util.*;
  */
 public class TypingScreen extends Screen{
 
-	public final static String fileSeparator = System.getProperty("file.separator");
-	private DrawingSurface surface; 
 	private Paint paint; 
 	private TypingGame game;
 	private String text; 
@@ -28,22 +27,32 @@ public class TypingScreen extends Screen{
 	private int amount; 
 	private float y; 
 	boolean playing; 
+	
 	/**
 	 * creates a TypingScreen object with set width and height
 	 * @param width the width of the screen
 	 * @param height the height of the screen
 	 */
 	public TypingScreen (DrawingSurface surface) {
-		super(800, 800);
+//		super(800, 800);
+		super(800, 1600);
 		this.surface = surface; 
 		//buttonColor = new Color(239, 183, 192, 255); 
 		
-		play = new Button(new Rectangle(25, 220, 80, 80), "Start", new Color(239, 183, 192, 255)); 
-		quit = new Button(new Rectangle(0, 0, 50, 50), "Quit", new Color(239, 183, 192, 255)); 
+		themeColor = new Color(239, 183, 192, 255);
+		
+		quit = new Button(new Rectangle(25, 25, 100, 50), "Quit", themeColor); 
+		play = new Button(new Rectangle(25, 265, 100, 50), "Start", themeColor); 
 		instructions = "Once you click start, you'll enter a typing game! Do your best to type accurately and speedily for a minute. The better your typing, the more paint you receive.";
 		y = 10; 
 		//System.out.println(text); 
 	}
+	
+	public void setup() {
+		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
+		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+	}
+	
 	/**
 	 * choose the paint you're typing for 
 	 * @param p the paint 
@@ -58,6 +67,11 @@ public class TypingScreen extends Screen{
 	}
 	@Override
 	public void draw() {
+		setup();
+		play.setColor(themeColor);
+		quit.setColor(themeColor);
+		
+		surface.image(background, 0,0);
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		quit.draw(surface);
@@ -66,18 +80,19 @@ public class TypingScreen extends Screen{
 			play.draw(surface);	
 			play.highlight(p, surface); 
 			surface.fill(0);
-			surface.text(instructions, 25, 50, 600, 500);
+			surface.text(instructions, 35, 95, 600, 500);
 		}
 		if(playing) {
 			surface.fill(255);
 			surface.rect(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT);
+			surface.image(background,0,0);
 			quit.draw(surface);
 			quit.highlight(p, surface);
 			String user = game.getUser();
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
 			//surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
-			Color textCol = null, fillCol ; 
+			Color textCol = null, fillCol; 
 			fillCol = null; 
 			if(game.gameOn()) {
 				surface.textSize(30); 
@@ -105,7 +120,7 @@ public class TypingScreen extends Screen{
 						y-= ( surface.textDescent() + surface.textAscent()); 
 					}
 					surface.fill(textCol.getRGB()); 
-					surface.text(text.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()); 
+					surface.text(text.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()+80); 
 //					if(fillCol != null) {
 //						surface.fill(fillCol.getRGB());
 //						surface.rect(x, newy, surface.textWidth(text.charAt(i)), newy + surface.textDescent() + surface.textAscent()); 
@@ -121,7 +136,7 @@ public class TypingScreen extends Screen{
 				newy = y+ (surface.textDescent() + surface.textAscent()); 
 				for(int i = 0; i< user.length(); i++) {
 					surface.fill(145); 
-					surface.text(user.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()); 
+					surface.text(user.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()+80); 
 					if(scored.get(i)) {
 						x += surface.textWidth(text.charAt(i));
 					}
@@ -159,20 +174,16 @@ public class TypingScreen extends Screen{
 				else if (res <= 100) {
 					amount = 10; 
 				}
-				surface.textSize(50); 
+				surface.textSize(30); 
 				String result = "You scored " + res + "\n You will receive " + amount + " use(s)."; 
-				surface.text(result, 50, 0, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
+				surface.text(result, 50, 100, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
 				if(amount > 0) {
 					paint.makeAvailable(amount);
 					PaintingScreen pscr = (PaintingScreen) surface.getScreens().get(surface.PAINTING_SCREEN); 
 					pscr.selectedColor(paint.getColor()); 
 				}
-				
 			}
-//			y-=.2; 
 		}
-		
-		
 	}
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
