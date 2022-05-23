@@ -106,10 +106,10 @@ public class Window extends Screen {
 				TypingScreen t = (TypingScreen) surface.getScreens().get(surface.TYPING_SCREEN); 
 				t.chooseColor(p.getPaint()); 
 				surface.switchScreen(surface.TYPING_SCREEN);
-				if(t.win()) {
-					pscreen.selectedColor(p.getColor());
-				}
-				t.restart();
+//				if(t.win()) {
+//					pscreen.selectedColor(p.getColor());
+//				}
+//				t.restart();
 			}
 			
 		}

@@ -159,6 +159,8 @@ public class TypingScreen extends Screen{
 				surface.text(result, 50, 0, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
 				if(amount > 0) {
 					paint.makeAvailable(amount);
+					PaintingScreen pscr = (PaintingScreen) surface.getScreens().get(surface.PAINTING_SCREEN); 
+					pscr.selectedColor(paint.getColor()); 
 				}
 				
 			}
