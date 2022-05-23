@@ -157,7 +157,7 @@ public class TypingScreen extends Screen{
 				surface.textSize(50); 
 				String result = "You scored " + res + "\n You will receive " + amount + " use(s)."; 
 				surface.text(result, 50, 0, DRAWING_WIDTH/2 -75, DRAWING_HEIGHT); 
-				if(amount > 1) {
+				if(amount > 0) {
 					paint.makeAvailable(amount);
 				}
 				
@@ -207,7 +207,7 @@ public class TypingScreen extends Screen{
 	 */
 	public boolean win() {
 		boolean ret; 
-		if(amount>=0) {
+		if(amount<=0) {
 			ret =  false; 
 		}
 		else {

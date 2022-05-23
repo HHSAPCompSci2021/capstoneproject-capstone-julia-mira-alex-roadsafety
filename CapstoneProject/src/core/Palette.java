@@ -57,19 +57,20 @@ public class Palette {
 		paints[34] = new Paint(new Color(123,104,238), 0); 
 		paints[35] = new Paint(new Color(255, 254, 113), 0); 
 		cs = new ColorSorter(); 
-		//expand palette later 
 		// create set up all the colors over here 
+		Collections.sort(Arrays.asList(paints), cs);
 		int count = 0; 
 		for(int j = 0; j < 9; j ++ ) {
 			for(int i = 0; i< 4; i++) {
 				Rectangle r =  new Rectangle(800 + 150*i, 100*j, 150, 100); 
 				Paint p = paints[count]; 
+			//	System.out.println(p.getColor() + "aye"); 
 				collection.add(new PaintButton(r, "", p)); 
 				count ++; 
 			}
 		}
 		//System.out.println(collection.size()); 
-		Collections.sort(collection, cs);
+		
 		
 	}
 	/**
