@@ -77,7 +77,8 @@ public class TypingScreen extends Screen{
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
 			//surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
-			Color textCol; 
+			Color textCol, fillCol; 
+			fillCol = null; 
 			if(game.gameOn()) {
 				surface.textSize(30); 
 				surface.fill(150); 
@@ -86,22 +87,29 @@ public class TypingScreen extends Screen{
 				for(int i = 0; i< text.length(); i++) {
 					if(i > user.length()-1 || i> scored.size() -1) {
 						textCol = Color.darkGray; 
+						
 						//surface.fill(125);
 					}
 					else if(scored.get(i)) {
 						textCol = new Color(34,139,34); 
+						fillCol = new Color(34, 139, 34, 50); 
 						//surface.fill(34,139,34);
 					}
 					else{
 						textCol = new Color(220,20,60); 
+						fillCol = new Color(220, 20, 60, 50); 
 						//surface.fill(220,20,60);
 					}
-					if(textCol != Color.darkGray && i >= text.length()/2) {
+					if(textCol != Color.darkGray && newy >= 10*( surface.textDescent() + surface.textAscent())) {
 					//	System.out.println(i + "sgsdfg");
-						y-=.02; 
+						y-= ( surface.textDescent() + surface.textAscent()); 
 					}
 					surface.fill(textCol.getRGB()); 
 					surface.text(text.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()); 
+//					if(fillCol != null) {
+//						surface.fill(fillCol.getRGB());
+//						surface.rect(x, newy, surface.textWidth(text.charAt(i)), newy + surface.textDescent() + surface.textAscent()); 
+//					}
 					x += surface.textWidth(text.charAt(i));
 					if(x>= DRAWING_WIDTH -55) {
 						x = 55; 
@@ -114,7 +122,7 @@ public class TypingScreen extends Screen{
 				for(int i = 0; i< user.length(); i++) {
 					surface.fill(145); 
 					surface.text(user.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()); 
-					x += surface.textWidth(user.charAt(i));
+					x += surface.textWidth(text.charAt(i));
 					if(x>= DRAWING_WIDTH -55) {
 						x = 55; 
 						newy+= 2*(surface.textDescent() + surface.textAscent()); 
