@@ -6,10 +6,10 @@ import java.awt.Color;
 import java.awt.Point; 
 
 public class Window extends Screen {
-	PaintButton p; 
-	PaintingScreen pscreen; 
-	Button create, back, use, mix; 
-	Color buttonColor;
+	private PaintButton p; 
+	private PaintingScreen pscreen; 
+	private Button create, back, use, mix; 
+	private Color buttonColor;
 	
 	/**
 	 * creates the window with set width and height
