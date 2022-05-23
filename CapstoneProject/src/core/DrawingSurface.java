@@ -159,8 +159,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //				int size = (int) pscreen.getWidth()/2; 
 //				int y = (int) p.getY(); 
 //				int x = (int) p.getX(); 
-				space = pg.get(x-size/2, y-size/2, size, size); 
-				if(space!= null || space.pixels.length >0) {
+				space = pg.get(x-size, y-size, (int) 1.5*size,  (int) 1.5*2*size); 
+				if(space!= null && space.pixels.length >0 && pg.pixels[y*pg.width + x] != 0) {
 					for(int i  = 0; i< 7; i++) {
 						space.filter(BLUR); 
 					}

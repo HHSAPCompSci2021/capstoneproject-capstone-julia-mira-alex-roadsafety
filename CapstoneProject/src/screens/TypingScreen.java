@@ -141,7 +141,7 @@ public class TypingScreen extends Screen{
 				double res = game.getScore(); 
 				//int amount = 0; 
 
-				if(res <= 10) {
+				if(res <= 10 || res == Double.NaN || res == Double.MAX_VALUE || res == Double.MIN_VALUE){
 					amount = 0; 
 				}
 				else if (res <= 20) {
@@ -156,7 +156,7 @@ public class TypingScreen extends Screen{
 				else if (res <= 80) {
 					amount = 7; 
 				}
-				else {
+				else if (res <= 100) {
 					amount = 10; 
 				}
 				surface.textSize(50); 
