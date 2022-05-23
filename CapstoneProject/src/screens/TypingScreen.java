@@ -77,7 +77,7 @@ public class TypingScreen extends Screen{
 			surface.fill(0); 
 			ArrayList<Boolean> scored = game.getScored();
 			//surface.text( text, DRAWING_WIDTH/2, y, DRAWING_WIDTH/2, DRAWING_HEIGHT); 
-			Color textCol, fillCol; 
+			Color textCol = null, fillCol ; 
 			fillCol = null; 
 			if(game.gameOn()) {
 				surface.textSize(30); 
@@ -122,7 +122,12 @@ public class TypingScreen extends Screen{
 				for(int i = 0; i< user.length(); i++) {
 					surface.fill(145); 
 					surface.text(user.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()); 
-					x += surface.textWidth(text.charAt(i));
+					if(scored.get(i)) {
+						x += surface.textWidth(text.charAt(i));
+					}
+					else {
+						x+= surface.textWidth(user.charAt(i)); 
+					}
 					if(x>= DRAWING_WIDTH -55) {
 						x = 55; 
 						newy+= 2*(surface.textDescent() + surface.textAscent()); 
@@ -221,6 +226,7 @@ public class TypingScreen extends Screen{
 	 * resets game 
 	 */
 	public void restart() {
-		amount = 0; 
+		y = 10; 
+		//amount = 0; 
 	}
 }

@@ -109,7 +109,7 @@ public class Window extends Screen {
 //				if(t.win()) {
 //					pscreen.selectedColor(p.getColor());
 //				}
-//				t.restart();
+				t.restart();
 			}
 			
 		}
