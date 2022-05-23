@@ -17,21 +17,15 @@ import core.*;
  */
 public class PaintingScreen extends Screen{
 
-	private DrawingSurface surface;
-	
-	private PImage background;
-	public final static String fileSeparator = System.getProperty("file.separator");
-	
-	//private Painting canvas; //the drawing canvas where the user draws on
 	private Palette palette; //the color palette that shows what colors user has
 	
 	private Button exit, finish, startOver, instructions; //other options other than drawing
 	private Button draw, fill, erase, blur; //drawing options
 	
+	private Button background1, background2, background3;
+
 	private Button widthSlider, widthButton, mode;
 	private int width;
-	
-	private Color buttonColor;
 	
 	private int drawState; // 0 is draw, 1 is fill, 2 is erase, 3 is blur 
 	Color selected; 
@@ -48,32 +42,34 @@ public class PaintingScreen extends Screen{
 		drawState = 0;
 		on  = true;
 		
-		buttonColor = new Color(239, 183, 192, 255);
+		themeColor = new Color(239, 183, 192, 255);
 		
-		exit = new Button(new Rectangle(DRAWING_WIDTH - 180, 10, 150, 40), "exit", buttonColor);
-		finish = new Button(new Rectangle(DRAWING_WIDTH - 180, 100, 150, 40), "finish", buttonColor);
-		instructions = new Button(new Rectangle(DRAWING_WIDTH - 180, 195, 150, 40), "instructions", buttonColor);
-		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "clear", buttonColor);
-		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", buttonColor);
-		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", buttonColor); 
-		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", buttonColor);
-		blur = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 300, 150, 40), "blur", buttonColor); 
+		exit = new Button(new Rectangle(DRAWING_WIDTH - 180, 10, 150, 40), "exit", themeColor);
+		finish = new Button(new Rectangle(DRAWING_WIDTH - 180, 100, 150, 40), "finish", themeColor);
+		instructions = new Button(new Rectangle(DRAWING_WIDTH - 180, 195, 150, 40), "instructions", themeColor);
+		startOver = new Button(new Rectangle(DRAWING_WIDTH - 180, 290, 150, 40), "clear", themeColor);
+		draw = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2, 150, 40), "draw", themeColor);
+		erase = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 +200, 150, 40), "erase", themeColor); 
+		fill = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 100, 150, 40), "fill", themeColor);
+		blur = new Button(new Rectangle(DRAWING_WIDTH - 180, DRAWING_HEIGHT/2 + 300, 150, 40), "blur", themeColor); 
 		
 		palette = new Palette(); 
 		selected = palette.getPaint(0).getColor();
 		
-		width = 1;
+		width = 3;
 		widthSlider = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 350, 40), "", Color.WHITE);
-		widthButton = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 50, 40), "1", buttonColor);
+		widthButton = new Button(new Rectangle(DRAWING_WIDTH/2 + 150, DRAWING_HEIGHT - 300, 50, 40), Integer.toString(width), themeColor);
 		
-		mode = new Button(new Rectangle(DRAWING_WIDTH/2 + 145,DRAWING_HEIGHT - 400, 250, 50), "", buttonColor); 
-		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);	
+		mode = new Button(new Rectangle(DRAWING_WIDTH/2 + 145,DRAWING_HEIGHT - 450, 250, 50), "", themeColor); 
+		
+		background1 = new Button(new Rectangle(DRAWING_WIDTH/2 + 50, DRAWING_HEIGHT - 80, 120, 40), "theme1", themeColor);
+		background2 = new Button(new Rectangle(DRAWING_WIDTH/2 + 200, DRAWING_HEIGHT - 80, 120, 40), "theme2", themeColor);;
+		background3 = new Button(new Rectangle(DRAWING_WIDTH/2 + 350, DRAWING_HEIGHT - 80, 120, 40), "theme3", themeColor);;
 	}
 
 	public void setup() {
-		background = surface.loadImage("additionalPictures"+fileSeparator+"pink-mountains.jpg");
+		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
-		
 	}
 	
 	public int getWidth() {
@@ -87,7 +83,7 @@ public class PaintingScreen extends Screen{
 		surface.rect(0, 0, DRAWING_WIDTH/2 , DRAWING_HEIGHT);
 		
 		surface.strokeWeight(2);
-		surface.fill(239, 183, 192, 255);
+		surface.fill(themeColor.getRGB());
 		surface.rect(DRAWING_WIDTH/2 +75, DRAWING_HEIGHT-300, 400, 40);
 		surface.fill(0);
 		surface.textSize(23);
@@ -117,6 +113,9 @@ public class PaintingScreen extends Screen{
 		draw.draw(surface);
 		erase.draw(surface);
 		blur.draw(surface);
+		background1.draw(surface);
+		background2.draw(surface);
+		background3.draw(surface);
 		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		
@@ -128,19 +127,27 @@ public class PaintingScreen extends Screen{
 		draw.highlight(p, surface);
 		erase.highlight(p, surface);
 		blur.highlight(p, surface);
+		background1.highlight(p, surface);
+		background2.highlight(p, surface);
+		background3.highlight(p, surface);
 		
 		palette.draw(surface, false);
-		//canvas.draw(surface, true, Color.WHITE, (int)p.getX(), (int)p.getY());
-	
-		//made array to prevent repeated code for each button
-		//keep this? or change to for each loop
-				
-				//go through each button to see if it is being hovered over (made array to prevent repeated code for each button)
-//				for (Button e : buttonList) {
-//					e.highlight(p, surface);
-//				}
 		
-		
+		exit.setColor(themeColor);
+		finish.setColor(themeColor);
+		startOver.setColor(themeColor);
+		instructions.setColor(themeColor);
+		draw.setColor(themeColor);
+		fill.setColor(themeColor);
+		exit.setColor(themeColor);
+		erase.setColor(themeColor);
+		blur.setColor(themeColor);
+		background1.setColor(themeColor);
+		background2.setColor(themeColor);
+		background3.setColor(themeColor);
+		widthButton.setColor(themeColor);
+		mode.setColor(themeColor);
+
 	}
 	
 	//total length of bar is 350
@@ -209,7 +216,26 @@ public class PaintingScreen extends Screen{
 			widthButton.changeLocation(p);
 			
 		}
-			
+		
+		else if(background1.isClicked(p)) {
+//			changeTheme(new Color(175,225,98,255), "background1.jpg");
+			changeTheme(new Color(239, 183, 192, 255), "background1.jpg");
+			setup();			
+		}
+		
+		else if(background2.isClicked(p)) {
+//			changeTheme(new Color(175,225,98,255), "background2.png"); //green
+			changeTheme(new Color(195,153,107,255), "background2.png"); //brown
+			setup();
+		}
+		
+		else if(background3.isClicked(p)) {
+//			changeTheme(new Color(75,40,62,255), "background3.jpg"); //dark purple
+			changeTheme(new Color(255,144,3,255), "background3.jpg"); //dark orange
+			setup();
+		}
+		
+		
 		else {
 			int pos = palette.selectPaint(p); 
 			if(pos >= 0) {

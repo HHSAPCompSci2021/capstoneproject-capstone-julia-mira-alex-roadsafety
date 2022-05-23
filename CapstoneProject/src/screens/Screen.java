@@ -1,9 +1,17 @@
 package screens;
-import core.*; 
+import java.awt.Color;
+
+import core.*;
+import processing.core.PImage; 
 
 public abstract class Screen {
 	
-	public DrawingSurface surface;
+	protected DrawingSurface surface;
+	protected static Color themeColor;
+	protected PImage background;
+	protected static String BGName;
+	protected final static String fileSeparator = System.getProperty("file.separator");
+
 	
 	/**
 	 * the dimensions of the screen
@@ -20,14 +28,29 @@ public abstract class Screen {
 	public Screen(int height, int width) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
+		BGName = "background1.jpg";
 	}
+	
+//	public Screen(int height, int width, PImage background) {
+//		this.DRAWING_WIDTH = width;
+//		this.DRAWING_HEIGHT = height;
+//		this.background = background;
+//	}
+//	
 	
 	
 	/**
 	 * set up of the Screen 
 	 */
 	public void setup() {
-
+//		background = surface.loadImage("additionalPictures"+fileSeparator+"background2.png");
+//		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
+	}
+	
+	public void changeTheme(Color newColor, String BG) {
+//		background = newBG;
+		themeColor = newColor;
+		BGName = BG;
 	}
 	
 	/**
@@ -55,8 +78,7 @@ public abstract class Screen {
 	 * depending on where the mouse is dragged, the program will do something
 	 */
 	public void mouseDragged() {
-		//return true; 
-		System.out.println("mouseDragged in Screen");
+
 	}
 	
 	/**

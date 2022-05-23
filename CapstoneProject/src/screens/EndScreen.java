@@ -15,11 +15,8 @@ import processing.core.*;
 public class EndScreen extends Screen {
 	
 	private Button exit;
-	private Color themeColor;
-	private PImage background;
 	private PImage finishedPainting;
-	public final static String fileSeparator = System.getProperty("file.separator");
-	private final static int finalWidth = 480;
+	private final static int finalWidth = 440;
 	private final static int finalHeight = 500;
 	
 	/**
@@ -30,33 +27,30 @@ public class EndScreen extends Screen {
 	public EndScreen(DrawingSurface surface) {
 		super(800, 1600);
 		this.surface = surface; 
-		
 		themeColor = new Color(239, 183, 192, 255);
 		exit = new Button(new Rectangle(1500, 0, 100, 50), "exit", themeColor); 
-
 	}
 	public void setup() {
-		background = surface.loadImage("additionalPictures"+fileSeparator+"pink-mountains.jpg");
+		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 	
-	
 	@Override
 	public void draw() {
-		surface.image(background,0,0);
+		setup();
+		exit.setColor(themeColor);
 		
+		surface.image(background,0,0);
 		surface.fill(255);
-		surface.rect(DRAWING_WIDTH/2 - 240, DRAWING_HEIGHT/2 - 250, finalWidth, finalHeight);
+		surface.rect(DRAWING_WIDTH/2 - 220, DRAWING_HEIGHT/2 - 250, finalWidth, finalHeight);
 		finishedPainting = surface.loadImage("additionalPictures" + fileSeparator + "Painting0.png");
 		finishedPainting.resize(finalWidth, finalHeight);
 		surface.image(finishedPainting, DRAWING_WIDTH/2 - 200, DRAWING_HEIGHT/2 - 250);
-		
+		surface.fill(0);
+		surface.textSize(30);
 		String instructions = "congratulations on finishing your painting!";
-		
 		surface.text(instructions, DRAWING_HEIGHT - (surface.textWidth(instructions)/2), 100);
-
 		exit.draw(surface);
-		
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		exit.highlight(p, surface);
 	}
@@ -64,8 +58,6 @@ public class EndScreen extends Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if(exit.isClicked(p)) {
-//			surface.clearGraphics();
-//			surface.switchScreen(surface.INTRO_SCREEN);
 			surface.exit();
 		}
 	}
