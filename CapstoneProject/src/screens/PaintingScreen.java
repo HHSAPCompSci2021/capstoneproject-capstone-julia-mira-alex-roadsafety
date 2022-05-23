@@ -28,7 +28,7 @@ public class PaintingScreen extends Screen{
 	private Button exit, finish, startOver, instructions; //other options other than drawing
 	private Button draw, fill, erase, blur; //drawing options
 	
-	private Button widthSlider, widthButton;
+	private Button widthSlider, widthButton, mode;
 	private int width;
 	
 	private Color buttonColor;
@@ -65,6 +65,8 @@ public class PaintingScreen extends Screen{
 		width = 1;
 		widthSlider = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 350, 40), "", Color.WHITE);
 		widthButton = new Button(new Rectangle(DRAWING_WIDTH/2 + 100, DRAWING_HEIGHT - 300, 50, 40), "1", buttonColor);
+		
+		mode = new Button(new Rectangle(DRAWING_WIDTH/2 + 145,DRAWING_HEIGHT - 400, 250, 50), "", buttonColor); 
 		//canvas = new Painting((int)(800),  DRAWING_HEIGHT, surface);	
 	}
 
@@ -94,6 +96,19 @@ public class PaintingScreen extends Screen{
 		widthSlider.draw(surface);
 		widthButton.draw(surface);
 		
+		if(drawState == 0) {
+			mode.setText("DRAW"); 
+		}
+		else if (drawState == 1) {
+			mode.setText("FILL");
+		}
+		else if(drawState == 2) {
+			mode.setText("ERASE"); 
+		}
+		else {
+			mode.setText("BLUR"); 
+		}
+		mode.draw(surface); 
 		exit.draw(surface);
 		finish.draw(surface);
 		instructions.draw(surface);
