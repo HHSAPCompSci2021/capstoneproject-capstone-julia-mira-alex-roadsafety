@@ -163,7 +163,7 @@ public class TypingGame {
 	 * @return it ends the game if the timer's up and returns the score 
 	 */
 	public double end() {
-		if (System.currentTimeMillis() - startTime >= 30000) { //ends after a minute 
+		if (System.currentTimeMillis() - startTime >= 60000) { //ends after a minute 
 			endTime = System.currentTimeMillis();
 			play = false;
 			return getScore();
