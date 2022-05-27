@@ -5,6 +5,11 @@ import mhaldar.shapes.*;
 import java.awt.Color;
 import java.awt.Point; 
 
+/**
+ * screen that shows the mixing options for the colors
+ * @author Mira and Julia
+ *
+ */
 public class Window extends Screen {
 	private PaintButton p; 
 	private PaintingScreen pscreen; 
@@ -27,10 +32,17 @@ public class Window extends Screen {
 		back = new Button(new Rectangle(DRAWING_WIDTH*(3.0/4), 20, 150, 50), "back", themeColor); 
 	}
 
+	/**
+	 * selects the paint and sets it to field
+	 * @param p the color chosen
+	 */
 	public void choosePaint(PaintButton p) {
 		this.p = p; 
 	}
 	
+	/**
+	 * draws the screen
+	 */
 	public void draw() {
 		create.setColor(themeColor);
 		back.setColor(themeColor);
@@ -70,8 +82,14 @@ public class Window extends Screen {
 		if (mix != null) {
 			mix.highlight(point, surface);
 		}
-		
 	}
+	
+	/**
+	 * if use button clicked, go back to drawing screen
+	 * if mix clicked, go to mixing screen
+	 * if back is clicked, go back to drawing screen
+	 * or go to the typing screen
+	 */
 	public void mousePressed() {
 		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if(p.getPaint().isAvailable()) {

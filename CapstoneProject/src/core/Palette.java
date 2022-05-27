@@ -6,14 +6,20 @@ import mhaldar.shapes.*;
 import java.util.*; 
 import java.awt.Color; 
 
+/**
+ * palette for user
+ * @author Mira
+ *
+ */
 public class Palette {
 // just arrange paints in a nice visual array and have a sort method so you can separate available from unavailable
 	protected ArrayList<PaintButton> collection; // it'll end up looking like a nice 4 by six array maybe??? 
 	private int divide; 
 	private Rectangle bg; 
 	private ColorSorter cs; 
+	
 	/**
-	 * set up a Palette of 14 Paints 
+	 * set up a Palette of 36 colors 
 	 */
 	public Palette() {
 		divide = 1; 
@@ -70,9 +76,8 @@ public class Palette {
 			}
 		}
 		//System.out.println(collection.size()); 
-		
-		
 	}
+	
 	/**
 	 * default constructor 
 	 * @param r rectangle 
@@ -81,22 +86,18 @@ public class Palette {
 		divide = -1; 
 		bg = r; 
 	}
-	private void sort() {
-		
-	}
-//	}
+	
 	/**
 	 * draw the Palette onto the surface
 	 * @param surface PApplet
 	 */
 	public void draw(PApplet surface, boolean mix) {
-		//System.out.println(collection.size()); 
 		surface.fill(Color.white.getRGB()); 
 		for(PaintButton pb : collection) {
-			//System.out.println(co); 
 			pb.draw(surface);
 		}
 	}
+	
 	/**
 	 * changes Paint p to increase/decrease by the given amount 
 	 * @param p the paint 
@@ -106,10 +107,10 @@ public class Palette {
 		collection.get(p).getPaint().makeAvailable(collection.get(p).getPaint().getAmount()+  amount);
 		System.out.println(collection.get(p).getPaint().getAmount()); 
 	}
+	
 	/**
-	 * 
-	 * @param x xcoord
-	 * @param y ycoord
+	 * returns -1 if color is selected, 1 if color is not selected
+	 * @param p point
 	 * @return the position of the paint inside the palette 
 	 */
 	public int selectPaint( Point p) {
@@ -117,32 +118,29 @@ public class Palette {
 			return -1; 
 		}
 		for(int i = 0; i< collection.size(); i++ ) {
-	//		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 			if(collection.get(i).isClicked(p)) {
-				//collection.get(i).createWindow();
 				return i; 
 			}
 		}
-		//make amount decrease
-		//and check if it's available first
-		//if it isn't return null 
 		return -1; 
 	}
+	
 	/**
-	 * 
+	 * gets the paint
 	 * @param i the index of the paint 
 	 * @return the PaintButton at index i 
 	 */
 	public PaintButton getPaint(int i) {
 		return collection.get(i); 
 	}
+	
 	/**
-	 * 
 	 * @return all paints in palette
 	 */
 	public ArrayList<PaintButton> getPaints() {
 		return collection; 
 	}
+	
 	/**
 	 * all amounts are reset 
 	 */
@@ -159,5 +157,4 @@ public class Palette {
 			}
 		}
 	}
-
 }

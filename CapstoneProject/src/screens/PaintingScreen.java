@@ -3,10 +3,8 @@ package screens;
 import core.DrawingSurface;
 import mhaldar.shapes.Rectangle;
 import processing.core.PImage;
-
 import java.awt.Color;
 import java.awt.Point;
-
 import core.*; 
 
 /**
@@ -18,23 +16,18 @@ import core.*;
 public class PaintingScreen extends Screen{
 
 	private Palette palette; //the color palette that shows what colors user has
-	
 	private Button exit, finish, startOver, instructions; //other options other than drawing
 	private Button draw, fill, erase, blur; //drawing options
-	
 	private Button background1, background2, background3;
-
 	private Button widthSlider, widthButton, mode;
 	private int width;
-	
 	private int drawState; // 0 is draw, 1 is fill, 2 is erase, 3 is blur 
-	Color selected; 
+	private Color selected; 
 	boolean on; 
 	
 	/**
 	 * creates a PaintingScreen with set width and height
-	 * @param width the width of the screen
-	 * @param height the height of the screen
+	 * @param surface drawing surface for screen
 	 */
 	public PaintingScreen (DrawingSurface surface) {
 		super(1600, 1600);
@@ -67,15 +60,25 @@ public class PaintingScreen extends Screen{
 		background3 = new Button(new Rectangle(DRAWING_WIDTH/2 + 350, DRAWING_HEIGHT - 80, 120, 40), "theme3", themeColor);;
 	}
 
+	/**
+	 * sets up background image
+	 */
 	public void setup() {
 		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 	
+	/**
+	 * returns width of screen
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}
 	
+	/**
+	 * draws the screen
+	 */
 	@Override
 	public void draw() {
 		surface.image(background, 0, 0);
@@ -147,12 +150,15 @@ public class PaintingScreen extends Screen{
 		background3.setColor(themeColor);
 		widthButton.setColor(themeColor);
 		mode.setColor(themeColor);
-
 	}
 	
 	//total length of bar is 350
 	//starts at 
 	//divide by 25? 50? to get 14? 7? different widths
+	/**
+	 * changes point to width
+	 * @param p mouse point
+	 */
 	public void clickToIndex(Point p) {
 		double x = p.getX();
 		double start = DRAWING_WIDTH/2 + 100;
@@ -172,6 +178,9 @@ public class PaintingScreen extends Screen{
 			width = 13;
 	}
 	
+	/**
+	 * depending on which mouse buttons are pressed, do the button's features
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (draw.isClicked(p)) {
@@ -188,7 +197,6 @@ public class PaintingScreen extends Screen{
 		
 		else if (exit.isClicked(p)) {
 			surface.exit();
-//			surface.switchScreen(surface.INTRO_SCREEN);
 		}
 		
 		else if (finish.isClicked(p)) {
@@ -198,8 +206,6 @@ public class PaintingScreen extends Screen{
 		 
 		else if(instructions.isClicked(p)) {
 			surface.switchScreen(surface.INSTRUCTIONS_SCREEN);
-//			surface.setBack2();
-
 		}
 		 
 		else if (startOver.isClicked(p)) {
@@ -214,27 +220,22 @@ public class PaintingScreen extends Screen{
 			clickToIndex(p);
 			widthButton.setText(Integer.toString(width));
 			widthButton.changeLocation(p);
-			
 		}
 		
 		else if(background1.isClicked(p)) {
-//			changeTheme(new Color(175,225,98,255), "background1.jpg");
 			changeTheme(new Color(239, 183, 192, 255), "background1.jpg");
 			setup();			
 		}
 		
 		else if(background2.isClicked(p)) {
-//			changeTheme(new Color(175,225,98,255), "background2.png"); //green
 			changeTheme(new Color(195,153,107,255), "background2.png"); //brown
 			setup();
 		}
 		
 		else if(background3.isClicked(p)) {
-//			changeTheme(new Color(75,40,62,255), "background3.jpg"); //dark purple
 			changeTheme(new Color(255,144,3,255), "background3.jpg"); //dark orange
 			setup();
 		}
-		
 		
 		else {
 			int pos = palette.selectPaint(p); 
@@ -244,22 +245,8 @@ public class PaintingScreen extends Screen{
 				palette.getPaint(pos).createWindow(surface);
 			}
 			else if(selected!= null) {
-			//	canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
 			}
 		}
-	}
-	
-
-	
-	//the drawing aspect of the drawing
-	//makes sure the draw option is selected
-	//makes the canvas call its drawing method
-	public void mouseDragged() {
-//		super.mouseDragged(); 
-		//System.out.println("s;dfhlsjf");
-		//Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		//on = true; 
-		//canvas.draw(surface, drawState, selected, (int)p.getX(), (int)p.getY());
 	}
 	
 	/**
@@ -269,6 +256,7 @@ public class PaintingScreen extends Screen{
 	public void selectedColor(Color c) {
 		selected = c; 
 	}
+	
 	/**
 	 * 
 	 * @return selected current color 
@@ -276,6 +264,7 @@ public class PaintingScreen extends Screen{
 	public Color getColor() {
 		return selected; 
 	}
+	
 	/**
 	 * 
 	 * @return return its mode(draw, erase, or fill) 
@@ -283,5 +272,4 @@ public class PaintingScreen extends Screen{
 	public int mode() {
 		return drawState; 
 	}
-
 }

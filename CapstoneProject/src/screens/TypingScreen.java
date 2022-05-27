@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * the typing screen in which the user can play the typing game to earn paint
  * 
- * @author 
+ * @author Alex
  *
  */
 public class TypingScreen extends Screen{
@@ -48,6 +48,9 @@ public class TypingScreen extends Screen{
 		//System.out.println(text); 
 	}
 	
+	/**
+	 * sets up screen
+	 */
 	public void setup() {
 		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
@@ -65,6 +68,10 @@ public class TypingScreen extends Screen{
 		paint = p; 
 		amount = 0; 
 	}
+	
+	/**
+	 * draws the screen
+	 */
 	@Override
 	public void draw() {
 		setup();
@@ -121,16 +128,11 @@ public class TypingScreen extends Screen{
 					}
 					surface.fill(textCol.getRGB()); 
 					surface.text(text.charAt(i), x, newy +  surface.textDescent() + surface.textAscent()+80); 
-//					if(fillCol != null) {
-//						surface.fill(fillCol.getRGB());
-//						surface.rect(x, newy, surface.textWidth(text.charAt(i)), newy + surface.textDescent() + surface.textAscent()); 
-//					}
 					x += surface.textWidth(text.charAt(i));
 					if(x>= DRAWING_WIDTH -55) {
 						x = 55; 
 						newy+= 2*(surface.textDescent() + surface.textAscent()); 
 					}
-
 				}
 				x= 55; 
 				newy = y+ (surface.textDescent() + surface.textAscent()); 
@@ -149,8 +151,6 @@ public class TypingScreen extends Screen{
 					}
 				}
 				game.end(); 
-				//surface.text(user, 50, y, DRAWING_WIDTH/2 -50, DRAWING_HEIGHT); 
-				//for(int i)
 			}
 			else {
 				double res = game.getScore(); 
@@ -185,6 +185,11 @@ public class TypingScreen extends Screen{
 			}
 		}
 	}
+	
+	/**
+	 * if play is clicked, play game
+	 * if quit is clicked, quit game
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (play.isClicked(p) && !playing) {
@@ -199,6 +204,10 @@ public class TypingScreen extends Screen{
 			playing=false;
 		}
 	}
+	
+	/**
+	 * different keys do different tasks during the game (the backspace, return, and tab specifically)
+	 */
 	public void keyPressed() { /// y does keyPressed not work?? puzzling 
 		if(game != null) {
 			char key = surface.key;
@@ -215,11 +224,10 @@ public class TypingScreen extends Screen{
 				else if (key != surface.TAB || key != surface.ESC || key != surface.SHIFT) { //figure out how to COUNT OUT SHIFT
 					game.type(key);
 				}
-				
 		}
 		}
-
 	}
+
 	/**
 	 * checks whether the user won any paint 
 	 */
@@ -233,11 +241,11 @@ public class TypingScreen extends Screen{
 		}
 		return ret; 
 	}
+	
 	/**
 	 * resets game 
 	 */
 	public void restart() {
 		y = 10; 
-		//amount = 0; 
 	}
 }

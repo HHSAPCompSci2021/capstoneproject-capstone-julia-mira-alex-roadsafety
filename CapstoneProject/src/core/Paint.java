@@ -7,11 +7,11 @@ public class Paint {
 	private Color color; 
 	private int amount; 
 	private boolean available; 
-	//private MixedPalette mixed; 
+
 	/**
-	 * creates a Paint with the given color
-	 * default amount is 0, default availability is false, created MixedPalette
-	 * @param color 
+	 * sets up the color, amount of color, and availability
+	 * @param color color of paint
+	 * @param amount amount of paint
 	 */
 	public Paint(Color color, int amount) {
 		if(amount == 0) {
@@ -23,17 +23,18 @@ public class Paint {
 			this.amount = amount; 
 		}
 		this.color = color; 
-//		if(shouldMix) {
-//			 mixed = new MixedPalette(this); 
-//		}
-	 
 	}
+	
 	/**
 	 * @return color of the paint 
 	 */
 	public Color getColor() {
 		return color ; 
 	}
+	
+	/**
+	 * @return if paint is available
+	 */
 	public boolean isAvailable() {
 		if(amount <= 0) {
 			available = false; 
@@ -43,9 +44,10 @@ public class Paint {
 		}
 		return available; 
 	}
+	
 	/**
 	 * makes available with given amount. if amount is zero, then availability is false 
-	 * @param amount
+	 * @param amount new amount of paint
 	 */
 	public void makeAvailable(int amount) {
 		this.amount = amount; 
@@ -55,8 +57,8 @@ public class Paint {
 		else {
 			available = true; 	
 		}
-		
 	}
+	
 	/**
 	 * 
 	 * @return the amount of paint left, or the number or uses it has 
@@ -64,5 +66,4 @@ public class Paint {
 	public int getAmount() {
 		return amount;  
 	}
-
 }

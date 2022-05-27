@@ -8,9 +8,7 @@ import processing.core.*;
 
 /**
  * screen that is displayed to user whenever they finish the game
- * 
  * @author Julia
- *
  */
 public class EndScreen extends Screen {
 	
@@ -30,11 +28,18 @@ public class EndScreen extends Screen {
 		themeColor = new Color(239, 183, 192, 255);
 		exit = new Button(new Rectangle(1500, 0, 100, 50), "exit", themeColor); 
 	}
+	
+	/**
+	 * sets up background image
+	 */
 	public void setup() {
 		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 	
+	/**
+	 * draws the end screen
+	 */
 	@Override
 	public void draw() {
 		setup();
@@ -55,6 +60,9 @@ public class EndScreen extends Screen {
 		exit.highlight(p, surface);
 	}
 	
+	/**
+	 * if exit is clicked, leave the program
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if(exit.isClicked(p)) {

@@ -30,11 +30,17 @@ public class InstructionsScreen extends Screen {
 		home = new Button(new Rectangle(1500, 100, 100, 50), "home", themeColor);
 	}
 
+	/**
+	 * sets up the background image
+	 */
 	public void setup() {
 		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 	
+	/**
+	 * draws the instructions screen
+	 */
 	@Override
 	public void draw() {
 		setup();
@@ -58,6 +64,10 @@ public class InstructionsScreen extends Screen {
 		home.highlight(p, surface);
 	}
 	
+	/**
+	 * if draw is clicked, go to draw screen
+	 * if home if clicked, go to home screen
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		System.out.println(p.getX() + " " + p.getY()); 
@@ -69,6 +79,5 @@ public class InstructionsScreen extends Screen {
 		else if(home.isClicked(p)) {
 			surface.switchScreen(surface.INTRO_SCREEN);
 		}
-		
 	}
 }

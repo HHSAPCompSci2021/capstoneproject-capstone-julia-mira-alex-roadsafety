@@ -11,13 +11,19 @@ import javax.swing.JButton;
 import mhaldar.shapes.Shape;
 import processing.core.PApplet;
 import screens.*; 
+
+/**
+ * button to display to user
+ * @author julia and Mira
+ *
+ */
 public class PaintButton extends Button {
 	private Window w; 
-//	Shape shape; 
 	private Paint paint;  
 	private boolean mixed;
 	private MixedPalette mpalette; 
-	PaintButton parent; 
+	private PaintButton parent; 
+	
 	/**
 	 * constructor for a normal paintbutton
 	 * @param button shape 
@@ -29,12 +35,13 @@ public class PaintButton extends Button {
 		paint = p; 
 		mpalette = new MixedPalette(this); 
 	}
+	
 	/**
 	 * constructor for mixed paintbuttons 
-	 * @param button
-	 * @param text
-	 * @param p
-	 * @param parent
+	 * @param button button
+	 * @param text text displayed
+	 * @param p paint color the button is holding
+	 * @param parent parent paintbutton
 	 */
 	public PaintButton(Shape button, String text, Paint p, PaintButton parent) {
 		super(button, text, p.getColor()); 
@@ -42,7 +49,7 @@ public class PaintButton extends Button {
 		mixed = true; 
 		this.parent = parent; 
 	}
-	//draw paint w/ an x over it if unavailable and do all sorts of things to the window 
+	
 	/**
 	 * draws the button at specified coord; draws x over it if color is unavailable 
 	 * @param p PApplet
@@ -50,8 +57,6 @@ public class PaintButton extends Button {
 	 * @param y ycoord 
 	 */
 	public void draw(PApplet surface, float x, float y) {
-		//draw button at specified coord 
-		
 		if(!paint.isAvailable()) {
 			super.setText("X");
 		}
@@ -61,15 +66,14 @@ public class PaintButton extends Button {
 		}
 		super.draw(surface,  x+5, y+20);
 	}
+	
+	/**
+	 * @return returns the paint the button is holding
+	 */
 	public Paint getPaint() {
 		return paint; 
 	}
-//	/**
-//	 * changes the paint button to false 
-//	 */
-//	public void setMixed() {
-//		mixed = true; 
-//	}
+	
 	/**
 	 * 
 	 * @return whether the paint is mixed or not 
@@ -77,14 +81,16 @@ public class PaintButton extends Button {
 	public boolean isMixed() {
 		return mixed; 
 	}
+	
 	/**
-	 * creates a window 
+	 * creates a window for user to customize their color
 	 */
 	public void createWindow(DrawingSurface surface) { 
 		w = (Window) surface.getScreens().get(surface.WIN); 
 		w.choosePaint(this);
 		surface.switchScreen(surface.WIN);
 	}
+	
 	/**
 	 * if mixed then this is useful
 	 * @return the parent PaintButton that spawned this one 
@@ -92,6 +98,7 @@ public class PaintButton extends Button {
 	public PaintButton getParent() {
 		return parent; 
 	}
+	
 	/**
 	 * 
 	 * @return available sub shades of paint 

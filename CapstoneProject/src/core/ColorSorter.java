@@ -4,8 +4,16 @@ import java.lang.*;
 import java.awt.Color; 
 import java.util.*; 
 
+/**
+ * the class that sorts colors
+ * @author Mira
+ *
+ */
 public final class ColorSorter implements Comparator<Paint> {
     @Override
+    /**
+     * compares two colors using Comparator<Paint>
+     */
     public int compare(Paint p1, Paint p2) {
     	Color c1 = p1.getColor(); 
     	Color c2 = p2.getColor();

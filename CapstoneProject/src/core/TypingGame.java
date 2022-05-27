@@ -4,18 +4,22 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList; 
 
+/**
+ * class for the typing game, contains the game's algorithm
+ * @author Alex
+ */
 public class TypingGame {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	private String text; 
 	private String user; 
 	private int words; 
 	private ArrayList<Boolean> scored; 
-	//private double score; 
 	private boolean play = false;
 	private long startTime;
 	private long endTime;
+	
 	/**
-	 * constructor 
+	 * constructor, sets up start time, end time, score, and text
 	 * @param inputFile random game text 
 	 */
 	public TypingGame (String inputFile) {
@@ -26,13 +30,11 @@ public class TypingGame {
 		try {
 			text = readFile(inputFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//tbh i think we should just throw a random file at them that's what feels right to me
-			//System.out.println("Please select a valid file");
 		}
 	}
+	
 	/**
-	 * 
+	 * reads the file
 	 * @param inputFile input file 
 	 * @return contents of input file 
 	 * @throws IOException
@@ -49,18 +51,14 @@ public class TypingGame {
 				fileData.append(line);
 				fileData.append(lineSeparator);
 			}
-			
 		}  finally {
 			if(scan!=null)
 				scan.close();
 		}
 		String t = fileData.toString();
-		
-//		String[] util = t.split(" "); 
-//		words = util.length; 
 		return t;
-	
 	}
+	
 	/**
 	 * starts the timer 
 	 */
@@ -68,6 +66,7 @@ public class TypingGame {
 		startTime = System.currentTimeMillis();
 		play = true;
 	}
+	
 	/**
 	 * 
 	 * @param a adds char to user text 
@@ -77,10 +76,8 @@ public class TypingGame {
 		int x = (int) a;
 		if(x>=32 && x<=127) {
 			user+=a;
-			
 			if(a == text.charAt(user.length()-1)) {
 				scored.add(true); 
-				
 			}
 			else { 
 				scored.add(false); 
@@ -89,9 +86,9 @@ public class TypingGame {
 				words ++; 
 			}
 		}
-		
 		return user;
 	}
+	
 	/**
 	 * deleting text 
 	 */
@@ -99,8 +96,9 @@ public class TypingGame {
 		scored.remove(scored.size()-1);
 		user = user.substring(0, user.length()-1);
 	}
+	
 	/**
-	 * 
+	 * gets the score
 	 * @return calculated score for user performance 
 	 */
 	public double getScore() {
@@ -109,48 +107,51 @@ public class TypingGame {
 			 if(check) {
 				 count++; 
 			 }
-			 //System.out.println(words); 
 		}
 		double percent = count/scored.size(); 
 		return percent* words; 
-	 
-		
 	}
+	
 	/**
-	 * 
+	 * returns scores
 	 * @return scored chars 
 	 */
 	public ArrayList<Boolean> getScored() {
 		return scored; 
 	}
+	
 	/**
-	 * 
+	 * returns current time
 	 * @return how long its been 
 	 */
 	public long getTime() {
 		return endTime-startTime;
 	}
+	
 	/**
-	 * 
+	 * check if game is going
 	 * @return if the game is still on
 	 */
 	public boolean gameOn() {
 		return play;
 	}
+	
 	/**
-	 * 
+	 * gets user text
 	 * @return user text
 	 */
 	public String getUser() {
 		return user;
 	}
+	
 	/**
-	 * 
+	 * gets file
 	 * @return og text 
 	 */
 	public String getFile() {
 		return text; 
 	}
+	
 	/**
 	 * change user text completely 
 	 * @param s  new string 
@@ -158,8 +159,9 @@ public class TypingGame {
 	public void setUser(String s) {
 		user = s;
 	}
+	
 	/**
-	 * 
+	 * ends the game
 	 * @return it ends the game if the timer's up and returns the score 
 	 */
 	public double end() {
@@ -167,10 +169,7 @@ public class TypingGame {
 			endTime = System.currentTimeMillis();
 			play = false;
 			return getScore();
-			
 		}
 		return 0;
 	}
-	
-	
 }

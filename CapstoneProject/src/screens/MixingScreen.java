@@ -6,10 +6,15 @@ import core.*;
 import processing.core.*;
 import core.DrawingSurface;
 
+/**
+ * mixing screen to mix the paints
+ * @author julia
+ */
 public class MixingScreen extends Screen{
 	private MixedPalette mixed; 
 	private Button back; 
 	private PaintingScreen pscreen; 
+	
 	/**
 	 * creates a MixingScreen with set width and height
 	 * @param width the width of the screen
@@ -23,18 +28,22 @@ public class MixingScreen extends Screen{
 	}
 	/**
 	 * default constructor 
+	 * sets up drawingSurface, and screen
 	 */
 	public MixingScreen(DrawingSurface surface, PaintingScreen pscreen) {
 		super(800, 800);
 		this.surface = surface; 
 		back = new Button(new Rectangle(0, 0, 100, 50), "Back", Color.yellow); 
 	}
-	
 
+	/**
+	 * sets up background image
+	 */
 	public void setup() {
 		background = surface.loadImage("additionalPictures"+fileSeparator+BGName);
 		background.resize(DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
+	
 	/**
 	 * choose which color to mix 
 	 * @param p og Paint for mixing 
@@ -43,6 +52,9 @@ public class MixingScreen extends Screen{
 		mixed = p.getMixes(); 
 	}
 
+	/**
+	 * draws the mixing screen
+	 */
 	@Override
 	public void draw() {
 		setup();
@@ -54,7 +66,11 @@ public class MixingScreen extends Screen{
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		back.highlight(p, surface); 
 	}
+	
 	//makes the shade that corresponds to the selected Paint
+	/**
+	 * depending on which button is pressed, the colors will be mixed
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		int chosen = mixed.selectPaint(p); 

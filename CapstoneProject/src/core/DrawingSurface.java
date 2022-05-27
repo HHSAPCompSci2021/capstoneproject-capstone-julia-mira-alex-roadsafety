@@ -15,28 +15,25 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	PGraphics pg; 
 	PImage eraser, brush, blur;
 	private Screen activeScreen;
-	public float ratioX, ratioY;
+	private float ratioX, ratioY;
 	private ArrayList<Screen> screens;
 	private boolean mouseDragged = false;
 	private boolean mouseClicked = false; 
-//	private static final float MAX_BRUSH = (float) 2;
-//	private static final float MIN_BRUSH = -1;
-	public final static String fileSeparator = System.getProperty("file.separator");
+	private final static String fileSeparator = System.getProperty("file.separator");
 	private static int paintingnum; 
 	private float v = (float)( .5 / 9.0);
 	private float[][] kernel = {{ (float).0947416, (float).118318, (float).0947416 }, 
 	                    		{(float).118318, (float).147761, (float).118318 }, 
 	                    		{(float).0947416, (float).118318, (float).0947416 }};
 	private PGraphics outline; 
-//	private double width, height;
 	
 	
+	/**
+	 * drawingsurface that adds all the screens to an array
+	 */
 	public DrawingSurface() {
-//		this.width = width;
-//		this.height = height;
 		screens = new ArrayList<Screen>();
 	
-		//add  the screen classes
 		paintingnum = 0; 
 		IntroScreen screen1 = new IntroScreen(this);
 		InstructionsScreen screen2 = new InstructionsScreen(this);
@@ -52,25 +49,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		screens.add(screen5);
 		screens.add(screen6); 
 		screens.add(window); 
-		//setting up all the other screens 
-		//creating a window for the intro with the below buttons 
 		activeScreen = screens.get(0); 
 	}
 	
-//	public int getMaxWidth() {
-//		return (int)width;
-//	}
-//	
-//	public int getMaxHeight() {
-//		return (int)height;
-//	}
-//	
-	
-//	public void settings() {
-//		fullScreen();
-//		
-//	}
-//	
+	/**
+	 * sets up the background image
+	 */
 	public void setup() {
 		brush = loadImage("additionalPictures" +   fileSeparator + "brush.png");
 		eraser = loadImage("additionalPictures" +  fileSeparator + "eraser.png"); 
@@ -84,8 +68,25 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		frameRate(80); 
 	}
 	
+	/**
+	 * returns the screens
+	 * @return arraylist of all the screens
+	 */
+	public ArrayList<Screen> getScreens(){
+		return screens;
+	}
+	
+	/**
+	 * return the PGraphics 
+	 */
+	public PGraphics getGraphics() {
+		return g; 
+	}
+	
+	/**
+	 * draws the current screen
+	 */
 	public void draw() {
-		//this.setSize(activeScreen.DRAWING_WIDTH, activeScreen.DRAWING_HEIGHT);
 		ratioX = (float) width/activeScreen.DRAWING_WIDTH;
 		ratioY = (float) height/activeScreen.DRAWING_HEIGHT;
 
@@ -103,41 +104,27 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			pg.beginDraw();
 			outline.beginDraw();
 			
-			//if(pscreen.drawing()) {
 			Point p = actualCoordinatesToAssumed(new Point(mouseX, mouseY));
 			PImage space = null; 
 			int size = (int) pscreen.getWidth(); 
 			int y = (int) p.getY(); 
 			int x = (int) p.getX(); 
 
-		//	int x = (int) p.getX(); 
-			//int y = (int)p.getY(); 
 			Point p0 =  actualCoordinatesToAssumed(new Point(pmouseX, pmouseY));
-//			float d = dist(mouseX, mouseY, pmouseX, pmouseY); // how fast did the user move the "pen"?
-//			float maxStrokeWidth = pscreen.getWidth() + MAX_BRUSH; 
-//			float minStrokeWidth = pscreen.getWidth() + MIN_BRUSH; 
-//			 float brushWidth = map(d, 0, 40, maxStrokeWidth, minStrokeWidth); // the slower the move, the wider the stroke
 			if(c!= null && mousePressed && pscreen.mode() == 0) {
 				pg.fill(c.getRGB()); 
 				outline.fill(0); 
 				outline.stroke(0);
 				outline.noFill();
 				outline.rect(0, 0, outline.width, outline.height); 
-//			    if(brushWidth < minStrokeWidth) 
-//			    brushWidth = minStrokeWidth;
 			    pg.strokeWeight(size);
 			    outline.strokeWeight(size); 
-			   // System.out.println(brushWidth); 
-				//pg.strokeWeight(5);
 				pg.stroke(c.getRGB()); 
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
-				//if()
 				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 				if(p.getX() <= width) {
 				cursor(brush, 0, 30); 
 				}
-//				pg.noStroke(); 
-//				pg.circle((float)p.getX(), (float)p.getY(), 5);
 			}
 			else if( mousePressed && pscreen.mode() == 2) {
 				pg.fill(Color.white.getRGB()); 
@@ -146,19 +133,12 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 				pg.strokeWeight(size*(float)2); 
 				outline.strokeWeight(size*(float)2);
 				pg.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
-				//if()
 				outline.line((float)p.getX(), (float)p.getY(), (float)p0.getX(), (float)p0.getY()); 
 				if(p.getX() <= width) {
 					cursor(eraser, 16, 16); 
 				}
-//				fill(x, y, c, outline); 
-//				//mouseClicked = false; 
 			}
 			else if( mousePressed && pscreen.mode() == 3 && p.getX() < pg.width) {
-				
-//				int size = (int) pscreen.getWidth()/2; 
-//				int y = (int) p.getY(); 
-//				int x = (int) p.getX(); 
 				space = pg.get(x-size, y-size, (int) 1.5*size,  (int) 1.5*2*size); 
 				if(space!= null && space.pixels.length >0 && pg.pixels[y*pg.width + x] != 0) {
 					for(int i  = 0; i< 7; i++) {
@@ -170,12 +150,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 					cursor(blur, 16, 16); 
 				}
 			}
-			//}
-		//	if(pscreen.mode() != 3) {
 				outline.endDraw();
 				pg.endDraw(); 
 				image(pg, 0, 0); 
-			//}
 			if(space!= null) {
 				image(space, x-size/2, y-size/2);
 			}
@@ -183,19 +160,19 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		pop();
 	}
 	
+	/**
+	 * changes the active screen
+	 */
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
 		this.background(255,255,255);
-		//PImage im = loadImage("background-pic.png");
-	//	this.background(im);
-		//fill(0);
-		//activeScreen.draw();
 	}
 	
+	/**
+	 * draws if active screen is painting_screen
+	 * calls the active screen's mousepressed method
+	 */
 	public void mousePressed() {
-//		System.out.println("mouse pressed");
-//		System.out.println(activeScreen);
-		
 		if(activeScreen == screens.get(PAINTING_SCREEN)) {
 			PaintingScreen pscreen = (PaintingScreen) activeScreen; 
 			Color c = pscreen.getColor();
@@ -203,55 +180,60 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
 			if(c!= null && pscreen.mode() == 1 && y< pg.height && x< pg.width-1 ) {
-				//pg.beginDraw();
 				pg.loadPixels(); 
 				outline.loadPixels(); 
 				fill(p, c, outline); 
 				pg.updatePixels();
-				//outline.updatePixels();
-				//pg.endDraw();
-				//image(pg, 0, 0); 
 			}	
-			
 		}
 		activeScreen.mousePressed();
 	}
+	
+	/**
+	 * sets mouseDragged and mouseClicked to true and false respectively
+	 */
 	public void mouseDragged() {
 		mouseDragged = true; 
 		mouseClicked = false; 
 	}
+	
+	/**
+	 * sets mouseDragged and mouseClicked to false
+	 */
 	public void mouseReleased() {
 		Point p = assumedCoordinatesToActual(new Point(mouseX, mouseY)); 
 	
 		cursor(ARROW); 
 		mouseDragged = false; 
 		mouseClicked = false; 
-		
 	}
+	
+	/**
+	 * returns the point based on dimensions of screen
+	 * @param assumed point
+	 * @return assumed point based on dimensions of screen
+	 */
 	public Point assumedCoordinatesToActual(Point assumed) {
 		return new Point((int)(assumed.getX()*ratioX), (int)(assumed.getY()*ratioY));
 	}
 
+	/**
+	 * returns the actual point based on dimensions of screen
+	 * @param actual point
+	 * @return actual point based on dimensions of screen
+	 */
 	public Point actualCoordinatesToAssumed(Point actual) {
 		return new Point((int)(actual.getX()/ratioX) , (int)(actual.getY()/ratioY));
 	}
+	
 	/**
-	 * 
-	 * @return the number of screens; 
+	 * sets mouseClicked to true
 	 */
-	public ArrayList<Screen> getScreens(){
-		return screens;
-	}
-	/**
-	 * return the PGraphics 
-	 */
-	public PGraphics getGraphics() {
-		return g; 
-	}
 	public void mouseClicked() {
 		mouseClicked = true; 
 		
 	}
+	
 	/**
 	 * fill an area in the painting 
 	 * @param p Point of origin 
@@ -259,16 +241,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 * @param outline outline to check borders 
 	 */
 	public void fill(Point p, Color c, PGraphics outline) { 
-		
-		// list
-		// add x,y
-		// while (!list.isEmpty()) {
-		//remove from list
-		// if needs color, then color & add neighbors
-	//}
 		ArrayList<Point> pixels = new ArrayList<Point>(); 
 		pixels.add(p); 
-		//int i = 0; 
 		int[] p1 = pg.pixels; 
 		int[] p2 = outline.pixels; 
 		int black = Color.BLACK.getRGB();
@@ -278,7 +252,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			int x = (int) p.getX(); 
 			int y = (int)p.getY(); 
 			if(y*pg.width + x < 0 || y*pg.width + x >= 1280000 ) {
-				//System.out.println(y*pg.width + x); 
 				pixels.remove(p); 
 			}
 			else if(p1[y*pg.width + x] == col || p2[y*outline.width + x] == black) {
@@ -298,6 +271,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		}
 			
 	}
+	
 	/**
 	 * start over 
 	 */
@@ -315,6 +289,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		image(pg, 0, 0); 
 		pop(); 
 	}
+	
 	/**
 	 * download the paintings 
 	 */
@@ -328,12 +303,20 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		pg.save(paintingnm); 
 		paintingnum ++; 
 	}
+	
+	/**
+	 * calls active screen's keypressed method
+	 */
 	public void keyPressed() {
 		activeScreen.keyPressed(); 
 	}
+	
+	/**
+	 * blurs the drawing
+	 * @param size size of blur
+	 * @param p point used to blur
+	 */
 	public void blur(int size, Point p) {
 		pg.updatePixels();
 	}
-
-	
 }
